@@ -130,7 +130,7 @@ dependencies {
     implementation("cafe.adriel.voyager:voyager-hilt:$voyagerVersion") // Hilt integration
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("androidx.compose.material:material:1.6.6")
     implementation("io.github.grizzi91:bouquet:1.1.2")
 
@@ -144,7 +144,7 @@ dependencies {
 //    implementation("io.coil-kt:coil-compose:2.6.0")
 
     // lottie
-    implementation("com.airbnb.android:lottie-compose:4.0.0")
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
 
     /**
      * REST API: Adding retrofit to the mainLayer

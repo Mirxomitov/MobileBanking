@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package uz.gita.mobilebanking.presentation.splash
 
 import androidx.compose.foundation.layout.Column

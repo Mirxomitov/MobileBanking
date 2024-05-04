@@ -79,6 +79,8 @@
     <!--errors-->
     <string name="connection_error">connection_error</string>
     <string name="unknown_error">unknown_error</string>
+
+
     <string name="phone_prefix">+998</string>
     <string name="o_zbek">O\'zbek</string>
     <string name="my_informations">Mening ma\'lumotlarim</string>

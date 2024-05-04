@@ -2,7 +2,6 @@ package uz.gita.mobilebanking.ui.components.buttons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -28,8 +27,7 @@ fun ButtonWithTimer(
 ) {
     Button(
         onClick = { /*TODO*/ },
-        modifier = modifier
-            ,
+        modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             contentColor = textColor,
             disabledContentColor = authComponentBg,

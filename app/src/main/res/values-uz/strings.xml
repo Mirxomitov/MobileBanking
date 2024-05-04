@@ -79,7 +79,17 @@
     <!--errors-->
     <string name="connection_error">connection_error</string>
     <string name="unknown_error">unknown_error</string>
+
+
     <string name="phone_prefix">+998</string>
     <string name="o_zbek">O\'zbek</string>
+    <string name="my_informations">Mening ma\'lumotlarim</string>
+    <string name="personal_informations">Shaxsiy ma\'lumotlar</string>
+    <string name="chat_helper">Chat yordamchi</string>
+    <string name="call">Qo\'ng\'iroq qilish</string>
+    <string name="write_email">Email yozish</string>
+    <string name="support">Qo\'llab-quvvatlash</string>
+    <string name="useful_information">Foydali ma\'lumot</string>
+    <string name="application_settings">Ilova sozlamalari</string>
 
 </resources>
