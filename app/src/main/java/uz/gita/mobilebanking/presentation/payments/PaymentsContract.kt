@@ -1,0 +1,3 @@
+package uz.gita.mobilebanking.presentation.payments
+
+interface PaymentsContract

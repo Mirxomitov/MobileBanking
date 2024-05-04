@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Paynet</string>
+
+    <!--    PIN CODE SCREEN-->
+    <string name="enter_the_pin_code">PIN-kodni kiriting</string>
+    <string name="your_phone_number">Telefon raqamingiz</string>
+    <string name="forget_pin_code">PIN kodni unitdingizmi ?</string>
+    <string name="incorrect_pin_code">PIN-kod noto\'g\'ri</string>
+    <string name="count_attempt_left">ta urinish qoldi</string>
+
+    <!--    MAIN SCREEN -->
+    <string name="my_money">Mening pulim</string>
+    <string name="som">so\'m</string>
+    <string name="what_is_it">Bu nima?</string>
+    <string name="pay_net_card">Paynet karta</string>
+    <string name="fill">To\'ldirish</string>
+    <string name="transact">O\'tkazish</string>
+    <string name="pay">To\'lash</string>
+    <string name="your_level">Sizning darajangiz:</string>
+    <string name="starter">Boshlang\'ich</string>
+    <string name="coin">tanga</string>
+    <string name="exchange">Ayirboshlash</string>
+    <string name="left_after_next_level">qoldi keyingi bosqichgacha</string>
+    <string name="my_cards">Kartalarim</string>
+    <string name="add_card">Karta qo\'shish</string>
+    <string name="uzcard">Uzcard</string>
+    <string name="cash_back_account">Keshbek-hisob</string>
+    <string name="balance">Balans</string>
+    <string name="today">Bugun</string>
+    <string name="language">Til</string>
+    <string name="enter_phone_number">Raqamingizni kiriting</string>
+    <string name="to_be_customer_or_enter">Mijoz bo\'lish uchun yoki kirish uchun</string>
+    <string name="txt_continue">Davom etish</string>
+
+    <!--    auth -->
+    <string name="oferta">\"Davom etish\" tugmasini bosish orqali men Xizmatlar ko\'rsatish haqidagi oferta shartlarini qabul qilaman va shaxsiy malumotlarni qayta ishlashga rozilik bildiraman</string>
+
+    <!--    transactions-->
+    <string name="transactions">O\'tkazmalar</string>
+    <string name="card_or_phone">Karta yoki telefon</string>
+    <string name="to_my_card">O\'zimning kartamga</string>
+    <string name="to_my_wallet">Paynet kartamga</string>
+    <string name="templates">Shablonlar</string>
+    <string name="add">Qo\'shish</string>
+    <string name="international_transactions">Xalqaro o\'tkazmalar</string>
+    <string name="to_russia">Rossiyaga</string>
+    <string name="to_uzbekistan">O\'zbeksitonga</string>
+    <string name="transfer_to_card">Kartaga o\'tkazish</string>
+    <string name="from">Qayerdan</string>
+    <string name="to">Qayerga</string>
+
+
+    <!--    create PIN code -->
+    <string name="create_pin_code">PIN-kod yarating</string>
+    <string name="repeat_pin_code">PIN-kodni takrorlang</string>
+    <string name="add_code_in_sms">SMSdagi kodni kiriting</string>
+    <string name="sent_to_number">raqamiga yubordik</string>
+    <string name="send_new_code">Yangi kodni yuborish</string>
+    <string name="sec">sek</string>
+    <string name="incorrect_code_error_text">Noto\'g\'ri kod.\nKodni qayta oling yoki telefon raqamini o\'zgartiring</string>
+
+    // Transfers
+    <string name="you_are_transfering">Siz o\'tkazyapsiz</string>
+    <string name="commission_0">Komissiya 0%</string>
+    <string name="insufficient_funds">Mablag\' yetarli emas</string>
+
+    // Tabs
+    <string name="main">Asosiy</string>
+    <string name="transfers">O\'tkazmalar</string>
+    <string name="profile">Profil</string>
+    <string name="application_language">Ilova tili</string>
+    <string name="ru_russian">Русский</string>
+    <string name="uzbek">Uzbek</string>
+    <string name="buy_ticket">Chipta sotib olish</string>
+    <string name="useful_and_reliable">Foydali va ishonchli</string>
+    <string name="cash_back_calculation">Keshbek-hisob</string>
+
+
+    <!--errors-->
+    <string name="connection_error">connection_error</string>
+    <string name="unknown_error">unknown_error</string>
+    <string name="phone_prefix">+998</string>
+    <string name="o_zbek">O\'zbek</string>
+    <string name="my_informations">Mening ma\'lumotlarim</string>
+    <string name="personal_informations">Shaxsiy ma\'lumotlar</string>
+    <string name="chat_helper">Chat yordamchi</string>
+    <string name="call">Qo\'ng\'iroq qilish</string>
+    <string name="write_email">Email yozish</string>
+    <string name="support">Qo\'llab-quvvatlash</string>
+    <string name="useful_information">Foydali ma\'lumot</string>
+    <string name="application_settings">Ilova sozlamalari</string>
+
+</resources>
