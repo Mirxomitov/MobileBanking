@@ -2,19 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AuthScreenPreview">
+      <entry key="ButtonWithTimerPreview">
         <State />
       </entry>
       <entry key="MainPreview">
         <State />
       </entry>
-      <entry key="MyInformationPreview">
+      <entry key="PersonalInformationPreview">
         <State />
       </entry>
-      <entry key="ProfileContentPreview">
+      <entry key="PinPreview">
         <State />
       </entry>
-      <entry key="SupportPreview">
+      <entry key="VerifyPreview">
         <State />
       </entry>
       <entry key="app">

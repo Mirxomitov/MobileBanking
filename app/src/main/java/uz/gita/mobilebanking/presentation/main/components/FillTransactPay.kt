@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
@@ -30,6 +31,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.cardColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun FillTransactPay(
@@ -64,6 +66,7 @@ fun FillTransactPay(
                     text = stringResource(id = R.string.pay_net_card),
                     modifier = Modifier,
                     textAlign = TextAlign.Center,
+                    fontSize = 16.sp
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
@@ -73,6 +76,7 @@ fun FillTransactPay(
                     modifier = Modifier,
                     color = primaryColor,
                     textAlign = TextAlign.Center,
+                    fontSize = 16.sp
                 )
             }
             // karta rasmi
@@ -91,13 +95,26 @@ fun FillTransactPay(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Row {
-                        TextNormal(text = stringResource(id = R.string.pay_net_card) + " * ")
-                        TextNormal(text = cardNumber)
+                        TextNormal(
+                            text = stringResource(id = R.string.pay_net_card) + " * ",
+                            fontSize = 14.sp,
+                            color = textColor
+                        )
+                        TextNormal(
+                            modifier = Modifier.padding(top = 2.dp),
+                            text = cardNumber, fontSize = 14.sp,
+                            color = textColor
+                        )
                     }
 
                     Row {
-                        TextBoldBlack(text = balance, fontSize = 14.sp)
-                        TextBold(text = " " + stringResource(id = R.string.som), fontSize = 14.sp)
+                        TextBoldBlack(
+                            text = balance, fontSize = 16.sp
+                        )
+
+                        TextBold(
+                            text = " " + stringResource(id = R.string.som), fontSize = 16.sp
+                        )
                     }
                 }
             }
@@ -119,7 +136,7 @@ fun FillTransactPay(
 
                 Item(
                     modifier = Modifier.weight(1f),
-                    icon = R.drawable.ic_add_black,
+                    icon = R.drawable.ic_action_transfers,
                     text = stringResource(id = R.string.transact),
                     onClick = {
                         onClickTransact()
@@ -129,7 +146,7 @@ fun FillTransactPay(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp),
-                    icon = R.drawable.ic_add_black,
+                    icon = R.drawable.wallet,
                     text = stringResource(id = R.string.pay),
                     onClick = {
                         onClickPay()
@@ -158,15 +175,40 @@ private fun Item(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(vertical = 12.dp, horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Icon(
-                painter = painterResource(id = icon), contentDescription = null, modifier = Modifier.size(32.dp)
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = primaryColor
             )
 
-            TextBoldBlack(text = text, fontSize = 12.sp, modifier = Modifier.padding(top = 4.dp))
+            TextBoldBlack(
+                text = text,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(top = 4.dp)
+            )
         }
     }
 }
 
+
+@Preview
+@Composable
+private fun FillTransactPreview() {
+    FillTransactPay(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp)
+            .padding(top = 12.dp),
+        balance = "0",
+        cardNumber = "3600",
+        onClickWhatIsIt = { },
+        onClickItem = { },
+        onClickFill = { },
+        onClickTransact = { },
+        onClickPay = { }
+    )
+}

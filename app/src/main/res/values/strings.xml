@@ -91,5 +91,24 @@
     <string name="support">Qo\'llab-quvvatlash</string>
     <string name="useful_information">Foydali ma\'lumot</string>
     <string name="application_settings">Ilova sozlamalari</string>
+    <string name="rate_application">Ilovani baholang</string>
+    <string name="log_out_profile">Profildan chiqish</string>
+    <string name="about_paynet">Paynet haqida</string>
+    <string name="reference">Ma\'lumotnoma</string>
+    <string name="payment">To\'lov</string>
+    <string name="history">Tarix</string>
+    <string name="pay_in_time_to_elektr_gas_and_call">Elektr, gaz va aloqa uchun o\'z vaqtida to\'lang</string>
+    <string name="my_home">Mening uyim</string>
+    <string name="the_state_tax_committee">Davlat Soliq Qo\'mitasi</string>
+    <string name="no_debt">Qarzdorlik yo\'q</string>
+    <string name="my_debt">Mening qarzdorligim</string>
+    <string name="mib_debt">MIB qarzdorlik</string>
+    <string name="call_us_if_your_identification_data_changed">Agar shaxsiy ma\'lumotlaringiz o\'zgargan bo\'lsa, ularni tahrirlash uchun qo\'llab-quvvatlash xizmatiga murojaat qiling.</string>
+    <string name="family_name">Familiyasi</string>
+    <string name="name">Ismi</string>
+    <string name="patronymic">Sharifi</string>
+    <string name="document_number">Hujjat rqaqami</string>
+    <string name="date_of_birth">Tug\'ilgan kun</string>
+    <string name="phone_number">Telefon raqami</string>
 
 </resources>

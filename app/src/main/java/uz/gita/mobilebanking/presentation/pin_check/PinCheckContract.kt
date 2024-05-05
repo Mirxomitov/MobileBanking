@@ -7,12 +7,15 @@ interface PinCheckContract {
         fun onEventDispatcher(intent: Intent)
     }
 
-    sealed interface UIState {
-        data object InitState : UIState
-    }
+    data class UIState(
+        var phoneNumber: String = "",
+        var pinCode : String = "",
+    )
 
     sealed interface SideEffect {}
     sealed interface Intent {
+        data class GetPinCode(val pinCode: String) : Intent
         data object ToMainScreen : Intent
+        data object GetPhoneNumber : Intent
     }
 }

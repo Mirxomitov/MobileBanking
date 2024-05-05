@@ -68,20 +68,21 @@ fun Exchange(
                     }
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        TextBoldBlack(text = "0 ", modifier = Modifier.padding(end = 4.dp), fontSize = 14.sp)
+                        TextBoldBlack(text = "0 ", modifier = Modifier.padding(end = 4.dp), fontSize = 18.sp)
                         TextNormal(text = stringResource(id = R.string.coin), fontSize = 12.sp)
                     }
 
                     LinearProgressIndicator(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .padding(vertical = 1.dp)
                             .background(mainBgLight)
                             .clip(CircleShape),
                         progress = 0f,
                     )
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        TextNormal(text = "100", fontSize = 12.sp)
+                        TextNormal(text = "100 ", fontSize = 14.sp)
                         TextNormal(text = stringResource(id = R.string.left_after_next_level), fontSize = 12.sp)
                     }
                 }

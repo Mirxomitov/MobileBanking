@@ -1,5 +1,6 @@
 package uz.gita.mobilebanking.presentation.main.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +23,12 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.grayIcon
 
 @Composable
-fun UserBalanceWithEye(balance: String, modifier: Modifier) {
+fun UserBalanceWithEye(
+    modifier: Modifier = Modifier,
+    balance: String,
+    onClickEye: () -> Unit,
+    isVisible: Boolean
+) {
     Column(modifier = modifier) {
         TextNormal(
             text = stringResource(id = R.string.my_money),
@@ -42,11 +48,14 @@ fun UserBalanceWithEye(balance: String, modifier: Modifier) {
             Spacer(modifier = Modifier.weight(1f))
 
             Icon(
-                painter = painterResource(id = R.drawable.ic_eye),
+                painter = painterResource(id = if (isVisible) R.drawable.ic_eye else R.drawable.ic_eye),
                 contentDescription = "eye",
-                modifier = Modifier.size(32.dp),
-                tint = grayIcon
-            )
+                modifier = Modifier
+                    .size(32.dp)
+                    .clickable { onClickEye() },
+                tint = grayIcon,
+
+                )
         }
     }
 }

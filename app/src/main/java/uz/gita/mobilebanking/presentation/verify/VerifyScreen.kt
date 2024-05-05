@@ -14,7 +14,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import kotlinx.coroutines.delay
+import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.CodeTextField
 import uz.gita.mobilebanking.ui.components.buttons.ButtonWithTimer
@@ -39,22 +43,27 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 import uz.gita.mobilebanking.ui.theme.errorColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
 import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.utils.hidePartOfNumber
+import uz.gita.mobilebanking.utils.logger
 
 data class VerifyScreen(val token: String, val isSignIn: Boolean) : Screen {
     @Composable
     override fun Content() {
-        val viewModel = getViewModel<VerifyModel>()
+        val viewModel: VerifyContract.Model = getViewModel<VerifyModel>()
+        viewModel.onEventDispatcher(VerifyContract.Intent.ShowUserPhone)
 
         VerifyContent(
+            viewModel.collectAsState().value,
             viewModel::onEventDispatcher,
             token,
-            isSignIn
+            isSignIn,
         )
     }
 }
 
 @Composable
 fun VerifyContent(
+    uiState: VerifyContract.UIState,
     onEventDispatcher: (VerifyContract.Intent) -> Unit,
     token: String,
     isSignIn: Boolean
@@ -62,7 +71,7 @@ fun VerifyContent(
 
     var verificationCode by remember { mutableStateOf("") }
     var buttonSt by remember { mutableStateOf(false) }
-    var isIncorrect by remember { mutableStateOf(false) }
+    val isIncorrect by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -73,7 +82,7 @@ fun VerifyContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconButton(
-            onClick = {},
+            onClick = {onEventDispatcher(VerifyContract.Intent.Back)},
             modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(
@@ -100,7 +109,10 @@ fun VerifyContent(
 
         Row {
             TextNormalBlack(
-                text = "+998 90 --- -- 20", fontSize = 12.sp, color = textColor, letterSpacing = 0.8.sp
+                text = uiState.phoneNumber.hidePartOfNumber(),
+                fontSize = 12.sp,
+                color = textColor,
+                letterSpacing = 0.8.sp
             )
 
             TextNormalBlack(
@@ -110,7 +122,6 @@ fun VerifyContent(
                 color = textColor
             )
         }
-
 
         CodeTextField(
             value = verificationCode,
@@ -145,17 +156,45 @@ fun VerifyContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
+        var resendTime by remember { mutableIntStateOf(60) }
+
         ButtonWithTimer(
             Modifier
                 .padding(12.dp)
                 .height(60.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            leftIcon = R.drawable.ic_reload,
+            time = resendTime,
+            onClick = {
+                if (resendTime == 60) {
+                    resendTime--
+                     onEventDispatcher(VerifyContract.Intent.ResendSms(token, isSignIn))
+                }
+            },
+            isSecondsVisible = resendTime != 60
         )
+
+        LaunchedEffect(resendTime) {
+            while (true) {
+                delay(1000)
+                if (resendTime == 1) {
+                    resendTime = 60
+                    break
+                } else if (resendTime in 1..59) {
+                    resendTime--
+                }
+            }
+        }
     }
 }
 
 @Preview
 @Composable
 private fun VerifyPreview() {
-    VerifyContent({}, "", false)
+    VerifyContent(
+        VerifyContract.UIState("903553620"),
+        {},
+        "",
+        false
+    )
 }

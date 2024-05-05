@@ -18,7 +18,6 @@ class ProfileModel @Inject constructor(
                 }
             }
         }
-
     }
 
     override val container =

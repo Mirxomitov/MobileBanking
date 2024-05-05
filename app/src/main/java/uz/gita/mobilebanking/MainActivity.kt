@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.gita.mobilebanking.presentation.splash.SplashScreen
+import uz.gita.mobilebanking.presentation.tabs.BottomNavigation
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.navigation.AppNavigationHandler
 import javax.inject.Inject
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
 //                    screen = BottomNavigation()
 //                    screen = MainScreen()
                         screen = SplashScreen()
+//                        screen = BottomNavigation()
                     ) { navigator ->
                         handler.uiNavigator.onEach {
                             it(navigator)

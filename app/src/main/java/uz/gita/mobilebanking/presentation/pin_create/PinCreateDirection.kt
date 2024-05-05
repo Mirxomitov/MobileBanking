@@ -5,15 +5,15 @@ import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface CreatePinDirection {
-    suspend fun toCheckPinScreen()
+interface PinCreateDirection {
+    suspend fun toPinCheckScreen(pinCode : String)
 }
 
 @Singleton
-class CreatePinDirectionImpl @Inject constructor(
+class PinCreateDirectionImpl @Inject constructor(
     private val navigator: AppNavigator
-) : CreatePinDirection {
-    override suspend fun toCheckPinScreen() {
-        navigator.replaceScreen(PinCheckScreen())
+) : PinCreateDirection {
+    override suspend fun toPinCheckScreen(pinCode : String) {
+        navigator.replaceScreen(PinCheckScreen(pinCode))
     }
 }

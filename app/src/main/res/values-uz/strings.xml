@@ -91,5 +91,11 @@
     <string name="support">Qo\'llab-quvvatlash</string>
     <string name="useful_information">Foydali ma\'lumot</string>
     <string name="application_settings">Ilova sozlamalari</string>
+    <string name="rate_application">Ilovani baholang</string>
+    <string name="log_out_profile">Profildan chiqish</string>
+    <string name="about_paynet">Paynet haqida</string>
+    <string name="reference">Ma\'lumotnoma</string>
+    <string name="payment">To\'lov</string>
+    <string name="history">Tarix</string>
 
 </resources>

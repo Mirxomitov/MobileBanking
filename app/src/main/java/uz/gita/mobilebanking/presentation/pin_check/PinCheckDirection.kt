@@ -14,6 +14,6 @@ class PinCheckDirectionImpl @Inject constructor(
     private val appNavigator: AppNavigator
 ) : PinCheckDirection {
     override suspend fun toMainScreen() {
-        appNavigator.replaceScreen(BottomNavigation())
+        appNavigator.replaceAll(BottomNavigation())
     }
 }

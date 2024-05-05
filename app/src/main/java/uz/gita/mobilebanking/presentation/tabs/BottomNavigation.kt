@@ -18,6 +18,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -31,7 +32,7 @@ class BottomNavigation : Screen {
                     CurrentTab()
                 },
                 bottomBar = {
-                    Row(modifier = Modifier.background(Color.White)) {
+                    Row(modifier = Modifier.background(mainBgLight)) {
                         TabNavigationItem(MainTab)
                         TabNavigationItem(TransfersTab)
                         TabNavigationItem(PaymentTab)
@@ -49,7 +50,9 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
 
     BottomNavigationItem(
         selected = tabNavigator.current == tab,
-        onClick = { tabNavigator.current = tab },
+        onClick = {
+            tabNavigator.current = tab
+        },
         icon = {
             Icon(
                 tint = if (tabNavigator.current == tab) primaryColor else Color.Black,

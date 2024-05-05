@@ -12,6 +12,7 @@ class SharedPreferenceHelper @Inject constructor(
     companion object {
         private const val PHONE_NUMBER = "PHONE_NUMBER"
         private const val LANGUAGE = "LANGUAGE"
+        private const val PIN_CODE = "PIN_CODE"
     }
 
     fun phoneNumber(phoneNumber: String) {
@@ -27,4 +28,14 @@ class SharedPreferenceHelper @Inject constructor(
     }
 
     fun isLanguageUzbek(): Boolean = sharedPreference.getBoolean(LANGUAGE, true)
+
+    fun signed(): Boolean {
+        return sharedPreference.getString(PIN_CODE, "") != ""
+    }
+
+    fun pinCode(pinCode: String) {
+        sharedPreference.edit().putString(PIN_CODE, pinCode).apply()
+    }
+
+    fun pinCode(): String = sharedPreference.getString(PIN_CODE, "").toString()
 }

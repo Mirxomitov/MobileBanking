@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
+import uz.gita.mobilebanking.ui.theme.grayIcon
 import uz.gita.mobilebanking.ui.theme.primaryColor
 
 @Composable
@@ -27,6 +28,8 @@ fun MainTop(
     modifier: Modifier,
     userName: String,
     onClickItem: () -> Unit,
+    icSupportClick : () -> Unit,
+    icNotificationClick : () -> Unit
 ) {
 
     Row(
@@ -42,7 +45,7 @@ fun MainTop(
         TextBoldBlack(
             modifier = Modifier.padding(start = 12.dp),
             text = userName,
-            fontSize = 14.sp
+            fontSize = 16.sp
         )
 
         Icon(
@@ -55,15 +58,21 @@ fun MainTop(
         Spacer(modifier = Modifier.weight(1f))
 
         Icon(
-            modifier = Modifier.size(24.dp),
-            painter = painterResource(id = R.drawable.ic_1),
-            contentDescription = null
+            modifier = Modifier.padding(end = 16.dp).size(24.dp).clickable {
+                icSupportClick()
+            },
+            painter = painterResource(id = R.drawable.ic_support_customers),
+            contentDescription = null,
+            tint = grayIcon
         )
 
         Icon(
-            modifier = Modifier.size(24.dp),
-            painter = painterResource(id = R.drawable.ic_2),
-            contentDescription = null
+            modifier = Modifier.size(24.dp).clickable {
+                icNotificationClick()
+            },
+            painter = painterResource(id = R.drawable.ic_notification),
+            contentDescription = null,
+            tint = grayIcon
         )
     }
 }

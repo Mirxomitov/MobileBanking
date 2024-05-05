@@ -6,12 +6,16 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.gita.mobilebanking.presentation.auth.AuthDirection
 import uz.gita.mobilebanking.presentation.auth.AuthDirectionImpl
+import uz.gita.mobilebanking.presentation.main.MainDirection
+import uz.gita.mobilebanking.presentation.main.MainDirectionImpl
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirection
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirectionImpl
+import uz.gita.mobilebanking.presentation.pin.PinDirection
+import uz.gita.mobilebanking.presentation.pin.PinDirectionImpl
 import uz.gita.mobilebanking.presentation.pin_check.PinCheckDirection
 import uz.gita.mobilebanking.presentation.pin_check.PinCheckDirectionImpl
-import uz.gita.mobilebanking.presentation.pin_create.CreatePinDirection
-import uz.gita.mobilebanking.presentation.pin_create.CreatePinDirectionImpl
+import uz.gita.mobilebanking.presentation.pin_create.PinCreateDirection
+import uz.gita.mobilebanking.presentation.pin_create.PinCreateDirectionImpl
 import uz.gita.mobilebanking.presentation.profile.ProfileDirection
 import uz.gita.mobilebanking.presentation.profile.ProfileDirectionImpl
 import uz.gita.mobilebanking.presentation.splash.SplashDirection
@@ -32,20 +36,26 @@ interface DirectionModule {
     fun authDirection(impl: AuthDirectionImpl): AuthDirection
 
     @Binds
-    fun createPinDirection(impl: CreatePinDirectionImpl): CreatePinDirection
+    fun pinDirection(impl: PinDirectionImpl): PinDirection
 
     @Binds
-    fun VerifyDirection(impl: VerifyDirectionImpl): VerifyDirection
+    fun pinCreateDirection(impl: PinCreateDirectionImpl): PinCreateDirection
 
     @Binds
     fun pinCheckDirection(impl: PinCheckDirectionImpl): PinCheckDirection
 
     @Binds
-    fun transferDirections(impl: TransferDirectionImpl): TransferDirection
+    fun verifyDirection(impl: VerifyDirectionImpl): VerifyDirection
 
     @Binds
-    fun paymentDirections(impl: PaymentsDirectionImpl): PaymentsDirection
+    fun transferDirection(impl: TransferDirectionImpl): TransferDirection
 
     @Binds
-    fun profileDirections(impl: ProfileDirectionImpl): ProfileDirection
+    fun paymentDirection(impl: PaymentsDirectionImpl): PaymentsDirection
+
+    @Binds
+    fun profileDirection(impl: ProfileDirectionImpl): ProfileDirection
+
+    @Binds
+    fun mainDirection(impl: MainDirectionImpl): MainDirection
 }

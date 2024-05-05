@@ -8,8 +8,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import uz.gita.mobilebanking.data.model.error.ErrorResponse
 import uz.gita.mobilebanking.data.model.request.SignInRequest
+import uz.gita.mobilebanking.data.model.request.SignInResendRequest
 import uz.gita.mobilebanking.data.model.request.SignInVerifyRequest
 import uz.gita.mobilebanking.data.model.request.SignUpRequest
+import uz.gita.mobilebanking.data.model.request.SignUpResendRequest
 import uz.gita.mobilebanking.data.model.request.SignUpVerifyRequest
 import uz.gita.mobilebanking.data.model.response.SignInResponse
 import uz.gita.mobilebanking.data.model.response.SignInVerifyResponse
@@ -26,6 +28,7 @@ class RegistrationRepositoryImpl @Inject constructor(
     private val gson: Gson
 ) : RegistrationRepository {
 
+    // API -> Send Requests and Get Responses
     override fun signIn(phoneNumber: String): Flow<Result<SignInResponse>> = flow {
         val response = api.singIn(SignInRequest("+998$phoneNumber", phoneNumber))
 
@@ -87,9 +90,38 @@ class RegistrationRepositoryImpl @Inject constructor(
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
 
-    // sharedPreference
+    override fun signInResend(token: String): Flow<Result<SignInResponse>> = flow {
+        val response = api.signInResend(SignInResendRequest(token))
+
+        if (response.isSuccessful && response.body() != null) {
+            emit(Result.success(response.body()!!))
+        } else {
+            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            emit(Result.failure(Exception(data.message)))
+        }
+    }.flowOn(Dispatchers.IO)
+        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+
+
+    override fun signUpResend(token: String): Flow<Result<SignUpResponse>> = flow {
+        val response = api.signUpResend(SignUpResendRequest(token))
+
+        if (response.isSuccessful && response.body() != null) {
+            emit(Result.success(response.body()!!))
+        } else {
+            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            emit(Result.failure(Exception(data.message)))
+        }
+    }.flowOn(Dispatchers.IO)
+        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+
+
+    // sharedPreference -> save and get data
     override fun phoneNumber(phoneNumber: String) = sharedPreferencesHelper.phoneNumber(phoneNumber)
     override fun phoneNumber(): String = sharedPreferencesHelper.phoneNumber()
+    override fun pinCode(pinCode: String) = sharedPreferencesHelper.pinCode(pinCode)
+    override fun pinCode() = sharedPreferencesHelper.pinCode()
     override fun isLanguageUzbek(): Boolean = sharedPreferencesHelper.isLanguageUzbek()
     override fun saveActiveLanguage(isUzbek: Boolean) = sharedPreferencesHelper.saveActiveLanguage(isUzbek)
+    override fun signed() = sharedPreferencesHelper.signed()
 }

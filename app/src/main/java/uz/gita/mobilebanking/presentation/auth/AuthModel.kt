@@ -62,7 +62,7 @@ class AuthModel @Inject constructor(
         repository.signUp(phone)
             .onEach {
                 it.onSuccess { signUpResponse ->
-                    logger("succcess")
+                    logger("signUp succcess")
                     onSuccess(signUpResponse)
                 }
                 it.onFailure {

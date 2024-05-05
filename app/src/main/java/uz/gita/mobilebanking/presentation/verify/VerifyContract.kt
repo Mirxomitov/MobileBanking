@@ -7,13 +7,16 @@ interface VerifyContract {
         fun onEventDispatcher(intent: Intent)
     }
 
-    sealed interface UIState {
-        data object InitState : UIState
-    }
+    data class UIState(
+        var phoneNumber: String,
+    )
 
     sealed interface SideEffect
     sealed interface Intent {
-        data class CheckUserCode(val token : String, val verificationCode: String, val isSignIn : Boolean) : Intent
+        data object ShowUserPhone : Intent
+        data class CheckUserCode(val token: String, val verificationCode: String, val isSignIn: Boolean) : Intent
+        data class ResendSms(val token: String, val isSignIn: Boolean) : Intent
         data object ToCreatePinScreen : Intent
+        data object Back : Intent
     }
 }

@@ -14,11 +14,12 @@ val Pink40 = Color(0xFF7D5260)
 // PIN SCREEN
 val pinScreenBgLight = Color(0xFFFEFEFE)
 val errorColor = Color(0xFFA03439)
+val errorColor2 = Color(0xFFF53C52)
 
 // MainScreen
 val mainBgLight = Color(0xFFF0F1F6)
 val primaryColor = Color(0xFF15A13A)
-val cardColor = Color(0xFFFEFEFE)
+val cardColor = Color(0xFFFFFFFF)
 val grayColor = Color(0xFFD1CFCF)
 val grayIcon = Color(0xFF6C7177)
 val textColor = Color(0xFF202325)
@@ -35,4 +36,7 @@ val toUzbColor = Color(0xFFF2EEFD)
 
 val p2pScreenBg = Color(0xFFFEFEFE)
 val ShadowColorCard = Color(0xEBF5F5F5)
+
+val profileBgLight = Color(0xFFF0F6FA)
+
 

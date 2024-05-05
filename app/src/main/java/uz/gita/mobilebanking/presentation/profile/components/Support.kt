@@ -34,7 +34,8 @@ fun Support(
             .padding(16.dp),
     ) {
         TextBold(
-            text = stringResource(R.string.support), fontSize = 14.sp,
+            text = stringResource(R.string.support),
+            fontSize = 16.sp,
             color = textColor
         )
 

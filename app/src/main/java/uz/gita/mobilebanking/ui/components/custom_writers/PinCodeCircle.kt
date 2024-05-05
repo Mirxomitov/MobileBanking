@@ -1,7 +1,6 @@
 package uz.gita.mobilebanking.ui.components.custom_writers
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,14 +12,15 @@ import androidx.compose.ui.unit.dp
 fun PinCodeCircle(
     color: Color,
     radius: Int,
-    padding: Int,
+    modifier: Modifier = Modifier
 ) {
-    Canvas(modifier = Modifier
-        .padding(padding.dp)
-        .size(radius.dp),
+    Canvas(
+        modifier = modifier
+            .size(radius.dp),
         onDraw = {
             drawCircle(
-                color = color, radius = radius.toFloat()
+                color = color,
+                radius = radius.toFloat()
             )
         }
     )

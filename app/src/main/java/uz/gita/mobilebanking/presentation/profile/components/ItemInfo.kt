@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.theme.grayIcon
 
 @Composable
 fun ItemInfo(
@@ -27,8 +29,9 @@ fun ItemInfo(
 
     Row(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+
     ) {
         Icon(
             painter = painterResource(id = icon),
@@ -50,7 +53,7 @@ fun ItemInfo(
         Icon(
             painter = painterResource(id = R.drawable.ic_chevronright),
             contentDescription = null,
-            tint = Color.Black,
+            tint = grayIcon,
             modifier = Modifier.size(24.dp)
         )
     }

@@ -12,6 +12,6 @@ class AuthDirectionImpl @Inject constructor(
     private val appNavigator: AppNavigator
 ) : AuthDirection {
     override suspend fun toVerifyScreen(token: String, isSignIn: Boolean) {
-        appNavigator.replaceScreen(VerifyScreen(token, isSignIn))
+        appNavigator.addScreen(VerifyScreen(token, isSignIn))
     }
 }

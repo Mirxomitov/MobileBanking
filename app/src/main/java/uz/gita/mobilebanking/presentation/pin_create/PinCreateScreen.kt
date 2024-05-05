@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
@@ -34,22 +35,26 @@ import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.circleDefaultColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
 import uz.gita.mobilebanking.ui.theme.textColor
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.hidePartOfNumber
 
-class CreatePinScreen : Screen {
+class PinCreateScreen : Screen {
     @Composable
     override fun Content() {
         MobileBankingTheme {
-            val viewModel: CreatePinContract.Model = getViewModel<CreatePinModel>()
+            val viewModel: PinCreateContract.Model = getViewModel<PinCreateModel>()
 
-            CreatePinContent(viewModel::onEventDispatcher)
+            CreatePinContent(
+                viewModel.collectAsState().value,
+                viewModel::onEventDispatcher
+            )
         }
     }
 }
 
 @Composable
 private fun CreatePinContent(
-    onEventDirection: (CreatePinContract.Intent) -> Unit
+    uiState: PinCreateContract.UIState,
+    onEventDirection: (PinCreateContract.Intent) -> Unit
 ) {
     //val context = LocalContext.current
     val PASSWORD_LENGTH = 4
@@ -72,23 +77,28 @@ private fun CreatePinContent(
                 painter = painterResource(id = R.drawable.ic_lock),
                 contentDescription = "lock icon",
                 Modifier
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 24.dp)
                     .size(60.dp)
             )
 
             TextBoldBlack(
-                text = stringResource(id = R.string.create_pin_code), fontSize = 22.sp, letterSpacing = 0.8.sp
+                text = stringResource(id = R.string.create_pin_code), fontSize = 24.sp, letterSpacing = 0.8.sp
             )
 
             TextNormalBlack(
+                modifier = Modifier.padding(top = 2.dp),
                 text = stringResource(id = R.string.your_phone_number),
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 letterSpacing = 0.8.sp,
-                color = textColor
+                color = textColor,
             )
 
             TextNormalBlack(
-                text = "+998 90 --- -- 20", fontSize = 12.sp, color = textColor, letterSpacing = 0.8.sp
+                modifier = Modifier.padding(top = 2.dp),
+                text = uiState.phoneNumber.hidePartOfNumber(),
+                fontSize = 14.sp,
+                color = textColor,
+                letterSpacing = 0.8.sp
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -96,7 +106,7 @@ private fun CreatePinContent(
             CodeCreator(modifier = Modifier,
                 onPasswordEntered = {
                     //Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                    onEventDirection(CreatePinContract.Intent.ToPinCheckScreen)
+                    onEventDirection(PinCreateContract.Intent.ToPinCheckScreen(it))
                 },
                 listOfCircleColors = listOfCircleColors,
                 onChangeCircleColor = {
@@ -116,8 +126,11 @@ private fun CreatePinContent(
             horizontalArrangement = Arrangement.Center,
         ) {
             repeat(PASSWORD_LENGTH) {
-                logger("draw circles")
-                PinCodeCircle(color = listOfCircleColors[it], radius = 10, 12)
+                PinCodeCircle(
+                    color = listOfCircleColors[it],
+                    radius = 10,
+                    modifier = Modifier.padding(horizontal = 12.dp)
+                )
             }
         }
 
@@ -128,6 +141,6 @@ private fun CreatePinContent(
 @Composable
 private fun CreatePinPreview() {
     MobileBankingTheme {
-        CreatePinContent({})
+        CreatePinContent(PinCreateContract.UIState("903553620"), {})
     }
 }

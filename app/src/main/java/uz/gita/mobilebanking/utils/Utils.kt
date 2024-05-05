@@ -10,3 +10,12 @@ fun logger(message: String, tag: String = "TTT") {
 fun <T> List<T>.new(): MutableList<T> {
     return mutableListOf<T>().also { it.addAll(this) }
 }
+
+fun String.hidePartOfNumber(): String {
+
+    if (this.length == 9) {
+        return "+998 ${this.substring(0, 2)} ••• •• ${this.substring(7, 9)}"
+    }
+
+    return this
+}

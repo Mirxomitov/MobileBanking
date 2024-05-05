@@ -1,22 +1,30 @@
 package uz.gita.mobilebanking.presentation.splash
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
+import uz.gita.mobilebanking.domain.RegistrationRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashModel @Inject constructor(
-    private val direction: SplashDirection
+    private val direction: SplashDirection,
+    private val registrationRepository: RegistrationRepository,
 ) : ViewModel(), SplashContract.Model {
     override fun onEventDispatcher(intent: SplashContract.Intent) {
         when (intent) {
             is SplashContract.Intent.NextScreen -> {
-                viewModelScope.launch {
-                    direction.toNext()
+                intent {
+                    when (registrationRepository.signed()) {
+                        true -> {
+                            direction.toPinScreen()
+                        }
+
+                        false -> {
+                            direction.toAuthScreen()
+                        }
+                    }
                 }
             }
         }

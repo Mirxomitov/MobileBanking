@@ -42,7 +42,8 @@ fun MyInformation(
             .padding(16.dp),
     ) {
         TextBold(
-            text = stringResource(R.string.my_informations), fontSize = 14.sp,
+            text = stringResource(R.string.my_informations),
+            fontSize = 16.sp,
             color = textColor
         )
 

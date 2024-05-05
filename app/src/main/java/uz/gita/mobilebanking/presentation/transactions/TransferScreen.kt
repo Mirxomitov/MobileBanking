@@ -1,15 +1,17 @@
 package uz.gita.mobilebanking.presentation.transactions
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -54,21 +56,23 @@ private fun TransactionsScreenContent(
     Column(
         modifier = Modifier
             .background(color = cardColor)
+            .verticalScroll(rememberScrollState()),
     ) {
         TopBar(
             modifier = Modifier
-                .padding(vertical = 28.dp),
+                .padding(vertical = 28.dp, horizontal = 12.dp),
             stringResource(id = R.string.transactions),
         )
 
         SearchBar(
-            Modifier,
+            Modifier.padding(horizontal = 12.dp),
             stringResource(id = R.string.card_or_phone),
             onClickContacts = {},
             onClickScan = {}
         )
 
         LazyRow(
+            contentPadding = PaddingValues(start = 12.dp),
             modifier = Modifier
                 .padding(top = 24.dp)
         ) {
@@ -89,7 +93,7 @@ private fun TransactionsScreenContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp)
+                .padding(top = 24.dp, start = 12.dp, end = 12.dp)
         ) {
             ItemSelfTransfer(
                 modifier = Modifier
@@ -112,34 +116,37 @@ private fun TransactionsScreenContent(
         TextBoldBlack(
             text = stringResource(R.string.templates),
             fontSize = 18.sp,
-            modifier = Modifier.padding(top = 24.dp)
+            modifier = Modifier.padding(top = 24.dp, start = 12.dp)
         )
 
-        Row(
+        LazyRow(
             modifier = Modifier
-                .padding(top = 12.dp)
-                .horizontalScroll(rememberScrollState())
+                .padding(top = 12.dp),
+            contentPadding = PaddingValues(start = 12.dp),
         ) {
-            AddTemplate(
-                Modifier
-                    .padding(end = 24.dp),
-                onClick = {}
-            )
-            for (i in 0..8)
+            item {
+                AddTemplate(
+                    Modifier
+                        .padding(end = 24.dp),
+                    onClick = {}
+                )
+            }
+            items(10) {
                 Template(
                     modifier = Modifier.padding(end = 24.dp),
                     firstName = "Saidrasul",
                     imageID = R.drawable.logo_tbc
                 )
+            }
         }
 
         TextBoldBlack(
             text = stringResource(R.string.international_transactions),
             fontSize = 18.sp,
-            modifier = Modifier.padding(top = 36.dp)
+            modifier = Modifier.padding(top = 36.dp, start = 12.dp)
         )
 
-        Row(modifier = Modifier.padding(top = 24.dp)) {
+        Row(modifier = Modifier.padding(top = 24.dp, start = 12.dp)) {
             TransferToCountry(
                 modifier = Modifier
                     .weight(1f)
@@ -157,11 +164,7 @@ private fun TransactionsScreenContent(
             )
         }
 
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize()
-        )
+        Spacer(modifier = Modifier.height(60.dp))
     }
 }
 

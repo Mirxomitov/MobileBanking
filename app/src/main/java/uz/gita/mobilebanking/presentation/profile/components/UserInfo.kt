@@ -51,7 +51,7 @@ fun UserInfo(
                 fontSize = 18.sp,
                 modifier = Modifier.padding(start = 8.dp)
             )
-            TextNormal(
+            TextBold(
                 letterSpacing = 0.8.sp,
                 text = "+998 90 355 36 20",
                 color = textColor,
@@ -62,7 +62,7 @@ fun UserInfo(
                     .fillMaxWidth()
                     .padding(top = 12.dp)
                     .shadow(
-                        elevation = 14.dp,
+                        elevation = 3.dp,
                         RoundedCornerShape(16.dp),
                         ambientColor = ShadowColorCard
                     )
