@@ -115,6 +115,17 @@ class RegistrationRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
+    override fun signOut(): Flow<Result<Unit>> = flow {
+        val response = api.signOut()
+
+        if (response.isSuccessful && response.body() != null) {
+            emit(Result.success(response.body()!!))
+        } else {
+            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            emit(Result.failure(Exception(data.message)))
+        }
+    }.flowOn(Dispatchers.IO)
+        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
     // sharedPreference -> save and get data
     override fun phoneNumber(phoneNumber: String) = sharedPreferencesHelper.phoneNumber(phoneNumber)

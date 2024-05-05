@@ -63,7 +63,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
         label = {
             TextNormal(
                 text = tab.options.title,
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 color = textColor
             )
         },

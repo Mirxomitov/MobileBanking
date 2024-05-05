@@ -15,7 +15,10 @@ interface RegistrationRepository {
     fun signUpVerify(token: String, verificationCode: String): Flow<Result<SignUpVerifyResponse>>
     fun signInResend(token : String) : Flow<Result<SignInResponse>>
     fun signUpResend(token : String) : Flow<Result<SignUpResponse>>
+    fun signOut() : Flow<Result<Unit>>
 
+
+    // shared preference
 
     fun phoneNumber(phoneNumber: String)
     fun phoneNumber() : String
@@ -24,5 +27,4 @@ interface RegistrationRepository {
     fun isLanguageUzbek(): Boolean
     fun saveActiveLanguage(isUzbek : Boolean)
     fun signed() : Boolean
-
 }

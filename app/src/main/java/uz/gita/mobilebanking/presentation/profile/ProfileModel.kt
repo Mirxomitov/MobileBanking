@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
+import uz.gita.mobilebanking.domain.RegistrationRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileModel @Inject constructor(
-    private val direction: ProfileDirection
+    private val direction: ProfileDirection,
+    private val registrationRepository: RegistrationRepository,
 ) : ViewModel(), ProfileContract.Model {
     override fun onEventDispatchers(intent: ProfileContract.Intent) {
         when (intent) {
@@ -16,6 +18,10 @@ class ProfileModel @Inject constructor(
                 intent {
                     direction.back()
                 }
+            }
+
+            is ProfileContract.Intent.LogOut -> {
+                intent { registrationRepository.signOut() }
             }
         }
     }

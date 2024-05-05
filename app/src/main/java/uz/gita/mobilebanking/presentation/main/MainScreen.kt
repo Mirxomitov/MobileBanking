@@ -60,12 +60,11 @@ private fun MainContent(
     var isVisibleMoney by remember { mutableStateOf(true) }
 
     Scaffold {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(mainBgLight)
-                .padding(it)
+                .padding(bottom = it.calculateBottomPadding())
         ) {
             MainTop(
                 modifier = Modifier
