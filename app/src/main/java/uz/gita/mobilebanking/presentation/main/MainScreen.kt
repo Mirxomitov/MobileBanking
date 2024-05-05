@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,105 +59,107 @@ private fun MainContent(
     val context = LocalContext.current
     var isVisibleMoney by remember { mutableStateOf(true) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(mainBgLight)
-    ) {
-        MainTop(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .padding(horizontal = 12.dp),
-            userName = "Tohir",
-            onClickItem = {
-                onEventDispatcher(MainContract.Intent.OpenProfileScreen)
-            },
-            icSupportClick = {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chat.paynet.uz/"))
-                startActivity(context, intent, null)
-            },
-            icNotificationClick = {
-                // TODO Bildirishnomalar uchun -> navigate to -> (Notifications Screen)
-            }
-        )
+    Scaffold {
 
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .background(mainBgLight)
+                .padding(it)
         ) {
-
-            UserBalanceWithEye(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(),
-                balance = "1 192 891",
-                onClickEye = {
-                    isVisibleMoney = !isVisibleMoney
-                },
-                isVisible = isVisibleMoney
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            FillTransactPay(
+            MainTop(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp)
-                    .padding(top = 12.dp),
-                balance = "0",
-                cardNumber = "3600",
-                onClickWhatIsIt = { },
-                onClickItem = { },
-                onClickFill = { },
-                onClickTransact = { },
-                onClickPay = { }
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Exchange(
-                modifier = Modifier
-                    .fillMaxWidth()
+                    .height(56.dp)
                     .padding(horizontal = 12.dp),
-                onClickItem = {},
-                onClickExchange = {}
+                userName = "Tohir",
+                onClickItem = {
+                    onEventDispatcher(MainContract.Intent.OpenProfileScreen)
+                },
+                icSupportClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chat.paynet.uz/"))
+                    startActivity(context, intent, null)
+                },
+                icNotificationClick = {
+                    // TODO Bildirishnomalar uchun -> navigate to -> (Notifications Screen)
+                }
             )
 
-            Row(
-                Modifier
-                    .padding(top = 12.dp)
-                    .padding(horizontal = 12.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
             ) {
-                Spacer(
+
+                UserBalanceWithEye(
                     modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
+                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    balance = "1 192 891",
+                    onClickEye = {
+                        isVisibleMoney = !isVisibleMoney
+                    },
+                    isVisible = isVisibleMoney
                 )
-                Spacer(modifier = Modifier.padding(4.dp))
-                CashBack(Modifier.weight(1f))
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                FillTransactPay(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp)
+                        .padding(top = 12.dp),
+                    balance = "0",
+                    cardNumber = "3600",
+                    onClickWhatIsIt = { },
+                    onClickItem = { },
+                    onClickFill = { },
+                    onClickTransact = { },
+                    onClickPay = { }
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Exchange(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp),
+                    onClickItem = {},
+                    onClickExchange = {}
+                )
+
+                Row(
+                    Modifier
+                        .padding(top = 12.dp)
+                        .padding(horizontal = 12.dp)
+                ) {
+                    Spacer(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
+                    )
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    CashBack(Modifier.weight(1f))
+                }
+
+                PaynetAvia(
+                    Modifier
+                        .padding(top = 12.dp)
+                        .padding(horizontal = 12.dp)
+                )
+
+                MyHome(
+                    Modifier
+                        .padding(top = 12.dp)
+                        .padding(horizontal = 12.dp)
+                )
+
+                MyDebt(
+                    Modifier
+                        .padding(top = 12.dp)
+                        .padding(horizontal = 12.dp)
+                )
             }
-
-            PaynetAvia(
-                Modifier
-                    .padding(top = 12.dp)
-                    .padding(horizontal = 12.dp)
-            )
-
-            MyHome(
-                Modifier
-                    .padding(top = 12.dp)
-                    .padding(horizontal = 12.dp)
-            )
-
-            MyDebt(
-                Modifier
-                    .padding(top = 12.dp)
-                    .padding(horizontal = 12.dp)
-            )
-
-            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }
