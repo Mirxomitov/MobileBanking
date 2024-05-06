@@ -1,6 +1,7 @@
 package uz.gita.mobilebanking.domain
 
 import kotlinx.coroutines.flow.Flow
+import uz.gita.mobilebanking.data.model.response.LogOutResponse
 import uz.gita.mobilebanking.data.model.response.SignInResendResponse
 import uz.gita.mobilebanking.data.model.response.SignInResponse
 import uz.gita.mobilebanking.data.model.response.SignUpResponse
@@ -15,7 +16,7 @@ interface RegistrationRepository {
     fun signUpVerify(token: String, verificationCode: String): Flow<Result<SignUpVerifyResponse>>
     fun signInResend(token : String) : Flow<Result<SignInResponse>>
     fun signUpResend(token : String) : Flow<Result<SignUpResponse>>
-    fun signOut() : Flow<Result<Unit>>
+    fun signOut() : Flow<Result<LogOutResponse>>
 
 
     // shared preference

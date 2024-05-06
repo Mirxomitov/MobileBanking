@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 interface ProfileDirection {
     suspend fun back()
-    suspend fun toLogInScreen()
+    suspend fun toAuthScreen()
 }
 
 @Singleton
@@ -18,7 +18,7 @@ class ProfileDirectionImpl @Inject constructor(
         appNavigator.back()
     }
 
-    override suspend fun toLogInScreen() {
-        appNavigator.replaceScreen(AuthScreen())
+    override suspend fun toAuthScreen() {
+        appNavigator.replaceAll(AuthScreen())
     }
 }

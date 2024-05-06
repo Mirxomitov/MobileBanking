@@ -166,5 +166,5 @@ private fun ProfileContent(
 @Preview
 @Composable
 fun ProfileContentPreview() {
-    ProfileContent(ProfileContract.UIState.InitState, {})
+    ProfileContent(ProfileContract.UIState, {})
 }

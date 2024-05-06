@@ -8,12 +8,10 @@ interface ProfileContract {
         fun onEventDispatchers(intent : Intent)
     }
 
-    sealed interface UIState {
-        data object InitState : UIState
-    }
+    data object UIState
     sealed interface Intent {
         data object Back : Intent
         data object LogOut : Intent
     }
-    sealed interface SideEffect {}
+    sealed interface SideEffect
 }

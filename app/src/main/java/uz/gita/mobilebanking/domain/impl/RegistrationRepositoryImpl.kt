@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.domain
+package uz.gita.mobilebanking.domain.impl
 
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -13,24 +13,26 @@ import uz.gita.mobilebanking.data.model.request.SignInVerifyRequest
 import uz.gita.mobilebanking.data.model.request.SignUpRequest
 import uz.gita.mobilebanking.data.model.request.SignUpResendRequest
 import uz.gita.mobilebanking.data.model.request.SignUpVerifyRequest
+import uz.gita.mobilebanking.data.model.response.LogOutResponse
 import uz.gita.mobilebanking.data.model.response.SignInResponse
 import uz.gita.mobilebanking.data.model.response.SignInVerifyResponse
 import uz.gita.mobilebanking.data.model.response.SignUpResponse
 import uz.gita.mobilebanking.data.model.response.SignUpVerifyResponse
 import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.RegistrationApi
+import uz.gita.mobilebanking.domain.RegistrationRepository
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 class RegistrationRepositoryImpl @Inject constructor(
-    private val api: RegistrationApi,
+    private val registrationApi: RegistrationApi,
     private val sharedPreferencesHelper: SharedPreferenceHelper,
     private val gson: Gson
 ) : RegistrationRepository {
 
     // API -> Send Requests and Get Responses
     override fun signIn(phoneNumber: String): Flow<Result<SignInResponse>> = flow {
-        val response = api.singIn(SignInRequest("+998$phoneNumber", phoneNumber))
+        val response = registrationApi.singIn(SignInRequest("+998$phoneNumber", phoneNumber))
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
@@ -42,7 +44,7 @@ class RegistrationRepositoryImpl @Inject constructor(
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
     override fun signUp(phoneNumber: String): Flow<Result<SignUpResponse>> = flow {
-        val response = api.signUp(
+        val response = registrationApi.signUp(
             SignUpRequest(
                 phone = "+998$phoneNumber",
                 password = phoneNumber,
@@ -65,7 +67,7 @@ class RegistrationRepositoryImpl @Inject constructor(
 
     override fun signInVerify(token: String, verificationCode: String): Flow<Result<SignInVerifyResponse>> = flow {
         logger("Repository.VerifySIGNIN.token=$token\tcode=$verificationCode")
-        val response = api.signInVerify(SignInVerifyRequest(token, verificationCode))
+        val response = registrationApi.signInVerify(SignInVerifyRequest(token, verificationCode))
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
@@ -78,7 +80,7 @@ class RegistrationRepositoryImpl @Inject constructor(
 
     override fun signUpVerify(token: String, verificationCode: String): Flow<Result<SignUpVerifyResponse>> = flow {
         logger("Repository.VerifySIGNUP.token=$token\tcode=$verificationCode")
-        val response = api.signUpVerify(SignUpVerifyRequest(token, verificationCode))
+        val response = registrationApi.signUpVerify(SignUpVerifyRequest(token, verificationCode))
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
@@ -91,7 +93,7 @@ class RegistrationRepositoryImpl @Inject constructor(
 
 
     override fun signInResend(token: String): Flow<Result<SignInResponse>> = flow {
-        val response = api.signInResend(SignInResendRequest(token))
+        val response = registrationApi.signInResend(SignInResendRequest(token))
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
@@ -104,7 +106,7 @@ class RegistrationRepositoryImpl @Inject constructor(
 
 
     override fun signUpResend(token: String): Flow<Result<SignUpResponse>> = flow {
-        val response = api.signUpResend(SignUpResendRequest(token))
+        val response = registrationApi.signUpResend(SignUpResendRequest(token))
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
@@ -115,17 +117,16 @@ class RegistrationRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
-    override fun signOut(): Flow<Result<Unit>> = flow {
-        val response = api.signOut()
+    override fun signOut(): Flow<Result<LogOutResponse>> = flow {
+        val response = registrationApi.signOut()
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
         } else {
-            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
-            emit(Result.failure(Exception(data.message)))
+            emit(Result.failure(Exception("")))
         }
     }.flowOn(Dispatchers.IO)
-        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+    // .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
     // sharedPreference -> save and get data
     override fun phoneNumber(phoneNumber: String) = sharedPreferencesHelper.phoneNumber(phoneNumber)

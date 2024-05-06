@@ -9,6 +9,7 @@ import uz.gita.mobilebanking.data.model.request.SignInVerifyRequest
 import uz.gita.mobilebanking.data.model.request.SignUpRequest
 import uz.gita.mobilebanking.data.model.request.SignUpResendRequest
 import uz.gita.mobilebanking.data.model.request.SignUpVerifyRequest
+import uz.gita.mobilebanking.data.model.response.LogOutResponse
 import uz.gita.mobilebanking.data.model.response.SignInResponse
 import uz.gita.mobilebanking.data.model.response.SignInVerifyResponse
 import uz.gita.mobilebanking.data.model.response.SignUpResponse
@@ -35,5 +36,5 @@ interface RegistrationApi {
 
 
     @POST("mobile-bank/v1/auth/sign-out")
-    suspend fun signOut() : Response<Unit>
+    suspend fun signOut() : Response<LogOutResponse>
 }

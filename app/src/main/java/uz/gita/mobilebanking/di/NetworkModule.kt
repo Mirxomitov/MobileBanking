@@ -8,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.gita.mobilebanking.data.source.remote.CardApi
 import uz.gita.mobilebanking.data.source.remote.RegistrationApi
 import javax.inject.Singleton
 
@@ -33,6 +34,10 @@ class NetworkModule {
             .build()
 
     @[Provides Singleton]
-    fun provideContactApi(retrofit: Retrofit): RegistrationApi =
+    fun provideRegistrationApi(retrofit: Retrofit): RegistrationApi =
         retrofit.create(RegistrationApi::class.java)
+
+    @[Provides Singleton]
+    fun provedCardApi(retrofit: Retrofit): CardApi =
+        retrofit.create(CardApi::class.java)
 }

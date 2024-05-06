@@ -19,8 +19,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.MobileBanking"
-            android:windowSoftInputMode="adjustResize">
+            android:theme="@style/Theme.MobileBanking">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +27,7 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
 
     <!--    android:label="@string/app_name"-->
+    <!--            android:windowSoftInputMode="adjustResize"-->

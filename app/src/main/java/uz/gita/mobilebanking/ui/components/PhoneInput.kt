@@ -69,7 +69,7 @@ fun PhoneInput(
             )
 
             TextBoldBlack(
-                text = "+ 998 ", fontSize = 20.sp, modifier = Modifier.padding(start = 4.dp), letterSpacing = 0.8.sp
+                text = "+998 ", fontSize = 20.sp, modifier = Modifier.padding(start = 4.dp), letterSpacing = 0.8.sp
             )
 
             BasicTextField(

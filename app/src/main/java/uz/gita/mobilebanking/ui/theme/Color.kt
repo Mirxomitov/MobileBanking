@@ -25,7 +25,7 @@ val grayIcon = Color(0xFF6C7177)
 val textColor = Color(0xFF202325)
 val authComponentBg = Color(0xFFE9EBEB)
 val primaryContainer = Color(0xFFDDFAE4)
-val onPrimaryContainer = Color(0xFF8AE6C0)
+//val onPrimaryContainer = Color(0xFF8AE6C0)
 val textColorLight = Color(0xFF8A9297)
 val circleDefaultColor = Color(0xFF8A9297)
 

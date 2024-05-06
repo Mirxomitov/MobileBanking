@@ -3,7 +3,6 @@ package uz.gita.mobilebanking.presentation.main
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,8 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,13 +57,8 @@ private fun MainContent(
     val context = LocalContext.current
     var isVisibleMoney by remember { mutableStateOf(true) }
 
-    Scaffold {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(mainBgLight)
-                .padding(bottom = it.calculateBottomPadding())
-        ) {
+    Scaffold(modifier = Modifier.fillMaxSize(),
+        topBar = {
             MainTop(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -83,13 +76,15 @@ private fun MainContent(
                     // TODO Bildirishnomalar uchun -> navigate to -> (Notifications Screen)
                 }
             )
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState())
-            ) {
-
+        }
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(mainBgLight)
+                .padding(it)
+        ) {
+            item {
                 UserBalanceWithEye(
                     modifier = Modifier
                         .padding(12.dp)
@@ -100,9 +95,11 @@ private fun MainContent(
                     },
                     isVisible = isVisibleMoney
                 )
-
+            }
+            item {
                 Spacer(modifier = Modifier.height(12.dp))
-
+            }
+            item {
                 FillTransactPay(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -116,9 +113,12 @@ private fun MainContent(
                     onClickTransact = { },
                     onClickPay = { }
                 )
+            }
 
+            item {
                 Spacer(modifier = Modifier.height(12.dp))
-
+            }
+            item {
                 Exchange(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -126,7 +126,9 @@ private fun MainContent(
                     onClickItem = {},
                     onClickExchange = {}
                 )
+            }
 
+            item {
                 Row(
                     Modifier
                         .padding(top = 12.dp)
@@ -140,19 +142,24 @@ private fun MainContent(
                     Spacer(modifier = Modifier.padding(4.dp))
                     CashBack(Modifier.weight(1f))
                 }
+            }
 
+            item {
                 PaynetAvia(
                     Modifier
                         .padding(top = 12.dp)
                         .padding(horizontal = 12.dp)
                 )
+            }
 
+            item {
                 MyHome(
                     Modifier
                         .padding(top = 12.dp)
                         .padding(horizontal = 12.dp)
                 )
-
+            }
+            item {
                 MyDebt(
                     Modifier
                         .padding(top = 12.dp)

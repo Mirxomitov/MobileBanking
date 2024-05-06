@@ -2,16 +2,16 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ButtonWithTimerPreview">
-        <State />
-      </entry>
-      <entry key="MainPreview">
+      <entry key="PaymentContentPreview">
         <State />
       </entry>
       <entry key="PersonalInformationPreview">
         <State />
       </entry>
       <entry key="PinPreview">
+        <State />
+      </entry>
+      <entry key="TransactionsScreenPreview">
         <State />
       </entry>
       <entry key="VerifyPreview">

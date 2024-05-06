@@ -110,5 +110,12 @@
     <string name="document_number">Hujjat rqaqami</string>
     <string name="date_of_birth">Tug\'ilgan kun</string>
     <string name="phone_number">Telefon raqami</string>
+    <string name="search">Izlash</string>
+    <string name="qr_code">QR kod</string>
+    <string name="fast_payments">Tezkor to\'lovlar</string>
+    <string name="train_ticket">Poyezd chiptasi</string>
+    <string name="convenient_and_fast">qulay va tez</string>
+    <string name="buy">Sotib olish</string>
+    <string name="payment_types">To\'lov turlari</string>
 
 </resources>
