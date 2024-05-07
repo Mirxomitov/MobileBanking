@@ -1,6 +1,6 @@
 package uz.gita.mobilebanking.presentation.payments
 
-import androidx.annotation.DrawableRes
+import ItemPay
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -10,7 +10,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -59,6 +58,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
+import uz.gita.mobilebanking.presentation.payments.components.ItemPaySmall
 import uz.gita.mobilebanking.presentation.payments.components.TrainTicket
 import uz.gita.mobilebanking.presentation.transactions.components.AddTemplate
 import uz.gita.mobilebanking.presentation.transactions.components.ItemSelfTransfer
@@ -70,7 +70,6 @@ import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.cardColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 import uz.gita.mobilebanking.utils.logger
 
@@ -220,186 +219,309 @@ fun PaymentContent() {
             }
 
             when (visible) {
-                true -> {
-                    TextBoldBlack(
-                        text = "Ommaboplari",
-                        fontSize = 18.sp,
-                        color = Color.Black,
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
-
-                    for (i in 0..12) {
-                        ItemPaySmall(
-                            Modifier
-                                .padding(top = 12.dp)
-                                .fillMaxWidth(),
-                            R.drawable.ic_search,
-                            "$i Elektroenergiya",
-                            "$i \"HUDUDIY ELEKTR TARMOQLARI\" AJ"
-                        )
-                    }
-                }
-
-                false -> {
-                    TextBoldBlack(
-                        text = stringResource(R.string.templates),
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(top = 24.dp, start = 12.dp)
-                    )
-
-                    LazyRow(
-                        modifier = Modifier.padding(top = 12.dp),
-                        contentPadding = PaddingValues(start = 12.dp),
-                    ) {
-
-                        item {
-                            AddTemplate(Modifier.padding(end = 24.dp), onClick = {})
-                        }
-                        items(10) {
-                            Template(
-                                modifier = Modifier.padding(end = 24.dp),
-                                firstName = "Saidrasul",
-                                imageID = R.drawable.logo_tbc
-                            )
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 24.dp, start = 12.dp, end = 12.dp)
-                    ) {
-                        ItemSelfTransfer(
-                            modifier = Modifier
-                                .padding(end = 12.dp)
-                                .weight(1f),
-                            title = stringResource(R.string.qr_code),
-                            iconID = R.drawable.self_transfer_to_card,
-                            bgColor = Color(0xFFECF0F2)
-                        )
-
-                        ItemSelfTransfer(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(R.string.fast_payments),
-                            iconID = R.drawable.self_transfer_to_wallet,
-                            bgColor = Color(0xFFF2EDFD)
-                        )
-                    }
-
-                    PaynetAvia(
-                        Modifier
-                            .padding(top = 24.dp)
-                            .padding(horizontal = 12.dp)
-                    )
-
-                    TrainTicket(
-                        Modifier
-                            .padding(top = 24.dp)
-                            .padding(horizontal = 12.dp)
-                    )
-
-                    TextBoldBlack(
-                        text = stringResource(R.string.payment_types),
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(top = 24.dp, start = 12.dp)
-                    )
-
-//                    LazyVerticalStaggeredGrid(
-//                        columns = StaggeredGridCells.Fixed(2),
-//                        verticalItemSpacing = 12.dp,
-//                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-//                        content = {
-//
-//                            item {
-//                                ItemPay(title = "Aloqa1", resource = R.drawable.paynet_avia_image)
-//                            }
-//
-//                            item {
-//                                ItemPay(title = "Aloqa2", resource = R.drawable.paynet_avia_image)
-//                            }
-//
-//                            item {
-//                                ItemPay(title = "Aloqa3", resource = R.drawable.paynet_avia_image)
-//                            }
-//
-//                            item {
-//                                ItemPay(title = "Aloqa4", resource = R.drawable.paynet_avia_image)
-//                            }
-//                        },
-//                        modifier = Modifier.fillMaxWidth()
-//                    )
-
-                }
+                true -> Searching()
+                false -> Default()
             }
         }
     }
 }
 
+
 @Composable
-private fun ItemPay(
-    modifier: Modifier = Modifier, title: String, resource: Int
-) {
-    Column(
-        modifier = modifier.padding(12.dp)
-    ) {
-        TextBoldBlack(
-            text = title, fontSize = 18.sp, modifier = Modifier.padding(top = 24.dp, start = 12.dp)
-        )
-        Image(
-            modifier = Modifier.fillMaxWidth(),
-            painter = painterResource(id = resource),
-            contentDescription = null,
+private fun Searching() {
+    TextBoldBlack(
+        text = "Ommaboplari",
+        fontSize = 18.sp,
+        color = Color.Black,
+        modifier = Modifier.padding(top = 12.dp)
+    )
+
+    for (i in 0..12) {
+        ItemPaySmall(
+            Modifier
+                .padding(top = 12.dp)
+                .fillMaxWidth(),
+            R.drawable.ic_search,
+            "$i Elektroenergiya",
+            "$i \"HUDUDIY ELEKTR TARMOQLARI\" AJ"
         )
     }
 }
 
 @Composable
-private fun ItemPaySmall(
-    modifier: Modifier = Modifier,
-    @DrawableRes imageID: Int,
-    mainTitle: String,
-    secondTitle: String
-) {
-    Row(
-        modifier = modifier
-            .shadow(
-                elevation = 1.dp, ambientColor = ShadowColorCard, shape = RoundedCornerShape(16.dp)
-            )
-            .background(cardColor)
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically
+private fun Default() {
+    TextBoldBlack(
+        text = stringResource(R.string.templates),
+        fontSize = 18.sp,
+        modifier = Modifier.padding(top = 24.dp, start = 12.dp)
+    )
+
+    LazyRow(
+        modifier = Modifier.padding(top = 12.dp),
+        contentPadding = PaddingValues(start = 12.dp),
     ) {
-        Image(
+
+        item {
+            AddTemplate(Modifier.padding(end = 24.dp), onClick = {})
+        }
+        items(10) {
+            Template(
+                modifier = Modifier.padding(end = 24.dp),
+                firstName = "Saidrasul",
+                imageID = R.drawable.logo_tbc
+            )
+        }
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 24.dp, start = 12.dp, end = 12.dp)
+    ) {
+        ItemSelfTransfer(
             modifier = Modifier
-                .clip(CircleShape)
-                .size(36.dp)
-                .padding(4.dp),
-            painter = painterResource(id = imageID),
-            contentDescription = null
+                .padding(end = 12.dp)
+                .weight(1f),
+            title = stringResource(R.string.qr_code),
+            iconID = R.drawable.self_transfer_to_card,
+            bgColor = Color(0xFFECF0F2)
         )
 
+        ItemSelfTransfer(
+            modifier = Modifier.weight(1f),
+            title = stringResource(R.string.fast_payments),
+            iconID = R.drawable.self_transfer_to_wallet,
+            bgColor = Color(0xFFF2EDFD)
+        )
+    }
+
+    PaynetAvia(
+        Modifier
+            .padding(top = 24.dp)
+            .padding(horizontal = 12.dp)
+    )
+
+    TrainTicket(
+        Modifier
+            .padding(top = 24.dp)
+            .padding(horizontal = 12.dp)
+    )
+
+    TextBoldBlack(
+        text = stringResource(R.string.payment_types),
+        fontSize = 18.sp,
+        modifier = Modifier.padding(vertical = 24.dp, horizontal = 12.dp)
+    )
+
+
+    Row(modifier = Modifier.fillMaxWidth()) {
         Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.Center
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 12.dp, end = 6.dp)
         ) {
-            TextBoldBlack(
-                text = mainTitle, fontSize = 18.sp, color = Color.Black
+            // item aloqa
+            Column(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(16.dp))
+                    .height(160.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFF8EAB0))
+            ) {
+                TextBoldBlack(
+                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    text = "Aloqa",
+                    fontSize = 18.sp,
+                )
+
+                Image(
+                    modifier = Modifier
+                        .height(128.dp),
+                    painter = painterResource(id = R.drawable.communication),
+                    contentDescription = null,
+                )
+            }
+
+            // item Internet va TV
+            Column(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .height(124.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFD0F3FC))
+            ) {
+                TextBoldBlack(
+                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    text = "Internet va TV",
+                    fontSize = 18.sp,
+                )
+
+                Image(
+                    modifier = Modifier
+                        .height(72.dp),
+                    painter = painterResource(id = R.drawable.internet),
+                    contentDescription = null,
+                )
+            }
+
+            // item Ta'lim
+            Column(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .height(124.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFFCE4DE))
+            ) {
+                TextBoldBlack(
+                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    text = "Ta'lim",
+                    fontSize = 18.sp,
+                )
+
+                Image(
+                    modifier = Modifier
+                        .height(72.dp),
+                    painter = painterResource(id = R.drawable.education),
+                    contentDescription = null,
+                )
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 6.dp, end = 12.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color(0xFFECF0F2))
+                    .padding(12.dp)
+            ) {
+                TextBold(
+                    text = stringResource(R.string.props_by_pays),
+                    fontSize = 18.sp,
+                    color = Color.Black
+                )
+            }
+
+            // kommunal to'lovlar
+            Column(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .height(164.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFD6F8E8))
+            ) {
+                TextBoldBlack(
+                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    text = "Kommunal to'lovlar",
+                    fontSize = 18.sp,
+                )
+
+                Image(
+                    modifier = Modifier
+                        .height(132.dp)
+                        .align(Alignment.End),
+                    painter = painterResource(id = R.drawable.communal),
+                    contentDescription = null,
+                )
+            }
+
+            // Davlat xizmatlari va shtatlar
+            Column(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .height(164.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFECE6FD))
+            ) {
+                TextBoldBlack(
+                    modifier = Modifier.padding(start = 12.dp, top = 12.dp),
+                    text = "Davlat xizmatlari va shtatlar",
+                    fontSize = 18.sp,
+                )
+
+                Image(
+                    modifier = Modifier
+                        .height(132.dp)
+                        .align(Alignment.End),
+                    painter = painterResource(id = R.drawable.government),
+                    contentDescription = null,
+                )
+            }
+        }
+    }
+
+    Row(
+        modifier = Modifier
+            .padding(top = 12.dp)
+            .fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 12.dp, end = 6.dp)
+        ) {
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Muddatli to'lovlar", iconID = R.drawable.ic_add_black,
+                onClick = {}
             )
-            TextNormal(
-                modifier = Modifier.padding(top = 4.dp),
-                text = secondTitle,
-                fontSize = 14.sp,
-                color = textColorLight
+
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Kredit to'lovlar", iconID = R.drawable.ic_add_black,
+                onClick = {}
+            )
+
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Mikrokredit, lombardlar", iconID = R.drawable.ic_add_black,
+                onClick = {}
             )
         }
 
-        Row(
+        Column(
             modifier = Modifier
-                .clip(RoundedCornerShape(12.dp))
-                .background(Color(0xFF63D18C))
-                .padding(4.dp)
+                .weight(1f)
+                .padding(end = 12.dp, start = 6.dp)
         ) {
-            TextNormal(color = textColor, fontSize = 14.sp, text = "2.2")
-            TextNormal(color = textColor, fontSize = 14.sp, text = "%")
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Transport va taksi", iconID = R.drawable.ic_add_black,
+                onClick = {}
+            )
+
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Tibbiyot", iconID = R.drawable.ic_add_black,
+                onClick = {}
+            )
+
+            ItemPay(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth(),
+                title = "Boshqa to'lovlar", iconID = R.drawable.ic_add_black,
+                onClick = {}
+            )
         }
     }
 }
@@ -409,10 +531,3 @@ private fun ItemPaySmall(
 fun PaymentContentPreview() {
     PaymentContent()
 }
-
-/*
-
-Focus true bo'lsa buttonni yoqaman
-button bosilgandan buttonni va focusni o'chiraman
-
- */
