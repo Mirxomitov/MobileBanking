@@ -27,7 +27,7 @@ val authComponentBg = Color(0xFFE9EBEB)
 val primaryContainer = Color(0xFFDDFAE4)
 //val onPrimaryContainer = Color(0xFF8AE6C0)
 val textColorLight = Color(0xFF8A9297)
-val circleDefaultColor = Color(0xFF8A9297)
+val circleDefaultColor = Color(0xFFE6EDF1)
 
 val transactionItemColor = Color(0xFFFEDEF3)
 val transactionItemColor2 = Color(0xFFACFEE2)

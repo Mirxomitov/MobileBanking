@@ -1,18 +1,18 @@
 package uz.gita.mobilebanking.presentation.pin
 
+import android.widget.Toast
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +47,8 @@ import uz.gita.mobilebanking.ui.theme.errorColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.utils.hidePartOfNumber
+import uz.gita.mobilebanking.utils.requireBiometricAuth
+import uz.gita.mobilebanking.utils.vibrate
 
 class PinScreen : Screen {
     @Composable
@@ -65,35 +68,64 @@ fun PinContent(
     uiState: PinContract.UIState,
     onEventDispatcher: (PinContract.Intent) -> Unit
 ) {
-
+    val context = LocalContext.current
     val ATTEMPTS_COUNT = 3
     val PASSWORD_LENGTH = 4
     var attemptsCount by remember { mutableIntStateOf(ATTEMPTS_COUNT) }
     var isErrorTextVisible by remember { mutableStateOf(false) }
     val listOfCircleColors =
         remember {
-            mutableStateListOf<Color>().apply { repeat(PASSWORD_LENGTH) { this.add(circleDefaultColor) } }
+            mutableStateListOf<Color>().apply {
+                repeat(PASSWORD_LENGTH) { this.add(circleDefaultColor) }
+            }
         }
 
+    var isClickNumbersEnabled by remember { mutableStateOf(true) }
     val shakeOffset = remember { Animatable(0f) }
 
     LaunchedEffect(attemptsCount) {
         if (attemptsCount != ATTEMPTS_COUNT) {
-            repeat(4) {
+            context.vibrate(500)
+            repeat(2) {
                 shakeOffset.animateTo(
-                    targetValue = 20f,
-                    animationSpec = tween(durationMillis = 20, easing = LinearEasing)
+                    targetValue = 10f,
+                    animationSpec = tween(
+                        durationMillis = 5,
+                        easing = LinearOutSlowInEasing
+                    )
                 )
                 shakeOffset.animateTo(
                     targetValue = 0f,
-                    animationSpec = tween(durationMillis = 20, easing = LinearEasing)
+                    animationSpec = tween(
+                        durationMillis = 5,
+                        easing = LinearOutSlowInEasing
+                    )
                 )
             }
-
             changeColor(circleDefaultColor, listOfCircleColors)
+            isClickNumbersEnabled = true
         }
     }
 
+    context.requireBiometricAuth(
+        onSuccess = {
+            onEventDispatcher(PinContract.Intent.ToMainScreen)
+        },
+        onError = { _, errorString ->
+            Toast.makeText(
+                context,
+                errorString.toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+        },
+        onFailed = {
+            Toast.makeText(
+                context,
+                "Verification error",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    )
 
     // ui started here
     Box(
@@ -115,7 +147,7 @@ fun PinContent(
                 painter = painterResource(id = R.drawable.ic_lock),
                 contentDescription = "lock icon",
                 Modifier
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 18.dp)
                     .size(60.dp)
             )
 
@@ -126,19 +158,20 @@ fun PinContent(
             )
 
             TextNormalBlack(
+                modifier = Modifier.padding(top = 4.dp),
                 text = stringResource(id = R.string.your_phone_number),
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 letterSpacing = 0.8.sp,
                 color = textColor
             )
 
-            TextNormalBlack(
+            TextBoldBlack(
+                modifier = Modifier.padding(top = 4.dp),
                 text = uiState.phoneNumber.hidePartOfNumber(),
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 color = textColor,
                 letterSpacing = 0.8.sp
             )
-
 
             if (isErrorTextVisible) {
                 TextNormal(
@@ -168,10 +201,29 @@ fun PinContent(
                 incorrectPinCodeListener = {
                     changeColor(errorColor, listOfCircleColors)
                     attemptsCount--
+                    isClickNumbersEnabled = false
                     isErrorTextVisible = true
                 },
                 onFingerButtonClick = {
-
+                    context.requireBiometricAuth(
+                        onSuccess = {
+                            onEventDispatcher(PinContract.Intent.ToMainScreen)
+                        },
+                        onError = { _, errorString ->
+                            Toast.makeText(
+                                context,
+                                errorString.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        },
+                        onFailed = {
+                            Toast.makeText(
+                                context,
+                                "Verification error",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    )
                 },
                 listOfCircleColors = listOfCircleColors,
                 onChangeCircleColor = {
@@ -183,19 +235,22 @@ fun PinContent(
                             red = color.red
                         )
                     }
-                }
+                },
+                isClickNumbersEnabled = isClickNumbersEnabled
             )
         }
 
         Row(
             modifier = Modifier
-                .padding(horizontal = shakeOffset.value.dp)
-               ,
-        ) {
+                .align(Alignment.Center)
+                .offset(x = shakeOffset.value.dp),
+
+            ) {
             repeat(PASSWORD_LENGTH) {
                 PinCodeCircle(
-                    color = listOfCircleColors[it], radius = 15,
-                    modifier = Modifier.padding(horizontal = 12.dp)
+                    color = listOfCircleColors[it],
+                    radius = 10,
+                    modifier = Modifier.padding(12.dp)
                 )
             }
         }
@@ -206,7 +261,10 @@ fun PinContent(
 @Composable
 fun PinPreview() {
     PinContent(
-        uiState = PinContract.UIState("1234", "903553620"),
+        uiState = PinContract.UIState(
+            "1234",
+            "903553620"
+        ),
         onEventDispatcher = {}
     )
 }

@@ -80,7 +80,6 @@ class PaymentsScreen : Screen {
     }
 }
 
-
 @Composable
 fun PaymentContent() {
     var searchText by remember { mutableStateOf("") }

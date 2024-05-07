@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -16,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import uz.gita.mobilebanking.utils.logger
 
 @Composable
 fun CodeWriter(
@@ -32,7 +35,8 @@ fun CodeWriter(
     circleDefaultColor: Color = uz.gita.mobilebanking.ui.theme.circleDefaultColor,
     circleErrorColor: Color = uz.gita.mobilebanking.ui.theme.errorColor,
     listOfCircleColors: MutableList<Color>,
-    onChangeCircleColor: (MutableList<Color>) -> Unit
+    onChangeCircleColor: (MutableList<Color>) -> Unit,
+    isClickNumbersEnabled: Boolean
 ) {
     var currentPos by remember { mutableIntStateOf(-1) }
     val currentPassword by remember { mutableStateOf(StringBuilder()) }
@@ -43,7 +47,9 @@ fun CodeWriter(
     ) {
         for (i in 0..2) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -52,21 +58,23 @@ fun CodeWriter(
                         modifier = Modifier,
                         number = "${i * 3 + j}",
                         onClick = { number ->
-                            if (currentPos < correctUserPin.length - 1) {
-                                currentPassword.append(number)
-                                listOfCircleColors[++currentPos] = circleCheckedColor
-                                onChangeCircleColor(listOfCircleColors)
+                            logger("isClickNumbersEnabled = $isClickNumbersEnabled")
+                            if (isClickNumbersEnabled)
+                                if (currentPos < correctUserPin.length - 1) {
+                                    currentPassword.append(number)
+                                    listOfCircleColors[++currentPos] = circleCheckedColor
+                                    onChangeCircleColor(listOfCircleColors)
 
-                                if (currentPos == correctUserPin.length - 1) {
-                                    if (correctUserPin == currentPassword.toString()) {
-                                        correctPinCodeListener()
-                                    } else {
-                                        incorrectPinCodeListener()
-                                        currentPassword.clear()
-                                        currentPos = -1
+                                    if (currentPos == correctUserPin.length - 1) {
+                                        if (correctUserPin == currentPassword.toString()) {
+                                            correctPinCodeListener()
+                                        } else {
+                                            incorrectPinCodeListener()
+                                            currentPassword.clear()
+                                            currentPos = -1
+                                        }
                                     }
                                 }
-                            }
                         }
                     )
                 }
@@ -74,7 +82,9 @@ fun CodeWriter(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -89,19 +99,20 @@ fun CodeWriter(
                 modifier = Modifier,
                 number = "0",
                 onClick = { number ->
-                    if (currentPos < correctUserPin.length - 1) {
-                        currentPassword.append(number)
-                        listOfCircleColors[++currentPos] = circleCheckedColor
-                        onChangeCircleColor(listOfCircleColors)
+                    if (isClickNumbersEnabled)
+                        if (currentPos < correctUserPin.length - 1) {
+                            currentPassword.append(number)
+                            listOfCircleColors[++currentPos] = circleCheckedColor
+                            onChangeCircleColor(listOfCircleColors)
 
-                        if (currentPos == correctUserPin.length - 1) {
-                            if (correctUserPin == currentPassword.toString()) {
-                                correctPinCodeListener()
-                            } else {
-                                incorrectPinCodeListener()
+                            if (currentPos == correctUserPin.length - 1) {
+                                if (correctUserPin == currentPassword.toString()) {
+                                    correctPinCodeListener()
+                                } else {
+                                    incorrectPinCodeListener()
+                                }
                             }
                         }
-                    }
                 }
             )
 

@@ -31,7 +31,8 @@ import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun CashBack(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isVisibleMoney: Boolean
 ) {
     Column(
         modifier = modifier
@@ -40,7 +41,11 @@ fun CashBack(
             .padding(12.dp)
 
     ) {
-        TextBold(fontSize = 12.sp, text = stringResource(R.string.cash_back_calculation), color = Black)
+        TextBold(
+            fontSize = 12.sp,
+            text = stringResource(R.string.cash_back_calculation),
+            color = Black
+        )
 
         TextNormal(
             text = stringResource(id = R.string.balance),
@@ -51,7 +56,7 @@ fun CashBack(
 
         Row {
             TextBold(
-                text = "3 444", fontSize = 12.sp,
+                text = if (isVisibleMoney) "3 444" else "• •••", fontSize = 12.sp,
                 color = Black
             )
 
@@ -67,7 +72,8 @@ fun CashBack(
                     elevation = 16.dp,
                     shape = RoundedCornerShape(16.dp),
                     ambientColor = ShadowColorCard
-                ).padding(top = 12.dp)
+                )
+                .padding(top = 12.dp)
         ) {
             Column(
                 Modifier
@@ -85,7 +91,7 @@ fun CashBack(
                             .background(primaryColor)
                             .padding(2.dp)
                     ) {
-                        TextBold(color = White, text = "0", fontSize = 8.sp)
+                        TextBold(color = White, text = if (isVisibleMoney) "0" else "• •••", fontSize = 8.sp)
                         TextBold(color = White, text = "\t" + stringResource(id = R.string.som), fontSize = 8.sp)
                     }
                 }
@@ -127,5 +133,5 @@ fun CashBack(
 @Preview
 @Composable
 fun CashBackPreview() {
-    CashBack()
+    CashBack(isVisibleMoney = true)
 }

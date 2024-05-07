@@ -8,13 +8,13 @@
       <entry key="PersonalInformationPreview">
         <State />
       </entry>
+      <entry key="PinCheckPreview">
+        <State />
+      </entry>
       <entry key="PinPreview">
         <State />
       </entry>
       <entry key="TransactionsScreenPreview">
-        <State />
-      </entry>
-      <entry key="VerifyPreview">
         <State />
       </entry>
       <entry key="app">

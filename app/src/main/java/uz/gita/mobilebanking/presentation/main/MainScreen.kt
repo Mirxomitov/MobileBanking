@@ -35,6 +35,7 @@ import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.main.components.UserBalanceWithEye
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.mainBgLight
+import uz.gita.mobilebanking.utils.logger
 
 class MainScreen : Screen {
     @Composable
@@ -74,7 +75,7 @@ private fun MainContent(
                 },
                 icNotificationClick = {
                     // TODO Bildirishnomalar uchun -> navigate to -> (Notifications Screen)
-                }
+                },
             )
         }
     ) {
@@ -89,8 +90,9 @@ private fun MainContent(
                     modifier = Modifier
                         .padding(12.dp)
                         .fillMaxWidth(),
-                    balance = "1 192 891",
+                    balance = if (isVisibleMoney) "1 192 891" else "• •••",
                     onClickEye = {
+                        logger("MainScreen.changing isVisibleMoney =$isVisibleMoney")
                         isVisibleMoney = !isVisibleMoney
                     },
                     isVisible = isVisibleMoney
@@ -139,8 +141,15 @@ private fun MainContent(
                             .weight(1f)
                             .fillMaxHeight(),
                     )
-                    Spacer(modifier = Modifier.padding(4.dp))
-                    CashBack(Modifier.weight(1f))
+
+                    Spacer(
+                        modifier = Modifier.padding(4.dp)
+                    )
+
+                    CashBack(
+                        modifier = Modifier.weight(1f),
+                        isVisibleMoney = isVisibleMoney
+                    )
                 }
             }
 

@@ -15,13 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 
 
 @Composable
 fun PinCodeNumberItem(
     modifier: Modifier,
     number: String,
-    fontSize: Int = 18,
+    fontSize: Int = 22,
     onClick: (String) -> Unit,
     shape: CornerBasedShape = RoundedCornerShape(900.dp),
 ) {
@@ -38,7 +39,7 @@ fun PinCodeNumberItem(
             }),
         contentAlignment = Alignment.Center
     ) {
-        Text(
+        TextBold(
             text = number,
             fontSize = fontSize.sp,
             color = Color.Black,

@@ -2,6 +2,7 @@ package uz.gita.mobilebanking.presentation.main.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -33,7 +35,11 @@ fun MainTop(
 ) {
 
     Row(
-        modifier = modifier.clickable { onClickItem() },
+        modifier = modifier.clickable(
+            interactionSource = remember { MutableInteractionSource()},
+            indication = null,
+            onClick = onClickItem
+        ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
@@ -58,18 +64,24 @@ fun MainTop(
         Spacer(modifier = Modifier.weight(1f))
 
         Icon(
-            modifier = Modifier.padding(end = 16.dp).size(24.dp).clickable {
-                icSupportClick()
-            },
+            modifier = Modifier.padding(end = 16.dp).size(24.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = icSupportClick
+                ),
             painter = painterResource(id = R.drawable.ic_support_customers),
             contentDescription = null,
             tint = grayIcon
         )
 
         Icon(
-            modifier = Modifier.size(24.dp).clickable {
-                icNotificationClick()
-            },
+            modifier = Modifier.size(24.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = icNotificationClick
+                ),
             painter = painterResource(id = R.drawable.ic_notification),
             contentDescription = null,
             tint = grayIcon
