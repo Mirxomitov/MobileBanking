@@ -32,7 +32,9 @@ class BottomNavigation : Screen {
                     CurrentTab()
                 },
                 bottomBar = {
-                    Row(modifier = Modifier.background(mainBgLight)) {
+                    Row(
+                        modifier = Modifier.background(mainBgLight)
+                    ) {
                         TabNavigationItem(MainTab)
                         TabNavigationItem(TransfersTab)
                         TabNavigationItem(PaymentTab)
@@ -50,9 +52,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
 
     BottomNavigationItem(
         selected = tabNavigator.current == tab,
-        onClick = {
-            tabNavigator.current = tab
-        },
+        onClick = { tabNavigator.current = tab },
         icon = {
             Icon(
                 tint = if (tabNavigator.current == tab) primaryColor else Color.Black,

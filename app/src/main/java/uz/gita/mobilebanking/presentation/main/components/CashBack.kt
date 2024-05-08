@@ -56,7 +56,8 @@ fun CashBack(
 
         Row {
             TextBold(
-                text = if (isVisibleMoney) "3 444" else "• •••", fontSize = 12.sp,
+                text = if (isVisibleMoney) "3 444" else "• •••",
+                fontSize = 12.sp,
                 color = Black
             )
 

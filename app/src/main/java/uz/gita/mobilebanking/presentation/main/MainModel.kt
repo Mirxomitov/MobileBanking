@@ -10,13 +10,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MainModel @Inject constructor(
     private val repository: RegistrationRepository,
-    private val direction: MainDirection
+    private val direction: MainDirection,
 ) : MainContract.Model, ViewModel() {
     override fun onEventDispatcher(intent: MainContract.Intent) = intent {
         when (intent) {
-            is MainContract.Intent.OpenProfileScreen -> {
-                direction.toProfileScreen()
-            }
+            MainContract.Intent.OpenProfileScreen -> direction.toProfileScreen()
+            MainContract.Intent.OpenAddCardScreen -> direction.toAddCardScreen()
         }
     }
 

@@ -29,7 +29,6 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.presentation.dialog.PersonalInformation
 import uz.gita.mobilebanking.presentation.profile.components.ItemInfo
 import uz.gita.mobilebanking.presentation.profile.components.LogOutButton
 import uz.gita.mobilebanking.presentation.profile.components.MyInformation
@@ -37,6 +36,7 @@ import uz.gita.mobilebanking.presentation.profile.components.Support
 import uz.gita.mobilebanking.presentation.profile.components.UsefulInformation
 import uz.gita.mobilebanking.presentation.profile.components.UserInfo
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
+import uz.gita.mobilebanking.ui.dialogs.PersonalInformation
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.cardColor
@@ -115,7 +115,12 @@ private fun ProfileContent(
 
             Support(modifier = Modifier.padding(top = 12.dp))
 
-            UsefulInformation(modifier = Modifier.padding(top = 12.dp))
+            UsefulInformation(
+                modifier = Modifier.padding(top = 12.dp),
+                onClickMap = {
+                    onEventDispatcher(ProfileContract.Intent.ToMaps)
+                }
+            )
 
             Row(
                 modifier = Modifier

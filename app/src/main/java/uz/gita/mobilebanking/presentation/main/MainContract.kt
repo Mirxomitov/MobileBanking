@@ -12,5 +12,6 @@ interface MainContract {
     sealed interface SideEffect {}
     sealed interface Intent {
         data object OpenProfileScreen : Intent
+        data object OpenAddCardScreen : Intent
     }
 }

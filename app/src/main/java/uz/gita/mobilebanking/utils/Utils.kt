@@ -5,10 +5,23 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.biometric.BiometricPrompt
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
 import uz.gita.mobilebanking.utils.biometric.BiometricAuthenticator
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import kotlin.math.PI
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
 
 fun logger(message: String, tag: String = "TTT") {
     Timber.tag(tag).d(message)
@@ -58,5 +71,74 @@ fun Context.requireBiometricAuth(
         onSuccess = onSuccess,
         onError = onError,
         onFailed = onFailed,
+    )
+}
+
+fun Modifier.angledGradientBackground(colors: List<Color>, degrees: Float) = this.then(
+    drawBehind {
+        val (x, y) = size
+        val gamma = atan2(y, x)
+
+        if (gamma == 0f || gamma == (PI / 2).toFloat()) {
+            // degenerate rectangle
+            return@drawBehind
+        }
+
+        val degreesNormalised = (degrees % 360).let { if (it < 0) it + 360 else it }
+
+        val alpha = (degreesNormalised * PI / 180).toFloat()
+
+        val gradientLength = when (alpha) {
+            // ray from centre cuts the right edge of the rectangle
+            in 0f..gamma, in (2 * PI - gamma)..2 * PI -> {
+                x / cos(alpha)
+            }
+            // ray from centre cuts the top edge of the rectangle
+            in gamma..(PI - gamma).toFloat() -> {
+                y / sin(alpha)
+            }
+            // ray from centre cuts the left edge of the rectangle
+            in (PI - gamma)..(PI + gamma) -> {
+                x / -cos(alpha)
+            }
+            // ray from centre cuts the bottom edge of the rectangle
+            in (PI + gamma)..(2 * PI - gamma) -> {
+                y / -sin(alpha)
+            }
+            // default case (which shouldn't really happen)
+            else -> hypot(x, y)
+        }
+
+        val centerOffsetX = cos(alpha) * gradientLength / 2
+        val centerOffsetY = sin(alpha) * gradientLength / 2
+
+        drawRect(
+            brush = Brush.linearGradient(
+                colors = colors,
+                // negative here so that 0 degrees is left -> right
+                //and 90 degrees is top -> bottom
+                start = Offset(center.x - centerOffsetX, center.y - centerOffsetY),
+                end = Offset(center.x + centerOffsetX, center.y + centerOffsetY)
+            ),
+            size = size
         )
+    }
+)
+
+fun String.checkExpirationDateValidation(): Boolean {
+    if (this.substring(0, 2).toInt() > 12) return false
+
+    val currentDate = Date()
+    val dateFormat = SimpleDateFormat("MMyy", Locale.getDefault())
+    val formattedDate = dateFormat.format(currentDate)
+
+    val monthsNow = formattedDate.substring(0, 2).toInt() + formattedDate.substring(2, 4).toInt() * 12
+    val monthsUser = this.substring(0, 2).toInt() + this.substring(2, 4).toInt() * 12
+
+    return monthsUser >= monthsNow
+}
+
+fun String.containsOnlyNumbers(): Boolean {
+    val regex = Regex("^\\d+\$")
+    return this.matches(regex)
 }

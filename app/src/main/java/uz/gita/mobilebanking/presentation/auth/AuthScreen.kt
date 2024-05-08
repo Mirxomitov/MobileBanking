@@ -26,7 +26,7 @@ import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.presentation.dialog.ChangeLanguage
+import uz.gita.mobilebanking.ui.dialogs.ChangeLanguage
 import uz.gita.mobilebanking.ui.components.Flag
 import uz.gita.mobilebanking.ui.components.PhoneInput
 import uz.gita.mobilebanking.ui.components.buttons.NextButton

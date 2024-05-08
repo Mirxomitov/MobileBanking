@@ -18,12 +18,10 @@ class ProfileModel @Inject constructor(
 ) : ViewModel(), ProfileContract.Model {
     override fun onEventDispatchers(intent: ProfileContract.Intent) {
         when (intent) {
-            ProfileContract.Intent.Back -> {
-                intent {
+            ProfileContract.Intent.Back -> { intent {
                     direction.back()
-                }
-            }
-
+                } }
+            ProfileContract.Intent.ToMaps -> intent {direction.toMapScreen()}
             is ProfileContract.Intent.LogOut -> {
                 registrationRepository.signOut()
                     .onEach {

@@ -107,25 +107,27 @@ fun PinContent(
         }
     }
 
-    context.requireBiometricAuth(
-        onSuccess = {
-            onEventDispatcher(PinContract.Intent.ToMainScreen)
-        },
-        onError = { _, errorString ->
-            Toast.makeText(
-                context,
-                errorString.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
-        },
-        onFailed = {
-            Toast.makeText(
-                context,
-                "Verification error",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    )
+    LaunchedEffect(Unit) {
+        context.requireBiometricAuth(
+            onSuccess = {
+                onEventDispatcher(PinContract.Intent.ToMainScreen)
+            },
+            onError = { _, errorString ->
+                Toast.makeText(
+                    context,
+                    errorString.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onFailed = {
+                Toast.makeText(
+                    context,
+                    "Verification error",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
 
     // ui started here
     Box(

@@ -11,6 +11,7 @@ interface ProfileContract {
     data object UIState
     sealed interface Intent {
         data object Back : Intent
+        data object ToMaps : Intent
         data object LogOut : Intent
     }
     sealed interface SideEffect

@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.dialog
+package uz.gita.mobilebanking.ui.dialogs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

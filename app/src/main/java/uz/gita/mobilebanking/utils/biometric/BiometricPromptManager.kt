@@ -8,7 +8,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.FragmentActivity
 
 class BiometricAuthenticator(
-    private val appContext: Context
+     appContext: Context
 ) {
 
 

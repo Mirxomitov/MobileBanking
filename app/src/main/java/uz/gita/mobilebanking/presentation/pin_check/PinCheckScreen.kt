@@ -107,7 +107,8 @@ private fun PinCheckContent(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            CodeChecker(modifier = Modifier,
+            CodeChecker(
+                modifier = Modifier,
                 onCorrectPinCodeListener = {
                     Toast.makeText(context, "CORRECT", Toast.LENGTH_SHORT).show()
                     onEventDispatcher(PinCheckContract.Intent.ToMainScreen)

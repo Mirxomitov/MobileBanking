@@ -1,10 +1,13 @@
 package uz.gita.mobilebanking.presentation.profile.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -19,7 +22,8 @@ import uz.gita.mobilebanking.ui.theme.cardColor
 
 @Composable
 fun UsefulInformation(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickMap: () -> Unit
 ) {
     val textColor = Color(0xFF1D1D1D)
 
@@ -51,6 +55,19 @@ fun UsefulInformation(
             icon = R.drawable.ic_question,
             text = stringResource(R.string.reference)
         )
+
+        ItemInfo(
+            paddingIcon = 2.dp,
+            modifier = Modifier
+                .padding(top = 12.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickMap
+                ),
+            icon = R.drawable.ic_location,
+            text = stringResource(R.string.we_on_map),
+        )
     }
 }
 
@@ -58,5 +75,5 @@ fun UsefulInformation(
 @Preview
 @Composable
 fun UsefulInformationPreview() {
-    UsefulInformation()
+    UsefulInformation(Modifier, {})
 }

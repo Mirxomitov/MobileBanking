@@ -118,5 +118,14 @@
     <string name="buy">Sotib olish</string>
     <string name="payment_types">To\'lov turlari</string>
     <string name="props_by_pays">Rekvizit bo\'yicha to\'lov</string>
+    <string name="uzb_card">O\'zbekiston kartasi</string>
+    <string name="card_russia">Rossiya kartasi</string>
+
+    // Add card screen
+    <string name="add_card_title">Kartani qo\'shish</string>
+    <string name="invalid_card_expiration_date">Kartaning amal qilish muddati noto\'g\'ri</string>
+    <string name="we_on_map">Biz xaritada</string>
+    <string name="location">Lokatsiya</string>
+    <string name="phoneNumber">Telefon raqam</string>
 
 </resources>
