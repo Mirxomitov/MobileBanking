@@ -30,7 +30,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -59,7 +59,7 @@ private fun ChangeLanguageDialog(
     Column(
         modifier
             .fillMaxWidth()
-            .background(cardColor)
+            .background(CardColor)
             .padding(12.dp)
     ) {
         Box(

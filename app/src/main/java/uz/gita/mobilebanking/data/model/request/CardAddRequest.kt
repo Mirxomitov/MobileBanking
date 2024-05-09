@@ -12,3 +12,11 @@ data class CardAddRequest(
     @SerializedName("name")
     val name: String,
 )
+/*
+{
+    "pan": "1234567898765432",
+    "expired-year": "2023",
+    "expired-month": "1",
+    "name": "Personal"
+}
+ */

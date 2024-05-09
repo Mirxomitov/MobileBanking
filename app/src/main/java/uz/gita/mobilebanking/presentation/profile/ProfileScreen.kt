@@ -39,7 +39,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.dialogs.PersonalInformation
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.profileBgLight
 
 class ProfileScreen : Screen {
@@ -128,7 +128,7 @@ private fun ProfileContent(
                     .shadow(
                         elevation = 2.dp, shape = RoundedCornerShape(16.dp), ambientColor = ShadowColorCard
                     )
-                    .background(cardColor)
+                    .background(CardColor)
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -146,7 +146,7 @@ private fun ProfileContent(
                     .shadow(
                         elevation = 2.dp, shape = RoundedCornerShape(16.dp), ambientColor = ShadowColorCard
                     )
-                    .background(cardColor)
+                    .background(CardColor)
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {

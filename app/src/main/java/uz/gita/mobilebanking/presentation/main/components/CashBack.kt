@@ -24,7 +24,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.grayColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
@@ -37,7 +37,7 @@ fun CashBack(
     Column(
         modifier = modifier
             .shadow(elevation = 1.dp, shape = RoundedCornerShape(16.dp), ambientColor = ShadowColorCard)
-            .background(cardColor)
+            .background(CardColor)
             .padding(12.dp)
 
     ) {
@@ -69,12 +69,12 @@ fun CashBack(
         Column(
             Modifier
                 .fillMaxWidth()
+                .padding(top = 12.dp)
                 .shadow(
                     elevation = 16.dp,
                     shape = RoundedCornerShape(16.dp),
                     ambientColor = ShadowColorCard
                 )
-                .padding(top = 12.dp)
         ) {
             Column(
                 Modifier

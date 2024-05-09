@@ -29,7 +29,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.buttons.RoundedButton
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.mainBgLight
 
 @Composable
@@ -48,7 +48,7 @@ fun Exchange(
                 indication = null,
                 onClick = onClickItem
             ),
-        colors = CardDefaults.cardColors(containerColor = cardColor),
+        colors = CardDefaults.cardColors(containerColor = CardColor),
     ) {
         Column(
             modifier = Modifier

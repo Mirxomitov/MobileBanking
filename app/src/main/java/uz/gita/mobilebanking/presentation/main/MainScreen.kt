@@ -143,29 +143,9 @@ private fun MainContent(
                         .padding(top = 12.dp)
                         .padding(horizontal = 12.dp)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .background(Color.Black)
-                            .clickable {
-                                bottomSheetNavigator.show(AddCardDialog(
-                                    onUzbClick = {
-                                        bottomSheetNavigator.hide()
-                                        onEventDispatcher(MainContract.Intent.OpenAddCardScreen)
-                                    },
-                                    onHide = { bottomSheetNavigator.hide() }
-                                ))
-                            },
-                    ) {
-                        Text(text = "TO ADD CARD TEST", modifier = Modifier
-                            .background(Color.White)
-                            .padding(24.dp)
-                        )
-                    }
 
-                    Spacer(
-                        modifier = Modifier.padding(4.dp)
-                    )
+
+                    Spacer(modifier = Modifier.padding(4.dp))
 
                     CashBack(
                         modifier = Modifier.weight(1f),
@@ -203,5 +183,5 @@ private fun MainContent(
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
-    MainContent(MainContract.UIState.InitState, {})
+    MainContent(MainContract.UIState(), {})
 }

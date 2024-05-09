@@ -134,15 +134,13 @@ fun PinContent(
         modifier = Modifier
             .fillMaxSize()
             .background(pinScreenBgLight),
-
-        ) {
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(pinScreenBgLight),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             Spacer(modifier = Modifier.height(64.dp))
 
             Image(

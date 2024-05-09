@@ -27,7 +27,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.ui.theme.textColorLight
 
@@ -38,7 +38,7 @@ fun MyDebt(modifier: Modifier = Modifier) {
             .shadow(
                 elevation = 1.dp, ambientColor = ShadowColorCard, shape = RoundedCornerShape(16.dp)
             )
-            .background(cardColor)
+            .background(CardColor)
             .padding(12.dp)
     ) {
         TextBold(

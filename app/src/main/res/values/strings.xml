@@ -127,5 +127,10 @@
     <string name="we_on_map">Biz xaritada</string>
     <string name="location">Lokatsiya</string>
     <string name="phoneNumber">Telefon raqam</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="_1_usd">$1 USD</string>
+    <string name="_1_eur">€1 EUR</string>
 
 </resources>

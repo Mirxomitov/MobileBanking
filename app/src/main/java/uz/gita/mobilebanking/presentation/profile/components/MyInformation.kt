@@ -22,7 +22,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 
 @Composable
 fun MyInformation(
@@ -38,7 +38,7 @@ fun MyInformation(
                 shape = RoundedCornerShape(16.dp),
                 ambientColor = ShadowColorCard
             )
-            .background(cardColor)
+            .background(CardColor)
             .padding(16.dp),
     ) {
         TextBold(

@@ -29,7 +29,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.grayIcon
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
@@ -52,7 +52,7 @@ private fun PersonalInformationContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(cardColor)
+            .background(CardColor)
             .padding(12.dp)
     ) {
         Box(

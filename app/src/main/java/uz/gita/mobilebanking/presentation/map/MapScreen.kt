@@ -49,7 +49,8 @@ class MapScreen : Screen {
                 textLocation = "75PP+997 Фархадский рынок, 100123, Tashkent, Toshkent Shahri, Узбекистан",
             ),
             MarkerData(
-                lat = 41.31904027624511, 69.24142262507962,
+                lat = 41.28024206442073,
+                lng = 69.2515846880356,
                 image = R.drawable.image_llc_uzpaynet,
                 titleBank = "\"UZPAYNET\" LLC | Платежная система",
                 titleBankInfo = "Paynet",
@@ -101,7 +102,14 @@ class MapScreen : Screen {
         MapComponent(
             modifier = Modifier,
             markers = markerList,
-            onClick = { bottomSheetNavigator.show(LocationDialog(it)) }
+            onClick = {
+                bottomSheetNavigator.show(
+                    LocationDialog(
+                        data = it,
+                        onHide = { bottomSheetNavigator.hide() }
+                    )
+                )
+            }
         )
     }
 }
@@ -116,9 +124,10 @@ fun MapComponent(
         cameraPositionState = CameraPositionState(
             position = CameraPosition.fromLatLngZoom(
                 LatLng(
-                    41.31,
-                    69.31
-                ), 10f
+                    // 41.280060587936894, 69.25164176571882
+                    41.28024206442073,
+                    69.2515846880356
+                ), 15f
             )
         ),
         modifier = modifier,

@@ -19,7 +19,7 @@ val errorColor2 = Color(0xFFF53C52)
 // MainScreen
 val mainBgLight = Color(0xFFF0F1F6)
 val primaryColor = Color(0xFF15A13A)
-val cardColor = Color(0xFFFFFFFF)
+val CardColor = Color(0xFFFFFFFF)
 val grayColor = Color(0xFFD1CFCF)
 val grayIcon = Color(0xFF6C7177)
 val textColor = Color(0xFF202325)

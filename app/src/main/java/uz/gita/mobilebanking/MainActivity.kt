@@ -37,9 +37,11 @@ class MainActivity : FragmentActivity() {
                     sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                 ) {
                     Navigator(
-//                    screen = BottomNavigation()
+//                        screen = AuthScreen()
+//                        screen = BottomNavigation()
                         screen = SplashScreen()
 //                        screen = BottomNavigation()
+//                        screen = ProfileScreen()
                     ) { navigator ->
                         handler.uiNavigator.onEach {
                             it(navigator)

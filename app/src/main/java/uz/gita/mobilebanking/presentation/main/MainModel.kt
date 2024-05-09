@@ -19,5 +19,5 @@ class MainModel @Inject constructor(
         }
     }
 
-    override val container = container<MainContract.UIState, MainContract.SideEffect>(MainContract.UIState.InitState) {}
+    override val container = container<MainContract.UIState, MainContract.SideEffect>(MainContract.UIState()) {}
 }

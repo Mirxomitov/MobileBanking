@@ -39,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,12 +51,12 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.errorColor2
+import uz.gita.mobilebanking.ui.theme.grayColor
 import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.angledGradientBackground
 import uz.gita.mobilebanking.utils.checkExpirationDateValidation
-import uz.gita.mobilebanking.utils.containsOnlyNumbers
+import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
-import uz.gita.mobilebanking.utils.visual_transformations.ExpirationDateTransformation
 
 class AddCardScreen : Screen {
     @Composable
@@ -119,7 +120,7 @@ private fun AddCardContent(
                     .angledGradientBackground(
                         colors = listOf(
                             Color(0xFF0A5EAA), Color(0xFF42E4C7)
-                        ), 45f
+                        ), 75f
                     )
                     .padding(12.dp)
             ) {
@@ -128,18 +129,22 @@ private fun AddCardContent(
                         .fillMaxWidth()
                         .height(60.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(mainBgLight),
+                        .background(mainBgLight)
+                        .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Box(modifier = Modifier) {
-                        if (cardNumber == "") TextNormal(
-                            text = "Karta raqami",
-                            modifier = Modifier
-                                .align(Alignment.CenterStart)
-                                .padding(12.dp)
-                        )
+                        if (cardNumber == "")
+                            TextNormal(
+                                fontSize = 18.sp,
+                                color = if (isCardNumberFocused) Color.Black else grayColor,
+                                text = "Karta raqami",
+                                modifier = Modifier
+                                    .align(Alignment.CenterStart)
+                            )
 
                         BasicTextField(
+                            singleLine = true,
                             modifier = Modifier
                                 .align(Alignment.CenterStart)
                                 .focusRequester(focusRequester)
@@ -150,6 +155,7 @@ private fun AddCardContent(
                             onValueChange = {
                                 if (it.length <= 16) {
                                     cardNumber = it
+                                    if (it.length == 16) focusManager.moveFocus(FocusDirection.Down)
                                 }
                             },
                             visualTransformation = CardNumberTransformation,
@@ -165,15 +171,18 @@ private fun AddCardContent(
                         painter = painterResource(id = R.drawable.ic_action_scan_card),
                         contentDescription = null,
                         modifier = Modifier
-                            .padding(12.dp)
                             .size(24.dp)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = { onEventDispatcher(AddCardContract.Intent.ToScanCardScreen) }
+                            )
                     )
                     else if (isCardNumberFocused) // cardNumber != ""
                         Icon(
                             painter = painterResource(id = R.drawable.search_clear),
                             contentDescription = null,
                             modifier = Modifier
-                                .padding(12.dp)
                                 .size(24.dp)
                                 .clickable(
                                     interactionSource = remember { MutableInteractionSource() },
@@ -188,34 +197,43 @@ private fun AddCardContent(
                         .padding(top = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
                         .height(60.dp)
-                        .background(mainBgLight),
+                        .background(mainBgLight)
+                        .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Box(modifier = Modifier) {
-                        if (expirationDate == "") TextNormal(
-                            text = "oo/yy", modifier = Modifier
-                                .align(Alignment.CenterStart)
-                                .padding(12.dp)
-                        )
+                        if (expirationDate == "")
+                            TextNormal(
+                                fontSize = 18.sp,
+                                color = if (isExpirationDateFocused) Color.Black else grayColor,
+                                text = "oo/yy",
+                                modifier = Modifier.align(Alignment.CenterStart)
+                            )
                         BasicTextField(
+                            singleLine = true,
                             modifier = Modifier
+                                .align(Alignment.CenterStart)
                                 .focusRequester(focusRequester)
-                                .onFocusChanged {
-                                    isExpirationDateFocused = it.isFocused
-                                },
+                                .onFocusChanged { isExpirationDateFocused = it.isFocused },
                             value = expirationDate,
                             onValueChange = {
-                                if (it.length <= 4 && it.containsOnlyNumbers()) {
+                                logger("card expiration number : $it")
+                                if (it.length < 2) {
                                     expirationDate = it
+                                } else if (it.length == 2) {
+                                    expirationDate = it.substring(0, 2) + "/"
+                                } else {
+                                    expirationDate = it.substring(0, 2) + "/" + it.substring(2, it.length)
                                     isExpirationDateValid = true
 
-                                    if (it.length == 4) isExpirationDateValid =
+                                    if (it.length == 5) isExpirationDateValid =
                                         expirationDate.checkExpirationDateValidation()
                                 }
                             },
-                            visualTransformation = ExpirationDateTransformation,
+                            visualTransformation = VisualTransformation.None,
                             textStyle = TextStyle(
-                                fontSize = 18.sp, color = if (isExpirationDateValid) Color.Black else errorColor2
+                                fontSize = 18.sp,
+                                color = if (isExpirationDateValid) Color.Black else errorColor2
                             ),
                             keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Down) }),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -226,7 +244,7 @@ private fun AddCardContent(
 
             if (!isExpirationDateValid) {
                 TextNormal(
-                    modifier = Modifier.padding(start = 8.dp, top = 8.dp),
+                    modifier = Modifier.padding(start = 20.dp, top = 8.dp),
                     text = stringResource(R.string.invalid_card_expiration_date),
                     color = errorColor2
                 )
@@ -239,9 +257,7 @@ private fun AddCardContent(
     }
 }
 
-@Preview
-@Composable
+@[Preview Composable]
 fun AddCardPreview() {
     AddCardContent(AddCardContract.UIState, {})
 }
-

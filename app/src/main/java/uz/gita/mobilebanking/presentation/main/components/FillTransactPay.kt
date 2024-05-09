@@ -31,7 +31,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -55,7 +55,7 @@ fun FillTransactPay(
             indication = null,
             onClick = onClickItem
         ),
-        colors = CardDefaults.cardColors(containerColor = cardColor),
+        colors = CardDefaults.cardColors(containerColor = CardColor),
     ) {
         Column(
             modifier = Modifier

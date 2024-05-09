@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -34,7 +34,7 @@ fun CardP2PSendItem(
             defaultElevation = 1.dp
         ),
         modifier = modifier.clickable { onClickItem() },
-        colors = CardDefaults.cardColors(containerColor = cardColor),
+        colors = CardDefaults.cardColors(containerColor = CardColor),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(

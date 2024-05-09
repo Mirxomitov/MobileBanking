@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 
@@ -38,7 +38,7 @@ fun ItemPaySmall(
             .shadow(
                 elevation = 1.dp, ambientColor = ShadowColorCard, shape = RoundedCornerShape(16.dp)
             )
-            .background(cardColor)
+            .background(CardColor)
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

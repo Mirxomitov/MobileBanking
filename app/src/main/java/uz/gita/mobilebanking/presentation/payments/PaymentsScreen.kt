@@ -66,10 +66,9 @@ import uz.gita.mobilebanking.presentation.transactions.components.ItemSelfTransf
 import uz.gita.mobilebanking.presentation.transactions.components.Template
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 import uz.gita.mobilebanking.utils.logger
@@ -92,7 +91,7 @@ fun PaymentContent() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(cardColor)
+            .background(CardColor)
             .imePadding(),
         topBar = {
             Row(
@@ -163,41 +162,35 @@ fun PaymentContent() {
                     tint = textColorLight
                 )
 
-                BasicTextField(
-                    modifier = Modifier
-                        .padding(start = 4.dp)
-                        .focusRequester(focusRequester)
-                        .onFocusChanged {
-                            if (it.isFocused) visible = true
-                            isSearchBarFocused = it.isFocused
+                Box(modifier = Modifier) {
+                    BasicTextField(
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .focusRequester(focusRequester)
+                            .onFocusChanged {
+                                if (it.isFocused) visible = true
+                                isSearchBarFocused = it.isFocused
+                            },
+                        value = searchText,
+                        onValueChange = {
+                            searchText = it
                         },
-                    value = searchText,
-                    onValueChange = {
-                        searchText = it
-                    },
-                    maxLines = 1,
-                    cursorBrush = Brush.linearGradient(listOf(primaryColor, primaryColor)),
-                    textStyle = TextStyle(
-                        color = Color.Black,
-                        fontSize = 18.sp
-                    ),
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.None,
-                        imeAction = ImeAction.Done,
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            focusManager.clearFocus()
-                        }
-                    ),
-                ) {
-                    if (searchText == "") {
-                        TextNormal(
-                            text = stringResource(id = R.string.search),
-                            fontSize = 18.sp,
-                            color = textColorLight
-                        )
-                    }
+                        maxLines = 1,
+                        cursorBrush = Brush.linearGradient(listOf(primaryColor, primaryColor)),
+                        textStyle = TextStyle(
+                            color = Color.Black,
+                            fontSize = 18.sp
+                        ),
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.None,
+                            imeAction = ImeAction.Done,
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                focusManager.clearFocus()
+                            }
+                        ),
+                    )
                 }
 
                 Spacer(Modifier.weight(1f))

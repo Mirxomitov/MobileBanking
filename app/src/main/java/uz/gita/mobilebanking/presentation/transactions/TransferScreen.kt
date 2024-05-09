@@ -4,10 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
@@ -31,7 +28,7 @@ import uz.gita.mobilebanking.presentation.transactions.components.TransferToCoun
 import uz.gita.mobilebanking.ui.components.TopBar
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.cardColor
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.toRussiaColor
 import uz.gita.mobilebanking.ui.theme.toUzbColor
 import uz.gita.mobilebanking.ui.theme.transactionItemColor
@@ -57,7 +54,7 @@ private fun TransactionsScreenContent(
     Scaffold {
         Column(
             modifier = Modifier
-                .background(color = cardColor)
+                .background(color = CardColor)
                 .verticalScroll(rememberScrollState())
                 .padding(it),
         ) {

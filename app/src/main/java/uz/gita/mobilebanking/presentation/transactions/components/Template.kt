@@ -19,15 +19,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun Template(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     @DrawableRes imageID: Int,
     firstName: String,
 ) {
@@ -65,4 +67,11 @@ fun Template(
             modifier = Modifier.fillMaxWidth()
         )
     }
+}
+
+
+@Preview
+@Composable
+fun Preview() {
+    Template(imageID = R.drawable.logo_tbc, firstName = "Tohir")
 }
