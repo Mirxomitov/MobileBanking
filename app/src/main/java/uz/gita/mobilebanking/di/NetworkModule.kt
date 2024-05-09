@@ -8,8 +8,8 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.gita.mobilebanking.data.source.remote.CardApi
-import uz.gita.mobilebanking.data.source.remote.RegistrationApi
+import uz.gita.mobilebanking.data.source.remote.api.CardApi
+import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
 import javax.inject.Singleton
 
 @Module

@@ -19,7 +19,7 @@ import uz.gita.mobilebanking.data.model.response.SignInVerifyResponse
 import uz.gita.mobilebanking.data.model.response.SignUpResponse
 import uz.gita.mobilebanking.data.model.response.SignUpVerifyResponse
 import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
-import uz.gita.mobilebanking.data.source.remote.RegistrationApi
+import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
 import uz.gita.mobilebanking.domain.RegistrationRepository
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject

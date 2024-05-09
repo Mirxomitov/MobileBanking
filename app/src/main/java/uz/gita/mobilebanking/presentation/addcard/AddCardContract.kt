@@ -12,5 +12,6 @@ interface AddCardContract {
     sealed interface Intent {
         data object ToScanCardScreen : Intent
         data object Back : Intent
+        data class AddCard(val cardNumber: String, val expirationDate: String) : Intent
     }
 }

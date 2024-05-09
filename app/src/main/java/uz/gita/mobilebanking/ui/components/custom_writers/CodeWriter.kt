@@ -31,7 +31,7 @@ fun CodeWriter(
     correctPinCodeListener: () -> Unit,
     incorrectPinCodeListener: () -> Unit,
     onFingerButtonClick: () -> Unit,
-    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.primaryColor,
+    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.PrimaryColor,
     circleDefaultColor: Color = uz.gita.mobilebanking.ui.theme.circleDefaultColor,
     circleErrorColor: Color = uz.gita.mobilebanking.ui.theme.errorColor,
     listOfCircleColors: MutableList<Color>,

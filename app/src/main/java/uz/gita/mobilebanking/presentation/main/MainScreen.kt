@@ -24,13 +24,14 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
-import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.main.components.CashBack
 import uz.gita.mobilebanking.presentation.main.components.Exchange
 import uz.gita.mobilebanking.presentation.main.components.FillTransactPay
 import uz.gita.mobilebanking.presentation.main.components.MainTop
+import uz.gita.mobilebanking.presentation.main.components.MyCardsEmpty
+import uz.gita.mobilebanking.presentation.main.components.MyCardsMoreCards
 import uz.gita.mobilebanking.presentation.main.components.MyCardsOneCard
 import uz.gita.mobilebanking.presentation.main.components.MyCardsTwoCards
 import uz.gita.mobilebanking.presentation.main.components.MyDebt
@@ -60,7 +61,7 @@ private fun MainContent(
     onEventDispatcher: (MainContract.Intent) -> Unit
 ) {
     val context = LocalContext.current
-  //  val bottomSheetNavigator = LocalBottomSheetNavigator.current
+    //  val bottomSheetNavigator = LocalBottomSheetNavigator.current
 
     Text(text = "")
 
@@ -146,25 +147,37 @@ private fun MainContent(
                         .height(220.dp)
                 ) {
 
-                    when (1) {
-                        0 -> {}
+                    when (uiState.cards.size) {
+                        0 -> MyCardsEmpty(
+                            Modifier.weight(1f),
+                            onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) }
+                        )
+
                         1 -> MyCardsOneCard(
                             modifier = Modifier.weight(1f),
-                            onClickAddCard = {},
+                            onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickCard = { },
                             card = CardData("", "", "", "")
                         )
 
                         2 -> MyCardsTwoCards(
-                            modifier = Modifier.weight(1f),
-                            onClickAddCard = {},
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(220.dp),
+                            onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickFrontCard = {},
                             onClickBackCard = {},
                             frontCard = CardData("", "", "", ""),
                             backCard = CardData("", "", "", ""),
                         )
 
-                        else -> {}
+                        else -> MyCardsMoreCards(
+                            modifier = Modifier.weight(1f),
+                            onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
+                            onClickFrontCard = { },
+                            onClickBackCard = { },
+                            cards = listOf(CardData("", "", "", ""), CardData("", "", "", ""), CardData("", "", "", ""))
+                        )
                     }
 
                     Spacer(modifier = Modifier.padding(4.dp))

@@ -23,7 +23,7 @@ import uz.gita.mobilebanking.ui.theme.errorColor
 fun CodeChecker(
     modifier: Modifier,
     correctUserPin: String,
-    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.primaryColor,
+    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.PrimaryColor,
     circleDefaultColor: Color = uz.gita.mobilebanking.ui.theme.circleDefaultColor,
     circleErrorColor: Color = uz.gita.mobilebanking.ui.theme.errorColor,
     listOfCircleColors: MutableList<Color>,

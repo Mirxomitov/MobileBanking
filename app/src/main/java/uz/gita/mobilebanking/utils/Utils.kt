@@ -133,8 +133,7 @@ fun String.checkExpirationDateValidation(): Boolean {
     val formattedDate = dateFormat.format(currentDate)
 
     val monthsNow = formattedDate.substring(0, 2).toInt() + formattedDate.substring(2, 4).toInt() * 12
-    logger("user code: $this")
-    val monthsUser = this.substring(0, 2).toInt() + this.substring(3, 5).toInt() * 12 // this is like a MM/YY
+    val monthsUser = this.substring(0, 2).toInt() + this.substring(2, 4).toInt() * 12 // this is like a MM/YY
 
     return monthsUser >= monthsNow
 }

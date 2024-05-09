@@ -18,14 +18,14 @@ val errorColor2 = Color(0xFFF53C52)
 
 // MainScreen
 val mainBgLight = Color(0xFFF0F1F6)
-val primaryColor = Color(0xFF15A13A)
+val PrimaryColor = Color(0xFF15A13A)
 val CardColor = Color(0xFFFFFFFF)
 val grayColor = Color(0xFFD1CFCF)
 val grayIcon = Color(0xFF6C7177)
 val textColor = Color(0xFF202325)
 val authComponentBg = Color(0xFFE9EBEB)
-val primaryContainer = Color(0xFFDDFAE4)
-//val onPrimaryContainer = Color(0xFF8AE6C0)
+val PrimaryContainer = Color(0xFFDDFAE4)
+val OnPrimaryContainer = Color(0xFF8AE6C0)
 val textColorLight = Color(0xFF8A9297)
 val circleDefaultColor = Color(0xFFE6EDF1)
 

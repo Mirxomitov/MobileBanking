@@ -32,7 +32,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -80,7 +80,7 @@ fun FillTransactPay(
                 TextBoldBlack(
                     text = stringResource(id = R.string.what_is_it),
                     modifier = Modifier,
-                    color = primaryColor,
+                    color = PrimaryColor,
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp
                 )
@@ -192,7 +192,7 @@ private fun Item(
                 painter = painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
-                tint = primaryColor
+                tint = PrimaryColor
             )
 
             TextBoldBlack(

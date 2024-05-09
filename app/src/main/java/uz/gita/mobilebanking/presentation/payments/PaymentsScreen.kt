@@ -69,7 +69,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 import uz.gita.mobilebanking.utils.logger
 
@@ -176,7 +176,7 @@ fun PaymentContent() {
                             searchText = it
                         },
                         maxLines = 1,
-                        cursorBrush = Brush.linearGradient(listOf(primaryColor, primaryColor)),
+                        cursorBrush = Brush.linearGradient(listOf(PrimaryColor, PrimaryColor)),
                         textStyle = TextStyle(
                             color = Color.Black,
                             fontSize = 18.sp

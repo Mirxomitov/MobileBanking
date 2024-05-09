@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.grayIcon
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 
 @Composable
 fun MainTop(
@@ -45,7 +45,7 @@ fun MainTop(
         Box(
             modifier = Modifier
                 .size(32.dp)
-                .background(primaryColor, shape = CircleShape),
+                .background(PrimaryColor, shape = CircleShape),
         )
 
         TextBoldBlack(

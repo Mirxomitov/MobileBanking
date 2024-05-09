@@ -34,7 +34,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 
@@ -65,7 +65,7 @@ fun PaynetAvia(modifier: Modifier = Modifier) {
                                 .padding(bottom = 4.dp)
                                 .size(18.dp)
                                 .clip(CircleShape)
-                                .background(primaryColor)
+                                .background(PrimaryColor)
                                 .align(Alignment.Bottom)
 
                         )

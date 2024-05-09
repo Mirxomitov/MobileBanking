@@ -20,6 +20,8 @@ import uz.gita.mobilebanking.presentation.pin_create.PinCreateDirection
 import uz.gita.mobilebanking.presentation.pin_create.PinCreateDirectionImpl
 import uz.gita.mobilebanking.presentation.profile.ProfileDirection
 import uz.gita.mobilebanking.presentation.profile.ProfileDirectionImpl
+import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirection
+import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirectionImpl
 import uz.gita.mobilebanking.presentation.splash.SplashDirection
 import uz.gita.mobilebanking.presentation.splash.SplashDirectionImpl
 import uz.gita.mobilebanking.presentation.transactions.TransferDirection
@@ -63,4 +65,9 @@ interface DirectionModule {
 
     @Binds
     fun addCardDirection(impl: AddCardDirectionImpl): AddCardDirection
+
+    @Binds
+    fun addReadCardNumberDirection(impl: ReadCardNumberDirectionImpl): ReadCardNumberDirection
+
+
 }

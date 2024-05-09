@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.CardColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
+import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.grayColor
-import uz.gita.mobilebanking.ui.theme.primaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -49,9 +49,9 @@ fun CashBack(
 
         TextNormal(
             text = stringResource(id = R.string.balance),
-            modifier = Modifier.padding(top = 12.dp),
+            modifier = Modifier.padding(top = 8.dp),
             color = textColor,
-            fontSize = 16.sp
+            fontSize = 14.sp
         )
 
         Row {
@@ -71,59 +71,59 @@ fun CashBack(
                 .fillMaxWidth()
                 .padding(top = 12.dp)
                 .shadow(
-                    elevation = 16.dp,
+                    elevation = 1.dp,
                     shape = RoundedCornerShape(16.dp),
                     ambientColor = ShadowColorCard
                 )
                 .background(White)
                 .padding(4.dp)
-        )  {
+        ) {
 
-                Row(Modifier, verticalAlignment = Alignment.CenterVertically) {
-                    TextNormal(text = "Bugun", color = textColor, fontSize = 12.sp)
-                    Spacer(modifier = Modifier.weight(1f))
-                    Row(
-                        Modifier
-                            .padding(4.dp)
-                            .clip(RoundedCornerShape(4.dp))
-                            .background(primaryColor)
-                            .padding(2.dp)
-                    ) {
-                        TextBold(color = White, text = if (isVisibleMoney) "0" else "• •••", fontSize = 12.sp)
-                        TextBold(color = White, text = "\t" + stringResource(id = R.string.som), fontSize = 12.sp)
-                    }
+            Row(Modifier, verticalAlignment = Alignment.CenterVertically) {
+                TextNormal(text = "Bugun", color = textColor, fontSize = 12.sp)
+                Spacer(modifier = Modifier.weight(1f))
+                Row(
+                    Modifier
+                        .padding(4.dp)
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(PrimaryColor)
+                        .padding(2.dp)
+                ) {
+                    TextBold(color = White, text = if (isVisibleMoney) "0" else "• •••", fontSize = 12.sp)
+                    TextBold(color = White, text = "\t" + stringResource(id = R.string.som), fontSize = 12.sp)
                 }
+            }
 
-                Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
-                    repeat(7) {
-                        Column(
+            Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+                repeat(7) {
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(56.dp)
+                            .padding(horizontal = 1.dp)
+                    ) {
+                        Box(
                             modifier = Modifier
+                                .weight(10f)
+                                .fillMaxWidth()
+
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .weight(1f)
-                                .height(56.dp)
                                 .padding(horizontal = 1.dp)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .weight(10f)
-                                    .fillMaxWidth()
+                                .clip(
+                                    RoundedCornerShape(4.dp)
+                                )
+                                .background(grayColor)
+                        )
 
-                            )
-
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(1f)
-                                    .padding(horizontal = 1.dp)
-                                    .clip(
-                                        RoundedCornerShape(4.dp)
-                                    )
-                                    .background(grayColor)
-                            )
-
-                        }
                     }
                 }
             }
+        }
 
     }
 }

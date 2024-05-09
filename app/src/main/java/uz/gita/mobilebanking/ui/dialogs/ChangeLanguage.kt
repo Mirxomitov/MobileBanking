@@ -31,7 +31,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 data class ChangeLanguage(
@@ -128,7 +128,7 @@ private fun ChangeLanguageDialog(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_check),
                     contentDescription = null,
-                    tint = primaryColor,
+                    tint = PrimaryColor,
                     modifier = Modifier
                         .size(24.dp)
                 )
@@ -166,7 +166,7 @@ private fun ChangeLanguageDialog(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_check),
                     contentDescription = null,
-                    tint = primaryColor,
+                    tint = PrimaryColor,
                     modifier = Modifier
                         .size(24.dp)
                 )

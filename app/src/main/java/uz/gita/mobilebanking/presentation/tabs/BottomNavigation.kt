@@ -19,7 +19,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.mainBgLight
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 class BottomNavigation : Screen {
@@ -55,7 +55,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
         onClick = { tabNavigator.current = tab },
         icon = {
             Icon(
-                tint = if (tabNavigator.current == tab) primaryColor else Color.Black,
+                tint = if (tabNavigator.current == tab) PrimaryColor else Color.Black,
                 painter = tab.options.icon!!,
                 contentDescription = tab.options.title
             )

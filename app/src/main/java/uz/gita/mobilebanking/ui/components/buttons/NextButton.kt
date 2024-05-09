@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
-import uz.gita.mobilebanking.ui.theme.primaryColor
-import uz.gita.mobilebanking.ui.theme.primaryContainer
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryContainer
 
 @Composable
 fun NextButton(
@@ -32,7 +32,7 @@ fun NextButton(
         colors = ButtonDefaults
             .buttonColors(
                 containerColor = containerColor,
-                disabledContainerColor = primaryContainer,
+                disabledContainerColor = PrimaryContainer,
             )
     ) {
         TextBold(
@@ -52,7 +52,7 @@ fun NextButtonPrev() {
         modifier = Modifier
             .fillMaxWidth(),
         isEnabled = true,
-        containerColor = primaryColor,
+        containerColor = PrimaryColor,
         onClick = {},
     )
 }

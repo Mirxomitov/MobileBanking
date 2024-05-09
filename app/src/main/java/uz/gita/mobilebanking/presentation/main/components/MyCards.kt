@@ -34,26 +34,74 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
+import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 import uz.gita.mobilebanking.ui.theme.CardColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.angledGradientBackground
 
 @Composable
 fun MyCardsEmpty(
-    modifier: Modifier = Modifier,
-    onClickAddCard: () -> Unit
+    modifier: Modifier = Modifier, onClickAddCard: () -> Unit
 ) {
+    Column(
+        modifier
+            .fillMaxWidth()
+            .shadow(
+                elevation = 1.dp,
+                shape = RoundedCornerShape(16.dp),
+                ambientColor = ShadowColorCard,
+            )
+            .background(CardColor)
+            .padding(8.dp),
+    ) {
+        TextBoldBlack(
+            modifier = Modifier.padding(2.dp),
+            text = "Mening kartalarim",
+            fontSize = 16.sp
+        )
 
+        Column(
+            Modifier
+                .padding(1.dp)
+                .weight(1f)
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 1.dp,
+                    shape = RoundedCornerShape(16.dp),
+                    ambientColor = ShadowColorCard,
+                )
+                .background(CardColor)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickAddCard
+                ),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_add_card),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(64.dp)
+            )
+
+            TextBoldBlack(
+                modifier = Modifier.padding(top = 8.dp),
+                text = stringResource(id = R.string.add_card),
+                fontSize = 12.sp
+            )
+        }
+    }
 }
 
 @Composable
 fun MyCardsOneCard(
-    modifier: Modifier = Modifier,
-    onClickAddCard: () -> Unit,
-    onClickCard: () -> Unit,
-    card: CardData
+    modifier: Modifier = Modifier, onClickAddCard: () -> Unit, onClickCard: () -> Unit, card: CardData
 ) {
     Column(
         modifier = modifier
@@ -109,8 +157,7 @@ fun MyCardsOneCard(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = onClickCard
-                    ),
-                cardData = card
+                    ), cardData = card
             )
         }
     }
@@ -134,58 +181,67 @@ fun MyCardsTwoCards(
                 ambientColor = ShadowColorCard,
             )
             .background(CardColor)
-            .padding(6.dp)
+            .padding(12.dp)
 
     ) {
         Box(Modifier.fillMaxWidth()) {
             TextBoldBlack(
                 text = "Kartalarim",
-                fontSize = 14.sp,
+                fontSize = 16.sp,
+                letterSpacing = 0.8.sp,
+                modifier = Modifier.align(Alignment.CenterStart)
+            )
+            Box(
                 modifier = Modifier
-                    .align(Alignment.CenterStart)
-            )
-            Icon(
-                painter = painterResource(id = R.drawable.ic_add),
-                contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterEnd)
-            )
+                    .size(22.dp)
+                    .clip(CircleShape)
+                    .background(PrimaryColor)
+                    .align(Alignment.CenterEnd)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onClickAddCard
+                    )
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_add),
+                    contentDescription = null,
+                    modifier = Modifier.padding(4.dp),
+                    tint = Color.White,
+                )
+            }
         }
 
         Box(
             modifier = Modifier
-                .height(200.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                    onClick = onClickAddCard
-                )
+                .padding(top = 12.dp)
+                .height(160.dp)
+
         ) {
             ItemCard(
                 modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .height(120.dp)
-                    .aspectRatio(ratio = 1.5857725f)
+                    .height(96.dp)
+                    .fillMaxWidth()
+                    //.aspectRatio(ratio = 1.5857725f)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = onClickBackCard
-                    ),
-                cardData = backCard
+                    ), cardData = backCard
             )
 
             ItemCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .height(120.dp)
-                    .aspectRatio(ratio = 1.5857725f)
+                    .height(96.dp)
+                    .fillMaxWidth()
+                    //.aspectRatio(ratio = 1.5857725f)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = onClickFrontCard
-                    ),
-                cardData = frontCard
+                    ), cardData = frontCard
             )
-
         }
     }
 }
@@ -194,17 +250,91 @@ fun MyCardsTwoCards(
 fun MyCardsMoreCards(
     modifier: Modifier = Modifier,
     onClickAddCard: () -> Unit,
-    onClickMainCard: () -> Unit,
+    onClickFrontCard: () -> Unit,
     onClickBackCard: () -> Unit,
     cards: List<CardData>
 ) {
+    Column(
+        modifier = modifier
+            .shadow(
+                elevation = 1.dp,
+                shape = RoundedCornerShape(16.dp),
+                ambientColor = ShadowColorCard,
+            )
+            .background(CardColor)
+            .padding(8.dp)
+    ) {
+        Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+            TextBoldBlack(
+                modifier = Modifier.padding(2.dp),
+                text = "Kartalarim",
+                fontSize = 14.sp
+            )
 
+            Spacer(modifier = Modifier.weight(1f))
+
+            Box(
+                modifier = Modifier
+                    .size(24.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF1A1818)),
+                contentAlignment = Alignment.Center
+            ) {
+                TextNormal(text = "${cards.size}")
+            }
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_chevronright),
+                contentDescription = null,
+                tint = Color(0xFF1A1818),
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .size(24.dp),
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .padding(top = 12.dp)
+                .height(160.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickAddCard
+                )
+        ) {
+            ItemCard(
+                modifier = Modifier
+                    .height(96.dp)
+                    .fillMaxWidth()
+                    //.aspectRatio(ratio = 1.5857725f)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onClickBackCard
+                    ), cardData = cards[1]
+            )
+
+            ItemCard(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .height(96.dp)
+                    .fillMaxWidth()
+                    //.aspectRatio(ratio = 1.5857725f)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onClickFrontCard
+                    ), cardData = cards[2]
+            )
+        }
+
+    }
 }
 
 @Composable
 private fun ItemCard(
-    modifier: Modifier = Modifier,
-    cardData: CardData
+    modifier: Modifier = Modifier, cardData: CardData
 ) {
     val bankImageID = R.drawable.logo_tbc
     val typeImageID = R.drawable.uzcard_logo
@@ -219,15 +349,12 @@ private fun ItemCard(
                 ambientColor = ShadowColorCard,
             )
             .angledGradientBackground(
-                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)),
-                degrees = 65f
+                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
             )
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceBetween
+            .padding(8.dp), verticalArrangement = Arrangement.SpaceBetween
     ) {
         Box(
-            Modifier
-                .fillMaxWidth()
+            Modifier.fillMaxWidth()
 
         ) {
 
@@ -254,27 +381,20 @@ private fun ItemCard(
         }
 
         Row(
-            Modifier
-                .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
+            Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
         ) {
             TextBold(
-                text = money,
-                fontSize = 18.sp,
-                color = Color.White
+                text = money, fontSize = 18.sp, color = Color.White
             )
             TextBold(
-                text = " " + stringResource(id = R.string.som),
-                fontSize = 18.sp,
-                color = Color(0x80FFFFFF)
+                text = " " + stringResource(id = R.string.som), fontSize = 18.sp, color = Color(0x80FFFFFF)
             )
         }
 
         Box(
-            modifier = Modifier,
-            contentAlignment = Alignment.Center
+            modifier = Modifier, contentAlignment = Alignment.Center
         ) {
             TextBold(
-
                 text = type,
                 fontSize = 14.sp,
                 color = Color.White,
@@ -282,43 +402,45 @@ private fun ItemCard(
         }
     }
 }
-
+//
+//@Preview
+//@Composable
+//fun OnePreview() {
+//    MyCardsOneCard(modifier = Modifier, onClickAddCard = {}, onClickCard = {}, card = CardData(
+//        "", "", "", ""
+//    )
+//    )
+//}
+//
+//
 @Preview
 @Composable
-fun OnePreview() {
-    MyCardsOneCard(
-        modifier = Modifier,
-        onClickAddCard = {},
-        onClickCard = {},
-        card = CardData(
-            "",
-            "",
-            "",
-            ""
-        )
-    )
-}
-
-
-@Preview
-@Composable
-fun MyCardsTwoCardsPreview() {
+fun TwoCardsPreview() {
     MyCardsTwoCards(
         modifier = Modifier,
         onClickAddCard = {},
         onClickFrontCard = {},
         onClickBackCard = {},
         frontCard = CardData(
-            "",
-            "",
-            "",
-            ""
+            "", "", "", ""
         ),
         backCard = CardData(
-            "",
-            "",
-            "",
-            ""
+            "", "", "", ""
         ),
+    )
+}
+
+@[Composable Preview]
+fun MoreCardsPreview() {
+    MyCardsMoreCards(
+        onClickAddCard = {},
+        onClickFrontCard = {},
+        onClickBackCard = {},
+        cards = listOf(
+            CardData("", "", "", ""),
+            CardData("", "", "", ""),
+            CardData("", "", "", ""),
+            CardData("", "", "", ""),
+        )
     )
 }

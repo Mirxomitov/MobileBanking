@@ -22,7 +22,7 @@ import uz.gita.mobilebanking.R
 fun CodeCreator(
     modifier: Modifier,
     onPasswordEntered: (String) -> Unit,
-    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.primaryColor,
+    circleCheckedColor: Color = uz.gita.mobilebanking.ui.theme.PrimaryColor,
     circleDefaultColor: Color = uz.gita.mobilebanking.ui.theme.circleDefaultColor,
     listOfCircleColors: MutableList<Color>,
     onChangeCircleColor: (MutableList<Color>) -> Unit,

@@ -33,7 +33,7 @@ import uz.gita.mobilebanking.ui.components.buttons.NextButton
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.primaryColor
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.textColorLight
 
@@ -140,7 +140,7 @@ private fun AuthScreenContent(
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
             isEnabled = phone.length == 9,
-            containerColor = primaryColor,
+            containerColor = PrimaryColor,
             onClick = {
                 onEventDispatcher(AuthContract.Intent.SignIn(phone))
             },
