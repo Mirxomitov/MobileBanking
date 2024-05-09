@@ -63,9 +63,9 @@ fun MyCardsOneCard(
                 ambientColor = ShadowColorCard,
             )
             .background(CardColor)
-            .padding(6.dp)
+            .padding(8.dp)
     ) {
-        TextBoldBlack(text = "Kartalarim", fontSize = 14.sp)
+        TextBoldBlack(modifier = Modifier.padding(2.dp), text = "Kartalarim", fontSize = 14.sp)
 
         Box(
             modifier = Modifier
@@ -116,22 +116,6 @@ fun MyCardsOneCard(
     }
 }
 
-@Preview
-@Composable
-fun OnePreview() {
-    MyCardsOneCard(
-        modifier = Modifier,
-        onClickAddCard = {},
-        onClickCard = {},
-        card = CardData(
-            "",
-            "",
-            "",
-            ""
-        )
-    )
-}
-
 
 @Composable
 fun MyCardsTwoCards(
@@ -142,6 +126,68 @@ fun MyCardsTwoCards(
     frontCard: CardData,
     backCard: CardData,
 ) {
+    Column(
+        modifier = modifier
+            .shadow(
+                elevation = 1.dp,
+                shape = RoundedCornerShape(16.dp),
+                ambientColor = ShadowColorCard,
+            )
+            .background(CardColor)
+            .padding(6.dp)
+
+    ) {
+        Box(Modifier.fillMaxWidth()) {
+            TextBoldBlack(
+                text = "Kartalarim",
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_add),
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterEnd)
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .height(200.dp)
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickAddCard
+                )
+        ) {
+            ItemCard(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .height(120.dp)
+                    .aspectRatio(ratio = 1.5857725f)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onClickBackCard
+                    ),
+                cardData = backCard
+            )
+
+            ItemCard(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .height(120.dp)
+                    .aspectRatio(ratio = 1.5857725f)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = onClickFrontCard
+                    ),
+                cardData = frontCard
+            )
+
+        }
+    }
 }
 
 @Composable
@@ -235,4 +281,44 @@ private fun ItemCard(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun OnePreview() {
+    MyCardsOneCard(
+        modifier = Modifier,
+        onClickAddCard = {},
+        onClickCard = {},
+        card = CardData(
+            "",
+            "",
+            "",
+            ""
+        )
+    )
+}
+
+
+@Preview
+@Composable
+fun MyCardsTwoCardsPreview() {
+    MyCardsTwoCards(
+        modifier = Modifier,
+        onClickAddCard = {},
+        onClickFrontCard = {},
+        onClickBackCard = {},
+        frontCard = CardData(
+            "",
+            "",
+            "",
+            ""
+        ),
+        backCard = CardData(
+            "",
+            "",
+            "",
+            ""
+        ),
+    )
 }

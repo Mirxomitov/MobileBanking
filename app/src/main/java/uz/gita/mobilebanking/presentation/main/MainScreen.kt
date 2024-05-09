@@ -3,8 +3,6 @@ package uz.gita.mobilebanking.presentation.main
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,15 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,15 +26,17 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
+import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.main.components.CashBack
 import uz.gita.mobilebanking.presentation.main.components.Exchange
 import uz.gita.mobilebanking.presentation.main.components.FillTransactPay
 import uz.gita.mobilebanking.presentation.main.components.MainTop
+import uz.gita.mobilebanking.presentation.main.components.MyCardsOneCard
+import uz.gita.mobilebanking.presentation.main.components.MyCardsTwoCards
 import uz.gita.mobilebanking.presentation.main.components.MyDebt
 import uz.gita.mobilebanking.presentation.main.components.MyHome
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.main.components.UserBalanceWithEye
-import uz.gita.mobilebanking.ui.dialogs.AddCardDialog
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.logger
@@ -61,7 +60,9 @@ private fun MainContent(
     onEventDispatcher: (MainContract.Intent) -> Unit
 ) {
     val context = LocalContext.current
-    val bottomSheetNavigator = LocalBottomSheetNavigator.current
+  //  val bottomSheetNavigator = LocalBottomSheetNavigator.current
+
+    Text(text = "")
 
     var isVisibleMoney by remember { mutableStateOf(true) }
 
@@ -81,7 +82,7 @@ private fun MainContent(
                     startActivity(context, intent, null)
                 },
                 icNotificationClick = {
-                    // TODO Bildirishnomalar uchun -> navigate to -> (Notifications Screen)
+                    //
                 },
             )
         }
@@ -142,13 +143,36 @@ private fun MainContent(
                     Modifier
                         .padding(top = 12.dp)
                         .padding(horizontal = 12.dp)
+                        .height(220.dp)
                 ) {
 
+                    when (1) {
+                        0 -> {}
+                        1 -> MyCardsOneCard(
+                            modifier = Modifier.weight(1f),
+                            onClickAddCard = {},
+                            onClickCard = { },
+                            card = CardData("", "", "", "")
+                        )
+
+                        2 -> MyCardsTwoCards(
+                            modifier = Modifier.weight(1f),
+                            onClickAddCard = {},
+                            onClickFrontCard = {},
+                            onClickBackCard = {},
+                            frontCard = CardData("", "", "", ""),
+                            backCard = CardData("", "", "", ""),
+                        )
+
+                        else -> {}
+                    }
 
                     Spacer(modifier = Modifier.padding(4.dp))
 
                     CashBack(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(220.dp),
                         isVisibleMoney = isVisibleMoney
                     )
                 }

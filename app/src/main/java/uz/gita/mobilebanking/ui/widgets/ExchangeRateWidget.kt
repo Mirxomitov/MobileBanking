@@ -1,9 +1,13 @@
-package uz.gita.mobilebanking
+package uz.gita.mobilebanking.ui.widgets
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
+import uz.gita.mobilebanking.MainActivity
+import uz.gita.mobilebanking.R
 
 /**
  * Implementation of App Widget functionality.
@@ -26,11 +30,11 @@ class ExchangeRateWidget : AppWidgetProvider() {
 }
 
 internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-    val widgetText = context.getString(R.string.appwidget_text)
-    // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.exchange_rate_widget)
-    //views.setTextViewText(R.id.appwidget_text, widgetText)
 
-    // Instruct the widget manager to update the widget
+    val configIntent = Intent(context, MainActivity::class.java)
+    val configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, PendingIntent.FLAG_IMMUTABLE)
+
+    views.setOnClickPendingIntent(R.id.widget, configPendingIntent);
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }

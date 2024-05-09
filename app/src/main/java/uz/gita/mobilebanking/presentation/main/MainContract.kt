@@ -9,7 +9,7 @@ interface MainContract {
     }
 
     data class UIState(
-        val cards: List<CardData> = listOf<CardData>()
+        val cards: List<CardData> = listOf(CardData("", "", "", ""), CardData("", "", "", ""))
     )
 
     sealed interface SideEffect {}

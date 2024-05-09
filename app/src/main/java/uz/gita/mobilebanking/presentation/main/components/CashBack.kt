@@ -42,27 +42,27 @@ fun CashBack(
 
     ) {
         TextBold(
-            fontSize = 12.sp,
+            fontSize = 16.sp,
             text = stringResource(R.string.cash_back_calculation),
             color = Black
         )
 
         TextNormal(
             text = stringResource(id = R.string.balance),
-            modifier = Modifier.padding(top = 4.dp),
+            modifier = Modifier.padding(top = 12.dp),
             color = textColor,
-            fontSize = 12.sp
+            fontSize = 16.sp
         )
 
         Row {
             TextBold(
                 text = if (isVisibleMoney) "3 444" else "• •••",
-                fontSize = 12.sp,
+                fontSize = 18.sp,
                 color = Black
             )
 
             TextBold(
-                text = "\t" + stringResource(id = R.string.som), fontSize = 12.sp, color = textColor
+                text = "\t" + stringResource(id = R.string.som), fontSize = 18.sp, color = textColor
             )
         }
 
@@ -75,29 +75,26 @@ fun CashBack(
                     shape = RoundedCornerShape(16.dp),
                     ambientColor = ShadowColorCard
                 )
-        ) {
-            Column(
-                Modifier
-                    .background(White)
-                    .padding(4.dp)
-            ) {
+                .background(White)
+                .padding(4.dp)
+        )  {
 
                 Row(Modifier, verticalAlignment = Alignment.CenterVertically) {
-                    TextNormal(text = "Bugun", color = textColor, fontSize = 8.sp)
+                    TextNormal(text = "Bugun", color = textColor, fontSize = 12.sp)
                     Spacer(modifier = Modifier.weight(1f))
                     Row(
                         Modifier
-                            .padding(2.dp)
+                            .padding(4.dp)
                             .clip(RoundedCornerShape(4.dp))
                             .background(primaryColor)
                             .padding(2.dp)
                     ) {
-                        TextBold(color = White, text = if (isVisibleMoney) "0" else "• •••", fontSize = 8.sp)
-                        TextBold(color = White, text = "\t" + stringResource(id = R.string.som), fontSize = 8.sp)
+                        TextBold(color = White, text = if (isVisibleMoney) "0" else "• •••", fontSize = 12.sp)
+                        TextBold(color = White, text = "\t" + stringResource(id = R.string.som), fontSize = 12.sp)
                     }
                 }
 
-                Row(Modifier.height(60.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                     repeat(7) {
                         Column(
                             modifier = Modifier
@@ -127,7 +124,7 @@ fun CashBack(
                     }
                 }
             }
-        }
+
     }
 }
 
