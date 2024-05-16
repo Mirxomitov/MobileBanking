@@ -7,11 +7,16 @@ interface AddCardContract {
         fun onEventDispatchers(intent: Intent)
     }
 
-    data object UIState
+    data class UIState(
+        var cardNumber: String = "",
+        var expirationDate: String = ""
+    )
+
     data object SideEffect
     sealed interface Intent {
         data object ToScanCardScreen : Intent
         data object Back : Intent
         data class AddCard(val cardNumber: String, val expirationDate: String) : Intent
+        data class SaveCard(val cardNumber: String, val expirationDate: String) : Intent
     }
 }

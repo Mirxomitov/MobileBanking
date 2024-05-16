@@ -79,7 +79,14 @@ fun FillTransactPay(
 
                 TextBoldBlack(
                     text = stringResource(id = R.string.what_is_it),
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .clickable(
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            },
+                            indication = null,
+                            onClick = onClickWhatIsIt
+                        ),
                     color = PrimaryColor,
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp

@@ -27,7 +27,6 @@ fun logger(message: String, tag: String = "TTT") {
     Timber.tag(tag).d(message)
 }
 
-
 fun <T> List<T>.new(): MutableList<T> {
     return mutableListOf<T>().also { it.addAll(this) }
 }
@@ -141,4 +140,16 @@ fun String.checkExpirationDateValidation(): Boolean {
 fun String.containsOnlyNumbers(): Boolean {
     val regex = Regex("^\\d+\$")
     return this.matches(regex)
+}
+
+fun String.toValue(): String {
+    if (this.length <= 3) return this
+
+    val builder = StringBuilder(this)
+    val length = builder.length
+
+    for (i in (length - 3) downTo 1 step 3)
+        builder.insert(i, " ")
+
+    return builder.toString()
 }

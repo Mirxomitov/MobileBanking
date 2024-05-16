@@ -20,7 +20,6 @@ interface RegistrationRepository {
 
 
     // shared preference
-
     fun phoneNumber(phoneNumber: String)
     fun phoneNumber() : String
     fun pinCode(pinCode : String)

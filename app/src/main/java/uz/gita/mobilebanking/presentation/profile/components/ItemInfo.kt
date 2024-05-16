@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.grayIcon
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 
 @Composable
 fun ItemInfo(
@@ -53,7 +53,7 @@ fun ItemInfo(
         Icon(
             painter = painterResource(id = R.drawable.ic_chevronright),
             contentDescription = null,
-            tint = grayIcon,
+            tint = GrayIcon,
             modifier = Modifier.size(24.dp)
         )
     }

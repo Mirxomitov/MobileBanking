@@ -44,7 +44,6 @@ import uz.gita.mobilebanking.ui.theme.errorColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
 import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.utils.hidePartOfNumber
-import uz.gita.mobilebanking.utils.logger
 
 data class VerifyScreen(val token: String, val isSignIn: Boolean) : Screen {
     @Composable
@@ -77,12 +76,12 @@ fun VerifyContent(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(8.dp)
-            .background(color = pinScreenBgLight),
+            .background(color = pinScreenBgLight)
+            .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconButton(
-            onClick = {onEventDispatcher(VerifyContract.Intent.Back)},
+            onClick = { onEventDispatcher(VerifyContract.Intent.Back) },
             modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(
@@ -168,7 +167,7 @@ fun VerifyContent(
             onClick = {
                 if (resendTime == 60) {
                     resendTime--
-                     onEventDispatcher(VerifyContract.Intent.ResendSms(token, isSignIn))
+                    onEventDispatcher(VerifyContract.Intent.ResendSms(token, isSignIn))
                 }
             },
             isSecondsVisible = resendTime != 60

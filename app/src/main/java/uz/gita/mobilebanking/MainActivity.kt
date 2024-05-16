@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package uz.gita.mobilebanking
 
 import android.annotation.SuppressLint
@@ -17,13 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.gita.mobilebanking.presentation.splash.SplashScreen
-import uz.gita.mobilebanking.presentation.tabs.BottomNavigation
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.navigation.AppNavigationHandler
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
+@OptIn(ExperimentalMaterialApi::class)
 class MainActivity : FragmentActivity() {
     @Inject
     lateinit var handler: AppNavigationHandler
@@ -39,8 +36,8 @@ class MainActivity : FragmentActivity() {
                 ) {
                     Navigator(
 //                        screen = AuthScreen()
-                        screen = BottomNavigation()
-//                        screen = SplashScreen()
+//                        screen = BottomNavigation()
+                        screen = SplashScreen()
 //                        screen = BottomNavigation()
 //                        screen = ProfileScreen()
                     ) { navigator ->

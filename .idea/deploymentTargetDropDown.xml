@@ -8,10 +8,10 @@
       <entry key="MainPreview">
         <State />
       </entry>
-      <entry key="PinCheckPreview">
+      <entry key="PaynetCardPreview">
         <State />
       </entry>
-      <entry key="PinPreview">
+      <entry key="ReadCardNumberPreview">
         <State />
       </entry>
       <entry key="app">

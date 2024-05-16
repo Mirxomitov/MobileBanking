@@ -18,7 +18,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.mainBgLight
+import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -33,7 +33,7 @@ class BottomNavigation : Screen {
                 },
                 bottomBar = {
                     Row(
-                        modifier = Modifier.background(mainBgLight)
+                        modifier = Modifier.background(MainBgLight)
                     ) {
                         TabNavigationItem(MainTab)
                         TabNavigationItem(TransfersTab)

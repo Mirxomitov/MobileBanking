@@ -9,12 +9,14 @@ interface MainContract {
     }
 
     data class UIState(
-        val cards: List<CardData> = listOf(CardData("", "", "", ""), CardData("", "", "", ""))
+        var cards: List<CardData> = listOf()
     )
 
     sealed interface SideEffect {}
     sealed interface Intent {
         data object OpenProfileScreen : Intent
         data object OpenAddCardScreen : Intent
+        data object OpenWhatIsIt : Intent
+        data object Init : Intent
     }
 }

@@ -36,7 +36,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
-import uz.gita.mobilebanking.ui.theme.textColorLight
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
 fun PaynetAvia(modifier: Modifier = Modifier) {
@@ -73,7 +73,7 @@ fun PaynetAvia(modifier: Modifier = Modifier) {
                         TextBold(
                             modifier = Modifier.padding(start = 5.dp),
                             text = "avia",
-                            color = textColorLight,
+                            color = TextColorLight,
                             fontSize = 24.sp
                         )
                     }

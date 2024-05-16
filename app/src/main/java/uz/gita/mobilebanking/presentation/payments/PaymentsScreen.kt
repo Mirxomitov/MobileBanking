@@ -70,7 +70,7 @@ import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColorLight
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 import uz.gita.mobilebanking.utils.logger
 
 class PaymentsScreen : Screen {
@@ -159,7 +159,7 @@ fun PaymentContent() {
                     modifier = Modifier.size(32.dp),
                     painter = painterResource(id = R.drawable.ic_search),
                     contentDescription = null,
-                    tint = textColorLight
+                    tint = TextColorLight
                 )
 
                 Box(modifier = Modifier) {
@@ -207,7 +207,7 @@ fun PaymentContent() {
                                     searchText = ""
                                 }
                             ),
-                        tint = textColorLight
+                        tint = TextColorLight
                     )
                 }
             }

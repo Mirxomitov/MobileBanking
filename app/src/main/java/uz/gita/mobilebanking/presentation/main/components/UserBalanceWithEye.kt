@@ -22,7 +22,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.grayIcon
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.utils.logger
 
 @Composable
@@ -64,7 +64,7 @@ fun UserBalanceWithEye(
                         indication = null,
                         onClick = onClickEye
                     ),
-                tint = grayIcon,
+                tint = GrayIcon,
 
                 )
         }

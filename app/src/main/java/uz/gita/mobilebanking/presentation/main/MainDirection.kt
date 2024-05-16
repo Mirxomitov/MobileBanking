@@ -1,6 +1,7 @@
 package uz.gita.mobilebanking.presentation.main
 
 import uz.gita.mobilebanking.presentation.addcard.AddCardScreen
+import uz.gita.mobilebanking.presentation.paynet_card.PaynetCard
 import uz.gita.mobilebanking.presentation.profile.ProfileScreen
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject
@@ -10,6 +11,7 @@ import javax.inject.Singleton
 interface MainDirection {
     suspend fun toProfileScreen()
     suspend fun toAddCardScreen()
+    suspend fun toWhatIsIt()
 }
 
 @Singleton
@@ -22,5 +24,9 @@ class MainDirectionImpl @Inject constructor(
 
     override suspend fun toAddCardScreen() {
         appNavigator.addScreen(AddCardScreen())
+    }
+
+    override suspend fun toWhatIsIt() {
+        appNavigator.addScreen(PaynetCard())
     }
 }

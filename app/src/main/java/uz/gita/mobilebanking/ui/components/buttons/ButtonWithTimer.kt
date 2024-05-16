@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.grayIcon
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -48,7 +48,7 @@ fun ButtonWithTimer(
                 .size(24.dp)
         )
 
-        TextBold(text = text, fontSize = 18.sp, color = grayIcon)
+        TextBold(text = text, fontSize = 18.sp, color = GrayIcon)
 
         Spacer(modifier = Modifier.width(8.dp))
 

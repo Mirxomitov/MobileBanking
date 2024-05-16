@@ -8,10 +8,15 @@ interface ReadCardNumberContract {
     }
 
     data object UIState
+
     data object SideEffect
 
     sealed interface Intent {
+        data class BackWithData(
+            var cardNumber: String,
+            var expirationDate: String
+        ) : Intent
+
         data object Back : Intent
     }
-
 }

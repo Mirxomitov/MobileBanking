@@ -64,14 +64,8 @@ fun PhoneInput(
         Row(
             modifier = Modifier, verticalAlignment = Alignment.CenterVertically
         ) {
-            Flag(
-                modifier = Modifier
-            )
-
-            TextBoldBlack(
-                text = "+998 ", fontSize = 20.sp, modifier = Modifier.padding(start = 4.dp), letterSpacing = 0.8.sp
-            )
-
+            Flag(modifier = Modifier)
+            TextBoldBlack(text = "+998 ", fontSize = 20.sp, modifier = Modifier.padding(start = 4.dp), letterSpacing = 0.8.sp)
             BasicTextField(
                 value = phone,
                 onValueChange = {
@@ -92,9 +86,8 @@ fun PhoneInput(
                     fontFamily = FontFamily(Font(R.font.pnfont_semibold))
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                visualTransformation = PhoneMaskTransformation
+                //visualTransformation = PhoneMaskTransformation
             )
-
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_remove),

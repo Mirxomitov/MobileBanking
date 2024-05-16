@@ -28,12 +28,14 @@
     <string name="balance">Balans</string>
     <string name="today">Bugun</string>
     <string name="language">Til</string>
-    <string name="enter_phone_number">Введите номер</string>
+    <string name="enter_phone_number">Raqamingizni kiriting</string>
     <string name="to_be_customer_or_enter">Mijoz bo\'lish uchun yoki kirish uchun</string>
     <string name="txt_continue">Davom etish</string>
 
     <!--    auth -->
-    <string name="oferta">\"Davom etish\" tugmasini bosish orqali men Xizmatlar ko\'rsatish haqidagi oferta shartlarini qabul qilaman va shaxsiy malumotlarni qayta ishlashga rozilik bildiraman</string>
+    <string name="oferta1">Davom etish\" tugmasini bosish orqali men </string>
+    <string name="oferta2">\ "Xizmatlar ko\'rsatish haqidagi oferta shartlarini</string>
+    <string name="oferta3">\ qabul qilaman va shaxsiy malumotlarni qayta ishlashga rozilik bildiraman</string>
 
     <!--    transactions-->
     <string name="transactions">O\'tkazmalar</string>
@@ -97,5 +99,42 @@
     <string name="reference">Ma\'lumotnoma</string>
     <string name="payment">To\'lov</string>
     <string name="history">Tarix</string>
+    <string name="pay_in_time_to_elektr_gas_and_call">Elektr, gaz va aloqa uchun o\'z vaqtida to\'lang</string>
+    <string name="my_home">Mening uyim</string>
+    <string name="the_state_tax_committee">Davlat Soliq Qo\'mitasi</string>
+    <string name="no_debt">Qarzdorlik yo\'q</string>
+    <string name="my_debt">Mening qarzdorligim</string>
+    <string name="mib_debt">MIB qarzdorlik</string>
+    <string name="call_us_if_your_identification_data_changed">Agar shaxsiy ma\'lumotlaringiz o\'zgargan bo\'lsa, ularni tahrirlash uchun qo\'llab-quvvatlash xizmatiga murojaat qiling.</string>
+    <string name="family_name">Familiyasi</string>
+    <string name="name">Ismi</string>
+    <string name="patronymic">Sharifi</string>
+    <string name="document_number">Hujjat rqaqami</string>
+    <string name="date_of_birth">Tug\'ilgan kun</string>
+    <string name="phone_number">Telefon raqami</string>
+    <string name="search">Izlash</string>
+    <string name="qr_code">QR kod</string>
+    <string name="fast_payments">Tezkor to\'lovlar</string>
+    <string name="train_ticket">Poyezd chiptasi</string>
+    <string name="convenient_and_fast">qulay va tez</string>
+    <string name="buy">Sotib olish</string>
+    <string name="payment_types">To\'lov turlari</string>
+    <string name="props_by_pays">Rekvizit bo\'yicha to\'lov</string>
+    <string name="uzb_card">O\'zbekiston kartasi</string>
+    <string name="card_russia">Rossiya kartasi</string>
+
+    // Add card screen
+    <string name="add_card_title">Kartani qo\'shish</string>
+    <string name="invalid_card_expiration_date">Kartaning amal qilish muddati noto\'g\'ri</string>
+    <string name="we_on_map">Biz xaritada</string>
+    <string name="location">Lokatsiya</string>
+    <string name="phoneNumber">Telefon raqam</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="_1_usd">$1 USD</string>
+    <string name="_1_eur">€1 EUR</string>
+    <string name="to_scanner_card_you_must_give_permission">Karta raqamini skanerlash uchun kameraga ruxsat bering</string>
+    <string name="you_can_go_to_settings">Telefoningiz sozlamalarida ilovaga kamera orqali kirishga ruxsat berishingiz mumkin.</string>
 
 </resources>

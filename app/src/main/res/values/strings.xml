@@ -33,7 +33,9 @@
     <string name="txt_continue">Davom etish</string>
 
     <!--    auth -->
-    <string name="oferta">\"Davom etish\" tugmasini bosish orqali men Xizmatlar ko\'rsatish haqidagi oferta shartlarini qabul qilaman va shaxsiy malumotlarni qayta ishlashga rozilik bildiraman</string>
+    <string name="oferta1">Davom etish tugmasini bosish orqali men </string>
+    <string name="oferta2">\ "Xizmatlar ko\'rsatish haqidagi oferta shartlarini</string>
+    <string name="oferta3">\ qabul qilaman va shaxsiy malumotlarni qayta ishlashga rozilik bildiraman</string>
 
     <!--    transactions-->
     <string name="transactions">O\'tkazmalar</string>
@@ -132,5 +134,21 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="_1_usd">$1 USD</string>
     <string name="_1_eur">€1 EUR</string>
+    <string name="to_scanner_card_you_must_give_permission">Karta raqamini skanerlash uchun kameraga ruxsat bering</string>
+    <string name="you_can_go_to_settings">Telefoningiz sozlamalarida ilovaga kamera orqali kirishga ruxsat berishingiz mumkin.</string>
+    <string name="what_is_paynet_card">Paynet karta nima?</string>
+    <string name="transfer_without_comission">Mablag\'ni <b>komissiyasiz</b> to\'ldiring va o\'tkazing</string>
+    <string name="know_the_restrictions_and_conditions">Cheklovlar va shartlarni bilish</string>
+    <string name="to_fill">To\'ldirishi uchun 0%</string>
+    <string name="in_agent_or_infokiosk_or_bank_card">Paynet agentida, infokioskda yoki ilovadagi bank kartasida</string>
+    <string name="zero_percent_for_transfers">O\'tkazmalar uchun 0%</string>
+    <string name="to_other_paynet_cards">Boshqa Paynet kartalariga</string>
+    <string name="for_cash">Naqd pul uchun</string>
+    <string name="on_paynet_agent">Paynet agentida</string>
+    <string name="payments_by_card">Karta yordamidagi to\'lovlar</string>
+    <string name="can_pay_for_any_thousand_services">Paynetning 1000 ta xizmatidan istalgani uchun Paynet kartasi yordamida to\'lov qilish mumkin</string>
+    <string name="until_2_2_percent_cash_back">2.2% gacha keshbek</string>
+    <string name="fill_cash_back_wallet">Paynet kartasi orqali to\'lovni amalga oshirganingizda keshbek hisobingizni keshbek bilan to\'ldiring</string>
+    <string name="scan_card">Kartani skanerlang</string>
 
 </resources>

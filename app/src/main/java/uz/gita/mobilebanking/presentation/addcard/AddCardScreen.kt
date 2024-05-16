@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalPermissionsApi::class)
+
 package uz.gita.mobilebanking.presentation.addcard
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -37,6 +40,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -47,15 +51,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.dialogs.CameraPermissionRationaleDialog
+import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.errorColor2
 import uz.gita.mobilebanking.ui.theme.grayColor
-import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.angledGradientBackground
 import uz.gita.mobilebanking.utils.checkExpirationDateValidation
 import uz.gita.mobilebanking.utils.containsOnlyNumbers
@@ -63,13 +73,19 @@ import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
 import uz.gita.mobilebanking.utils.visual_transformations.ExpirationDateTransformation
 
-class AddCardScreen : Screen {
+data class AddCardScreen(
+    val cardNumber: String = "",
+    val expirationDate: String = ""
+) : Screen {
     @Composable
     override fun Content() {
         MobileBankingTheme {
             val viewModel: AddCardContract.Model = getViewModel<AddCardModel>()
+            viewModel.onEventDispatchers(AddCardContract.Intent.SaveCard(cardNumber, expirationDate))
+
             AddCardContent(
-                viewModel.collectAsState().value, viewModel::onEventDispatchers
+                viewModel.collectAsState().value,
+                viewModel::onEventDispatchers
             )
         }
     }
@@ -83,17 +99,22 @@ private fun AddCardContent(
 ) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
-    var cardNumber by remember { mutableStateOf("") }
-    var expirationDate by remember { mutableStateOf("") }
+    var cardNumber by remember { mutableStateOf(uiState.cardNumber) }
+    var expirationDate by remember { mutableStateOf(uiState.expirationDate) }
 
     var isExpirationErrorVisible by remember { mutableStateOf(false) }
     var isCardNumberFocused by remember { mutableStateOf(false) }
     var isExpirationDateFocused by remember { mutableStateOf(false) }
 
-    Scaffold(containerColor = mainBgLight, topBar = {
+    val bottomSheetNavigator = LocalBottomSheetNavigator.current
+    val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
+    val context = LocalContext.current
+
+
+    Scaffold(containerColor = MainBgLight, topBar = {
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = mainBgLight,
+                containerColor = MainBgLight,
                 titleContentColor = Color.Black,
             ),
             navigationIcon = {
@@ -107,14 +128,16 @@ private fun AddCardContent(
                             indication = null,
                             onClick = {
                                 onEventDispatcher(AddCardContract.Intent.Back)
-                            })
+                            }
+                        )
                 )
             },
             title = {
                 TextBoldBlack(text = stringResource(id = R.string.add_card_title), letterSpacing = 0.8.sp)
             },
         )
-    }) {
+    }
+    ) {
         Column(Modifier.padding(it)) {
             // card
             Column(
@@ -135,7 +158,7 @@ private fun AddCardContent(
                         .fillMaxWidth()
                         .height(60.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(mainBgLight)
+                        .background(MainBgLight)
                         .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -181,7 +204,15 @@ private fun AddCardContent(
                             .clickable(
                                 interactionSource = remember { MutableInteractionSource() },
                                 indication = null,
-                                onClick = { onEventDispatcher(AddCardContract.Intent.ToScanCardScreen) }
+                                onClick = {
+                                    if (!cameraPermissionState.status.shouldShowRationale && !cameraPermissionState.status.isGranted) {
+                                        cameraPermissionState.launchPermissionRequest()
+                                    } else if (cameraPermissionState.status.isGranted) {
+                                        onEventDispatcher(AddCardContract.Intent.ToScanCardScreen)
+                                    } else if (cameraPermissionState.status.shouldShowRationale) {
+                                        bottomSheetNavigator.show(CameraPermissionRationaleDialog(onHide = { bottomSheetNavigator.hide() }))
+                                    }
+                                }
                             )
                     )
                     else if (isCardNumberFocused) // cardNumber != ""
@@ -203,7 +234,7 @@ private fun AddCardContent(
                         .padding(top = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
                         .height(60.dp)
-                        .background(mainBgLight)
+                        .background(MainBgLight)
                         .padding(12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -273,7 +304,7 @@ private fun AddCardContent(
 
 @[Preview Composable]
 fun AddCardPreview() {
-    AddCardContent(AddCardContract.UIState, {})
+    AddCardContent(AddCardContract.UIState(), {})
 }
 
 @Composable

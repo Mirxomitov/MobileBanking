@@ -1,10 +1,12 @@
 package uz.gita.mobilebanking.presentation.read_card_number
 
+import uz.gita.mobilebanking.presentation.addcard.AddCardScreen
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject
 
 interface ReadCardNumberDirection {
     suspend fun back()
+    suspend fun backWithData(cardNumber: String, expirationDate: String)
 }
 
 class ReadCardNumberDirectionImpl @Inject constructor(
@@ -12,5 +14,12 @@ class ReadCardNumberDirectionImpl @Inject constructor(
 ) : ReadCardNumberDirection {
     override suspend fun back() {
         appNavigator.back()
+    }
+
+    override suspend fun backWithData(cardNumber: String, expirationDate: String) {
+        appNavigator.back()
+        appNavigator.replaceScreen(
+            AddCardScreen(cardNumber = cardNumber, expirationDate = expirationDate)
+        )
     }
 }

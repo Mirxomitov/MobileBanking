@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.theme.grayIcon
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 
 @Composable
@@ -72,7 +72,7 @@ fun MainTop(
                 ),
             painter = painterResource(id = R.drawable.ic_support_customers),
             contentDescription = null,
-            tint = grayIcon
+            tint = GrayIcon
         )
 
         Icon(
@@ -84,7 +84,7 @@ fun MainTop(
                 ),
             painter = painterResource(id = R.drawable.ic_notification),
             contentDescription = null,
-            tint = grayIcon
+            tint = GrayIcon
         )
     }
 }

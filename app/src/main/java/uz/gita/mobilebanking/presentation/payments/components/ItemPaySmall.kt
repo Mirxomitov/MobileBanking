@@ -24,7 +24,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.textColor
-import uz.gita.mobilebanking.ui.theme.textColorLight
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
 fun ItemPaySmall(
@@ -61,7 +61,7 @@ fun ItemPaySmall(
                 modifier = Modifier.padding(top = 4.dp),
                 text = secondTitle,
                 fontSize = 14.sp,
-                color = textColorLight
+                color = TextColorLight
             )
         }
 

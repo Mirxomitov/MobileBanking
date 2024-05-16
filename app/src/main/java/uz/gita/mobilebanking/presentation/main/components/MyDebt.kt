@@ -28,8 +28,8 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.mainBgLight
-import uz.gita.mobilebanking.ui.theme.textColorLight
+import uz.gita.mobilebanking.ui.theme.MainBgLight
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
 fun MyDebt(modifier: Modifier = Modifier) {
@@ -97,7 +97,7 @@ private fun Item(
             TextNormal(
                 modifier = Modifier.padding(top = 2.dp),
                 text = state,
-                color = textColorLight,
+                color = TextColorLight,
                 fontSize = 12.sp
             )
         }
@@ -110,7 +110,7 @@ fun MyDebtPreview() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(mainBgLight),
+            .background(MainBgLight),
     ) {
         MyDebt()
     }

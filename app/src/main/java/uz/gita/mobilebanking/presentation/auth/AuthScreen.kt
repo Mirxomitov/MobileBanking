@@ -1,6 +1,9 @@
 package uz.gita.mobilebanking.presentation.auth
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,9 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,22 +33,22 @@ import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.ui.dialogs.ChangeLanguage
 import uz.gita.mobilebanking.ui.components.Flag
 import uz.gita.mobilebanking.ui.components.PhoneInput
 import uz.gita.mobilebanking.ui.components.buttons.NextButton
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.dialogs.ChangeLanguage
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
-import uz.gita.mobilebanking.ui.theme.textColorLight
 
 class AuthScreen : Screen {
     @Composable
     override fun Content() {
         val viewModel: AuthContract.Model = getViewModel<AuthModel>()
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        val context = LocalContext.current
 
         viewModel.onEventDispatcher(AuthContract.Intent.GetLanguage)
 
@@ -60,6 +67,14 @@ class AuthScreen : Screen {
                             }
                         )
                     )
+                }
+
+                is AuthContract.SideEffect.OpenOffer -> {
+                    val intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://assets-global.website-files.com/63a7038e6eb0c1f38cd4d11f/659e7e324fed06afd1dbacfb_%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%BA%D0%B0%202024.pdf")
+                    )
+                    context.startActivity(intent)
                 }
             }
         }
@@ -81,6 +96,7 @@ private fun AuthScreenContent(
     Column(
         Modifier
             .fillMaxSize()
+            .background(Color.White)
             .padding(horizontal = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -146,22 +162,37 @@ private fun AuthScreenContent(
             },
         )
 
-        TextNormal(
-            text = stringResource(id = R.string.oferta),
-            textAlign = TextAlign.Center,
-            color = textColorLight,
-            letterSpacing = 0.5.sp,
-            fontSize = 14.sp,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
+        val annotatedString = buildAnnotatedString {
+            append(stringResource(id = R.string.oferta1))
+            pushStringAnnotation(
+                tag = "TTT",
+                annotation = "https://assets-global.website-files.com/63a7038e6eb0c1f38cd4d11f/659e7e324fed06afd1dbacfb_%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%BA%D0%B0%202024.pdf"
+            )
+            withStyle(style = SpanStyle(color = Color.Blue)) {
+                append(stringResource(id = R.string.oferta2))
+            }
+            append(stringResource(id = R.string.oferta3))
+        }
+
+        /*ClickableText(
+            modifier = Modifier.fillMaxWidth(),
+            text = annotatedString,
+            onClick = {
+                annotatedString.getStringAnnotations(
+                    start = it,
+                    end = it,
+                ).firstOrNull()?.let {
+                    if (it.tag == "TTT")
+                        onEventDispatcher.invoke(AuthContract.Intent.OnClickOffer)
+                }
+            },
+        )*/
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun AuthScreenPreview(
-
-) {
+fun AuthScreenPreview() {
     AuthScreenContent(
         {},
         AuthContract.UIState("", R.drawable.ic_flag_uz)

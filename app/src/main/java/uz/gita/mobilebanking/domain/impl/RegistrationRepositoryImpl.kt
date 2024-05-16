@@ -21,7 +21,6 @@ import uz.gita.mobilebanking.data.model.response.SignUpVerifyResponse
 import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
 import uz.gita.mobilebanking.domain.RegistrationRepository
-import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 class RegistrationRepositoryImpl @Inject constructor(
@@ -29,8 +28,6 @@ class RegistrationRepositoryImpl @Inject constructor(
     private val sharedPreferencesHelper: SharedPreferenceHelper,
     private val gson: Gson
 ) : RegistrationRepository {
-
-    // API -> Send Requests and Get Responses
     override fun signIn(phoneNumber: String): Flow<Result<SignInResponse>> = flow {
         val response = registrationApi.singIn(SignInRequest("+998$phoneNumber", phoneNumber))
 
@@ -42,7 +39,6 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
     override fun signUp(phoneNumber: String): Flow<Result<SignUpResponse>> = flow {
         val response = registrationApi.signUp(
             SignUpRequest(
@@ -63,13 +59,13 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
-
     override fun signInVerify(token: String, verificationCode: String): Flow<Result<SignInVerifyResponse>> = flow {
-        logger("Repository.VerifySIGNIN.token=$token\tcode=$verificationCode")
+
         val response = registrationApi.signInVerify(SignInVerifyRequest(token, verificationCode))
 
         if (response.isSuccessful && response.body() != null) {
+            sharedPreferencesHelper.refreshToken(response.body()!!.refreshToken)
+            sharedPreferencesHelper.accessToken(response.body()!!.accessToken)
             emit(Result.success(response.body()!!))
         } else {
             val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
@@ -77,12 +73,14 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
     override fun signUpVerify(token: String, verificationCode: String): Flow<Result<SignUpVerifyResponse>> = flow {
-        logger("Repository.VerifySIGNUP.token=$token\tcode=$verificationCode")
+
         val response = registrationApi.signUpVerify(SignUpVerifyRequest(token, verificationCode))
 
         if (response.isSuccessful && response.body() != null) {
+            sharedPreferencesHelper.refreshToken(response.body()!!.refreshToken)
+            sharedPreferencesHelper.accessToken(response.body()!!.accessToken)
+
             emit(Result.success(response.body()!!))
         } else {
             val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
@@ -90,8 +88,6 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
-
     override fun signInResend(token: String): Flow<Result<SignInResponse>> = flow {
         val response = registrationApi.signInResend(SignInResendRequest(token))
 
@@ -103,8 +99,6 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
-
     override fun signUpResend(token: String): Flow<Result<SignUpResponse>> = flow {
         val response = registrationApi.signUpResend(SignUpResendRequest(token))
 
@@ -116,17 +110,20 @@ class RegistrationRepositoryImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
         .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
-
     override fun signOut(): Flow<Result<LogOutResponse>> = flow {
-        val response = registrationApi.signOut()
+        val response = registrationApi.signOut(
+            mapOf(Pair("Authorization", "Bearer ${sharedPreferencesHelper.accessToken()}"))
+        )
 
         if (response.isSuccessful && response.body() != null) {
+            sharedPreferencesHelper.clear()
             emit(Result.success(response.body()!!))
         } else {
-            emit(Result.failure(Exception("")))
+            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            emit(Result.failure(Exception(data.message)))
         }
     }.flowOn(Dispatchers.IO)
-    // .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
     // sharedPreference -> save and get data
     override fun phoneNumber(phoneNumber: String) = sharedPreferencesHelper.phoneNumber(phoneNumber)

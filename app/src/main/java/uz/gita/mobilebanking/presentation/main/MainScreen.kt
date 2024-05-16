@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
-import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.main.components.CashBack
 import uz.gita.mobilebanking.presentation.main.components.Exchange
 import uz.gita.mobilebanking.presentation.main.components.FillTransactPay
@@ -38,8 +37,8 @@ import uz.gita.mobilebanking.presentation.main.components.MyDebt
 import uz.gita.mobilebanking.presentation.main.components.MyHome
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.main.components.UserBalanceWithEye
+import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.logger
 
 class MainScreen : Screen {
@@ -47,6 +46,9 @@ class MainScreen : Screen {
     override fun Content() {
         MobileBankingTheme {
             val viewModel: MainContract.Model = getViewModel<MainModel>()
+
+            viewModel.onEventDispatcher(MainContract.Intent.Init)
+
             MainContent(
                 uiState = viewModel.collectAsState().value,
                 onEventDispatcher = viewModel::onEventDispatcher
@@ -91,7 +93,7 @@ private fun MainContent(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(mainBgLight)
+                .background(MainBgLight)
                 .padding(it)
         ) {
             item {
@@ -118,11 +120,13 @@ private fun MainContent(
                         .padding(top = 12.dp),
                     balance = "0",
                     cardNumber = "3600",
-                    onClickWhatIsIt = { },
+                    onClickWhatIsIt = {
+                        onEventDispatcher(MainContract.Intent.OpenWhatIsIt)
+                    },
                     onClickItem = { },
                     onClickFill = { },
                     onClickTransact = { },
-                    onClickPay = { }
+                    onClickPay = { },
                 )
             }
 
@@ -147,6 +151,8 @@ private fun MainContent(
                         .height(220.dp)
                 ) {
 
+                    logger("MAIN UISTATE CARDS SIZE: " + uiState.cards.size.toString())
+
                     when (uiState.cards.size) {
                         0 -> MyCardsEmpty(
                             Modifier.weight(1f),
@@ -157,7 +163,7 @@ private fun MainContent(
                             modifier = Modifier.weight(1f),
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickCard = { },
-                            card = CardData("", "", "", "")
+                            card = uiState.cards[0]
                         )
 
                         2 -> MyCardsTwoCards(
@@ -167,8 +173,8 @@ private fun MainContent(
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickFrontCard = {},
                             onClickBackCard = {},
-                            frontCard = CardData("", "", "", ""),
-                            backCard = CardData("", "", "", ""),
+                            frontCard = uiState.cards[0],
+                            backCard = uiState.cards[1],
                         )
 
                         else -> MyCardsMoreCards(
@@ -176,7 +182,7 @@ private fun MainContent(
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickFrontCard = { },
                             onClickBackCard = { },
-                            cards = listOf(CardData("", "", "", ""), CardData("", "", "", ""), CardData("", "", "", ""))
+                            cards = uiState.cards
                         )
                     }
 

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.grayIcon
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -49,7 +49,7 @@ fun AddTemplate(
                 modifier = Modifier
                     .size(32.dp)
                     .clip(CircleShape),
-                tint = grayIcon
+                tint = GrayIcon
             )
         }
 

@@ -51,6 +51,10 @@ class AuthModel @Inject constructor(
             }
 
             is AuthContract.Intent.GetLanguage -> {}
+
+            is AuthContract.Intent.OnClickOffer -> {
+                postSideEffect(AuthContract.SideEffect.OpenOffer)
+            }
         }
     }
 

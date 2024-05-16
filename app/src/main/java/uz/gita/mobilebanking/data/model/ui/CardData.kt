@@ -5,4 +5,5 @@ data class CardData(
     val expiredYear: String,
     val expiredMonth: String,
     val name: String,
+    val money : String,
 )

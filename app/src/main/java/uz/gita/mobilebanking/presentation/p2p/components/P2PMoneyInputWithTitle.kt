@@ -25,7 +25,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -36,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.textColor
-import uz.gita.mobilebanking.ui.theme.textColorLight
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
 fun P2PMoneyInputWithTitle(
@@ -59,7 +58,7 @@ fun P2PMoneyInputWithTitle(
     ) {
 
         Column(modifier = Modifier.weight(1f)) {
-            TextNormal(text = stringResource(id = R.string.you_are_transfering), color = textColorLight)
+            TextNormal(text = stringResource(id = R.string.you_are_transfering), color = TextColorLight)
 
             BasicTextField(
                 value = value.trim(),
@@ -88,7 +87,7 @@ fun P2PMoneyInputWithTitle(
                     .clickable {
                         value = ""
                     },
-                tint = textColorLight
+                tint = TextColorLight
             )
         }
     }

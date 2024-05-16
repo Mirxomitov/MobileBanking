@@ -1,15 +1,21 @@
 package uz.gita.mobilebanking.di
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
+import uz.gita.mobilebanking.data.source.remote.TokenAuthenticator
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
 import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -19,9 +25,15 @@ class NetworkModule {
     fun provideGson(): Gson = Gson()
 
     @[Provides Singleton]
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(
+        @ApplicationContext context: Context,
+        sharedPreferenceHelper: SharedPreferenceHelper,
+        cardApi: Provider<CardApi>
+    ): OkHttpClient {
         return OkHttpClient
             .Builder()
+            .addInterceptor(ChuckerInterceptor(context = context))
+            .addInterceptor(TokenAuthenticator(sharedPreferenceHelper, cardApi))
             .build()
     }
 
@@ -38,6 +50,6 @@ class NetworkModule {
         retrofit.create(RegistrationApi::class.java)
 
     @[Provides Singleton]
-    fun provedCardApi(retrofit: Retrofit): CardApi =
+    fun provideCardApi(retrofit: Retrofit): CardApi =
         retrofit.create(CardApi::class.java)
 }

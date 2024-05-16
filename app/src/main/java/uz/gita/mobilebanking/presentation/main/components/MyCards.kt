@@ -37,10 +37,11 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 import uz.gita.mobilebanking.ui.theme.CardColor
+import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.mainBgLight
 import uz.gita.mobilebanking.utils.angledGradientBackground
+import uz.gita.mobilebanking.utils.toValue
 
 @Composable
 fun MyCardsEmpty(
@@ -135,7 +136,7 @@ fun MyCardsOneCard(
                         shape = RoundedCornerShape(16.dp),
                         ambientColor = ShadowColorCard,
                     )
-                    .background(mainBgLight)
+                    .background(MainBgLight)
 
             ) {
                 Box(
@@ -264,7 +265,15 @@ fun MyCardsMoreCards(
             .background(CardColor)
             .padding(8.dp)
     ) {
-        Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = onClickAddCard
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             TextBoldBlack(
                 modifier = Modifier.padding(2.dp),
                 text = "Kartalarim",
@@ -297,11 +306,6 @@ fun MyCardsMoreCards(
             modifier = Modifier
                 .padding(top = 12.dp)
                 .height(160.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                    onClick = onClickAddCard
-                )
         ) {
             ItemCard(
                 modifier = Modifier
@@ -334,11 +338,12 @@ fun MyCardsMoreCards(
 
 @Composable
 private fun ItemCard(
-    modifier: Modifier = Modifier, cardData: CardData
+    modifier: Modifier = Modifier,
+    cardData: CardData
 ) {
     val bankImageID = R.drawable.logo_tbc
     val typeImageID = R.drawable.uzcard_logo
-    val money = "166 807"
+    val money = cardData.money
     val type = "Uzcard"
 
     Column(
@@ -355,7 +360,6 @@ private fun ItemCard(
     ) {
         Box(
             Modifier.fillMaxWidth()
-
         ) {
 
             Image(
@@ -384,10 +388,10 @@ private fun ItemCard(
             Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
         ) {
             TextBold(
-                text = money, fontSize = 18.sp, color = Color.White
+                text = money.toValue(), fontSize = 14.sp, color = Color.White
             )
             TextBold(
-                text = " " + stringResource(id = R.string.som), fontSize = 18.sp, color = Color(0x80FFFFFF)
+                text = " " + stringResource(id = R.string.som), fontSize = 14.sp, color = Color(0x80FFFFFF)
             )
         }
 
@@ -402,17 +406,7 @@ private fun ItemCard(
         }
     }
 }
-//
-//@Preview
-//@Composable
-//fun OnePreview() {
-//    MyCardsOneCard(modifier = Modifier, onClickAddCard = {}, onClickCard = {}, card = CardData(
-//        "", "", "", ""
-//    )
-//    )
-//}
-//
-//
+
 @Preview
 @Composable
 fun TwoCardsPreview() {
@@ -422,10 +416,10 @@ fun TwoCardsPreview() {
         onClickFrontCard = {},
         onClickBackCard = {},
         frontCard = CardData(
-            "", "", "", ""
+            "", "", "", "", ""
         ),
         backCard = CardData(
-            "", "", "", ""
+            "", "", "", "", ""
         ),
     )
 }
@@ -437,10 +431,10 @@ fun MoreCardsPreview() {
         onClickFrontCard = {},
         onClickBackCard = {},
         cards = listOf(
-            CardData("", "", "", ""),
-            CardData("", "", "", ""),
-            CardData("", "", "", ""),
-            CardData("", "", "", ""),
+            CardData("", "", "", "", ""),
+            CardData("", "", "", "", ""),
+            CardData("", "", "", "", ""),
+            CardData("", "", "", "", ""),
         )
     )
 }

@@ -30,7 +30,7 @@ import uz.gita.mobilebanking.ui.components.buttons.RoundedButton
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.mainBgLight
+import uz.gita.mobilebanking.ui.theme.MainBgLight
 
 @Composable
 fun Exchange(
@@ -84,7 +84,7 @@ fun Exchange(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 1.dp)
-                            .background(mainBgLight)
+                            .background(MainBgLight)
                             .clip(CircleShape),
                         progress = 0f,
                     )

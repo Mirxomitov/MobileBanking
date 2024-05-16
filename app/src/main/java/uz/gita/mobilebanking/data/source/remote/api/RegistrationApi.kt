@@ -3,6 +3,7 @@ package uz.gita.mobilebanking.data.source.remote.api
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.HeaderMap
 import uz.gita.mobilebanking.data.model.request.SignInRequest
 import uz.gita.mobilebanking.data.model.request.SignInResendRequest
 import uz.gita.mobilebanking.data.model.request.SignInVerifyRequest
@@ -34,7 +35,6 @@ interface RegistrationApi {
     @POST("mobile-bank/v1/auth/sign-up/resend")
     suspend fun signUpResend(@Body data: SignUpResendRequest): Response<SignUpResponse>
 
-
     @POST("mobile-bank/v1/auth/sign-out")
-    suspend fun signOut() : Response<LogOutResponse>
+    suspend fun signOut(@HeaderMap headers: Map<String, String>) : Response<LogOutResponse>
 }

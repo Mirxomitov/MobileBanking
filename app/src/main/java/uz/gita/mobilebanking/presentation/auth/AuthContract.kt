@@ -15,11 +15,14 @@ interface AuthContract {
 
     sealed interface SideEffect {
         data class LanguageDialog(val isCurrentUzbek: Boolean) : SideEffect
+        data object OpenOffer : SideEffect
     }
 
     interface Intent {
         data object ChangeLanguageDialog : Intent
         data object GetLanguage : Intent
+        data object OnClickOffer : Intent
+
         data class SignIn(val phoneNumber: String) : Intent
         data class ChangeLanguage(val isUzbekLanguage: Boolean) : Intent
     }
