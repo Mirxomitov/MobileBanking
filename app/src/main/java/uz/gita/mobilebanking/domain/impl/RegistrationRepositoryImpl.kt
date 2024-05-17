@@ -29,6 +29,7 @@ class RegistrationRepositoryImpl @Inject constructor(
     private val gson: Gson
 ) : RegistrationRepository {
     override fun signIn(phoneNumber: String): Flow<Result<SignInResponse>> = flow {
+//        val response = registrationApi.singIn(SignInRequest("+998$phoneNumber", "qwerty"))
         val response = registrationApi.singIn(SignInRequest("+998$phoneNumber", phoneNumber))
 
         if (response.isSuccessful && response.body() != null) {

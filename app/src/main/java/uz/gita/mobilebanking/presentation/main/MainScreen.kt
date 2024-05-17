@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.presentation.main.components.CashBack
 import uz.gita.mobilebanking.presentation.main.components.Exchange
 import uz.gita.mobilebanking.presentation.main.components.FillTransactPay
@@ -48,7 +49,6 @@ class MainScreen : Screen {
             val viewModel: MainContract.Model = getViewModel<MainModel>()
 
             viewModel.onEventDispatcher(MainContract.Intent.Init)
-
             MainContent(
                 uiState = viewModel.collectAsState().value,
                 onEventDispatcher = viewModel::onEventDispatcher

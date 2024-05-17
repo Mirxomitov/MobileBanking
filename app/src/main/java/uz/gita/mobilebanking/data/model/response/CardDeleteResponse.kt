@@ -1,3 +1,7 @@
 package uz.gita.mobilebanking.data.model.response
 
-//data class CardDeleteResponse()
+import retrofit2.Response
+
+data class CardDeleteResponse(
+    val response: String,
+)

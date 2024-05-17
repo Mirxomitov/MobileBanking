@@ -5,6 +5,9 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.biometric.BiometricPrompt
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -13,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
+import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.utils.biometric.BiometricAuthenticator
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -153,3 +157,11 @@ fun String.toValue(): String {
 
     return builder.toString()
 }
+
+fun String.toFullMonth() =
+    if (this.length == 1) "0$this" else this
+
+fun CardData.toCardExpirationDate() = "${this.expiredMonth.toFullMonth()} / ${this.expiredYear.substring(2, 4)}"
+
+@Composable
+fun <T> previewStateOf(value: T) = remember { mutableStateOf(value) }

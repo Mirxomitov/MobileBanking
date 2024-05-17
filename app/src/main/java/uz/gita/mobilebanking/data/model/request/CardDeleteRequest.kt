@@ -1,3 +1,5 @@
 package uz.gita.mobilebanking.data.model.request
 
-//data class CardDeleteRequest()
+//data class CardDeleteRequest(
+// nothing
+//)

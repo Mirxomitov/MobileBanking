@@ -24,6 +24,7 @@ class AddCardModel @Inject constructor(
                 cardRepository.addCard(intent.cardNumber, intent.expirationDate)
                     .onEach {
                         it.onSuccess {
+                            addCardDirection.back()
                             logger("cardRepository.addCard.onSuccess")
                         }
                         it.onFailure {

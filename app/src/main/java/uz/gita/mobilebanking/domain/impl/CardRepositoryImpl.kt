@@ -21,26 +21,25 @@ import javax.inject.Inject
 class CardRepositoryImpl @Inject constructor(
     private val cardApi: CardApi,
     private val gson: Gson,
-    private val sharedPreferenceHelper: SharedPreferenceHelper
 ) : CardRepository {
     override fun addCard(cardNumber: String, expirationDate: String): Flow<Result<CardAddResponse>> = flow {
-        val response = cardApi.addCard(
-            CardAddRequest(
-                cardNumber,
-                expirationDate.substring(0, 2).toInt().toString(),
-                "20" + expirationDate.substring(3, 5),
-                cardNumber
-            )
+        val data = CardAddRequest(
+            cardNumber,
+            "20" + expirationDate.substring(2, 4),
+            expirationDate.substring(0, 2).toInt().toString(),
+            "Default"
         )
+
+        val response = cardApi.addCard(data)
 
         if (response.isSuccessful && response.body() != null) {
             emit(Result.success(response.body()!!))
         } else {
-            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
-            emit(Result.failure(Exception(data.message)))
+            val errorData = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            emit(Result.failure(Exception(errorData.message)))
         }
     }.flowOn(Dispatchers.IO)
-        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+//        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
 
     override fun getCards(): Flow<Result<List<CardData>>> = flow {
         logger("CardRepository.getCards.start")
@@ -49,6 +48,20 @@ class CardRepositoryImpl @Inject constructor(
         if (response.isSuccessful && response.body() != null) {
             val cards = response.body()!!
             emit(Result.success(cards.map { it.toCardData() }))
+        } else {
+            val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
+            logger("getCards.isFailure : $data")
+            emit(Result.failure(Exception(data.message)))
+        }
+    }.flowOn(Dispatchers.IO)
+        .catch { emit(Result.failure(Exception("Unknown exception try catch"))) }
+
+    override fun deleteCard(id: String): Flow<Result<Unit>> = flow {
+        val response = cardApi.deleteCard(id)
+
+        if (response.isSuccessful && response.body() != null) {
+            logger("CardRepository.deleteCard.success")
+            emit(Result.success(Unit))
         } else {
             val data = gson.fromJson(response.errorBody()!!.string(), ErrorResponse::class.java)
             logger("getCards.isFailure : $data")
