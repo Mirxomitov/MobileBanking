@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AddCardPreview">
-        <State />
-      </entry>
       <entry key="ContentPreview">
         <State />
       </entry>
@@ -12,6 +9,9 @@
         <State />
       </entry>
       <entry key="ReadCardNumberPreview">
+        <State />
+      </entry>
+      <entry key="TransactionsScreenPreview">
         <State />
       </entry>
       <entry key="app">

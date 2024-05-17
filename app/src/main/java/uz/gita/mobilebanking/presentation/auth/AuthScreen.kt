@@ -156,7 +156,6 @@ private fun AuthScreenContent(
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
             isEnabled = phone.length == 9,
-            containerColor = PrimaryColor,
             onClick = {
                 onEventDispatcher(AuthContract.Intent.SignIn(phone))
             },

@@ -16,7 +16,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.presentation.main.MainScreen
 import uz.gita.mobilebanking.presentation.payments.PaymentsScreen
-import uz.gita.mobilebanking.presentation.transactions.TransfersScreen
+import uz.gita.mobilebanking.presentation.transfers.TransfersScreen
 
 object MainTab : Tab {
     override val options: TabOptions

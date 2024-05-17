@@ -1,6 +1,6 @@
 package uz.gita.mobilebanking.data
 
-import uz.gita.mobilebanking.data.model.response.CardGetResponse
+import uz.gita.mobilebanking.data.model.response.card.CardGetResponse
 import uz.gita.mobilebanking.data.model.ui.CardData
 
 fun CardGetResponse.toCardData() =

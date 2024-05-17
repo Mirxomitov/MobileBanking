@@ -34,18 +34,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.textColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
+import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun P2PMoneyInputWithTitle(
     modifier: Modifier = Modifier,
-    onError: (Boolean) -> Unit
+    onError: (Boolean) -> Unit,
+    focusRequester: FocusRequester,
+    onValueChange: (String) -> Unit
 ) {
-    val focusRequester = remember { FocusRequester() } // isFocused
-    var value by remember {
-        mutableStateOf("0 so'm")
-    }
+
+    var value by remember { mutableStateOf("0 so'm") }
+    var isValueInputFocused by remember { mutableStateOf(true) }
 
     Row(
         modifier
@@ -61,15 +62,14 @@ fun P2PMoneyInputWithTitle(
             TextNormal(text = stringResource(id = R.string.you_are_transfering), color = TextColorLight)
 
             BasicTextField(
-                value = value.trim(),
+                value = value,
                 onValueChange = {
                     value = it.trim()
+                    onValueChange(value)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .onFocusChanged {
-
-                    },
+                    .onFocusChanged { isValueInputFocused = it.isFocused },
                 keyboardActions = KeyboardActions(onDone = { focusRequester.freeFocus() }),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 textStyle = TextStyle(color = textColor, fontSize = 24.sp),
@@ -77,16 +77,14 @@ fun P2PMoneyInputWithTitle(
             )
         }
 
-        if (value != "") {
+        if (value.isNotEmpty() && isValueInputFocused) {
             Icon(
                 painter = painterResource(id = R.drawable.search_clear),
                 contentDescription = null,
                 modifier = Modifier
                     .padding(4.dp)
                     .size(24.dp)
-                    .clickable {
-                        value = ""
-                    },
+                    .clickable { value = "" },
                 tint = TextColorLight
             )
         }
@@ -99,7 +97,9 @@ private fun Preview() {
     P2PMoneyInputWithTitle(
         onError = {},
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
+        focusRequester = remember { FocusRequester() },
+        onValueChange = {}
     )
 }
 

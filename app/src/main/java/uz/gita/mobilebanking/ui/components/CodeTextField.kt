@@ -146,7 +146,7 @@ private fun SearchComponentPreview() {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        NextButton(modifier = Modifier.fillMaxWidth(), isEnabled = false, containerColor = grayColor, onClick = {})
+        NextButton(modifier = Modifier.fillMaxWidth(), isEnabled = false,  onClick = {})
     }
 }
 

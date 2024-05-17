@@ -7,11 +7,11 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import uz.gita.mobilebanking.data.model.request.CardAddRequest
+import uz.gita.mobilebanking.data.model.request.card.CardAddRequest
 import uz.gita.mobilebanking.data.model.request.UpdateTokenRequest
-import uz.gita.mobilebanking.data.model.response.CardAddResponse
-import uz.gita.mobilebanking.data.model.response.CardDeleteResponse
-import uz.gita.mobilebanking.data.model.response.CardGetResponse
+import uz.gita.mobilebanking.data.model.response.card.CardAddResponse
+import uz.gita.mobilebanking.data.model.response.card.CardDeleteResponse
+import uz.gita.mobilebanking.data.model.response.card.CardGetResponse
 import uz.gita.mobilebanking.data.model.response.UpdateTokenResponse
 
 interface CardApi {

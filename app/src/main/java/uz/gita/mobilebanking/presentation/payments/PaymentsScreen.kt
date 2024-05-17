@@ -61,9 +61,9 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.payments.components.ItemPaySmall
 import uz.gita.mobilebanking.presentation.payments.components.TrainTicket
-import uz.gita.mobilebanking.presentation.transactions.components.AddTemplate
-import uz.gita.mobilebanking.presentation.transactions.components.ItemSelfTransfer
-import uz.gita.mobilebanking.presentation.transactions.components.Template
+import uz.gita.mobilebanking.presentation.transfers.components.AddTemplate
+import uz.gita.mobilebanking.presentation.transfers.components.ItemSelfTransfer
+import uz.gita.mobilebanking.presentation.transfers.components.Template
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
@@ -94,9 +94,9 @@ fun PaymentContent() {
             .background(CardColor)
             .imePadding(),
         topBar = {
-            Row(
-                modifier = Modifier.wrapContentHeight()
-            ) {
+                Row(
+                    modifier = Modifier.wrapContentHeight()
+                ) {
                 TextBold(
                     modifier = Modifier.padding(12.dp),
                     text = stringResource(id = R.string.payment),

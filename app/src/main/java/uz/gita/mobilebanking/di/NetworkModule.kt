@@ -15,6 +15,7 @@ import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.TokenAuthenticator
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
 import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
+import uz.gita.mobilebanking.data.source.remote.api.TransferApi
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -52,4 +53,8 @@ class NetworkModule {
     @[Provides Singleton]
     fun provideCardApi(retrofit: Retrofit): CardApi =
         retrofit.create(CardApi::class.java)
+
+    @[Provides Singleton]
+    fun provideTransferApi(retrofit: Retrofit): TransferApi =
+        retrofit.create(TransferApi::class.java)
 }

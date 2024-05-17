@@ -9,7 +9,7 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.response.SignUpResponse
+import uz.gita.mobilebanking.data.model.response.auth.SignUpResponse
 import uz.gita.mobilebanking.domain.RegistrationRepository
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject

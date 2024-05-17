@@ -28,8 +28,8 @@ import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirecti
 import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirectionImpl
 import uz.gita.mobilebanking.presentation.splash.SplashDirection
 import uz.gita.mobilebanking.presentation.splash.SplashDirectionImpl
-import uz.gita.mobilebanking.presentation.transactions.TransferDirection
-import uz.gita.mobilebanking.presentation.transactions.TransferDirectionImpl
+import uz.gita.mobilebanking.presentation.transfers.TransferDirection
+import uz.gita.mobilebanking.presentation.transfers.TransferDirectionImpl
 import uz.gita.mobilebanking.presentation.verify.VerifyDirection
 import uz.gita.mobilebanking.presentation.verify.VerifyDirectionImpl
 

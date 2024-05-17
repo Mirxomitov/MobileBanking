@@ -21,16 +21,15 @@ class AddCardModel @Inject constructor(
             AddCardContract.Intent.ToScanCardScreen -> intent { addCardDirection.toScanCardScreen() }
             AddCardContract.Intent.Back -> intent { addCardDirection.back() }
             is AddCardContract.Intent.AddCard -> {
-                cardRepository.addCard(intent.cardNumber, intent.expirationDate)
-                    .onEach {
-                        it.onSuccess {
-                            addCardDirection.back()
-                            logger("cardRepository.addCard.onSuccess")
-                        }
-                        it.onFailure {
-                            logger("cardRepository.addCard.onFailure ${it.message}")
-                        }
-                    }.launchIn(viewModelScope)
+                cardRepository.addCard(intent.cardNumber, intent.expirationDate).onEach {
+                    it.onSuccess {
+                        addCardDirection.back()
+                        logger("cardRepository.addCard.onSuccess")
+                    }
+                    it.onFailure {
+                        logger("cardRepository.addCard.onFailure ${it.message}")
+                    }
+                }.launchIn(viewModelScope)
             }
 
             is AddCardContract.Intent.SaveCard -> {

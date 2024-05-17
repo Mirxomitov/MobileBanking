@@ -2,6 +2,7 @@ package uz.gita.mobilebanking.presentation.p2p
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +48,10 @@ private fun P2PContent(
     uiState: State<P2PContract.UIState>,
     onEventDispatcher: (P2PContract.Intent) -> Unit
 ) {
-    var isInputIncorrect by remember { mutableStateOf(false) }
+    val isInputIncorrect by remember { mutableStateOf(false) }
+    val focusRequester = remember { FocusRequester() }
+    var isTransferButtonEnabled by remember { mutableStateOf(true) }
+
     Column(
         Modifier
             .fillMaxSize()
@@ -68,9 +73,12 @@ private fun P2PContent(
             letterSpacing = 0.8.sp
         )
 
-        CardP2PSendItem(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 2.dp), onClickItem = {})
+        CardP2PSendItem(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 2.dp),
+            onClickItem = {}
+        )
 
         TextBoldBlack(
             text = stringResource(R.string.to),
@@ -79,13 +87,22 @@ private fun P2PContent(
             letterSpacing = 0.8.sp
         )
 
-        CardP2PWithCardNumber(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp),
+        CardP2PWithCardNumber(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
             onClickItem = {}
         )
 
-        P2PMoneyInputWithTitle(modifier = Modifier.padding(top = 24.dp)) { isInputIncorrect = it }
+        P2PMoneyInputWithTitle(
+            modifier = Modifier
+                .padding(top = 24.dp),
+            onError = {},
+            focusRequester = focusRequester,
+            onValueChange = {
+                isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
+            }
+        )
 
         if (isInputIncorrect) {
             TextNormal(modifier = Modifier.padding(8.dp), text = stringResource(R.string.commission_0))
@@ -93,12 +110,13 @@ private fun P2PContent(
             TextNormal(modifier = Modifier.padding(8.dp), text = stringResource(R.string.insufficient_funds))
         }
 
+        Spacer(modifier = Modifier.weight(1f))
+
+
         NextButton(
             modifier = Modifier.fillMaxWidth(),
-            isEnabled = false,
-            onClick = {
-                onEventDispatcher(P2PContract.Intent.Pay)
-            }
+            isEnabled = isTransferButtonEnabled,
+            onClick = { onEventDispatcher(P2PContract.Intent.Pay) }
         )
     }
 }
