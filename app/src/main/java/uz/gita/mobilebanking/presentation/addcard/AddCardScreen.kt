@@ -2,7 +2,6 @@
 
 package uz.gita.mobilebanking.presentation.addcard
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -19,8 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -34,13 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -58,12 +53,12 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.presentation.addcard.components.AddCardButton
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.dialogs.CameraPermissionRationaleDialog
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.errorColor2
 import uz.gita.mobilebanking.ui.theme.grayColor
 import uz.gita.mobilebanking.utils.angledGradientBackground
@@ -99,6 +94,7 @@ private fun AddCardContent(
 ) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
+
     var cardNumber by remember { mutableStateOf(uiState.cardNumber) }
     var expirationDate by remember { mutableStateOf(uiState.expirationDate) }
 
@@ -108,8 +104,6 @@ private fun AddCardContent(
 
     val bottomSheetNavigator = LocalBottomSheetNavigator.current
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
-    val context = LocalContext.current
-
 
     Scaffold(containerColor = MainBgLight, topBar = {
         TopAppBar(
@@ -307,45 +301,6 @@ fun AddCardPreview() {
     AddCardContent(AddCardContract.UIState(), {})
 }
 
-@Composable
-fun AddCardButton(
-    modifier: Modifier = Modifier,
-    isEnabled: Boolean,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .shadow(
-                elevation = 1.dp,
-                shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp),
-                ambientColor = ShadowColorCard
-            )
-            .background(Color.White),
-        contentAlignment = Alignment.Center
-    ) {
-        Button(
-            modifier = Modifier
-                .padding(12.dp)
-                .fillMaxWidth(),
-            enabled = isEnabled,
-            onClick = onClick,
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF4CAF50),
-                contentColor = Color.White,
-                disabledContainerColor = Color(0xFFB1E0B2),
-                disabledContentColor = Color.White,
-            )
-        ) {
-            TextNormal(
-                modifier = Modifier.padding(6.dp),
-                text = stringResource(id = R.string.txt_continue),
-                fontSize = 14.sp,
-                color = Color.White
-            )
-        }
-    }
-}
 //
 //@Composable
 //@Preview

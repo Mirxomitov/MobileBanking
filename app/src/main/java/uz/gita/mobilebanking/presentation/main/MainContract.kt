@@ -18,5 +18,6 @@ interface MainContract {
         data object OpenAddCardScreen : Intent
         data object OpenWhatIsIt : Intent
         data object Init : Intent
+        data object OpenMyCardsScreen : Intent
     }
 }

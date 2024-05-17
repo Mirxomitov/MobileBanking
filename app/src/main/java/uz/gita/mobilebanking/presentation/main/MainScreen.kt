@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,7 +26,6 @@ import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
-import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.presentation.main.components.CashBack
 import uz.gita.mobilebanking.presentation.main.components.Exchange
 import uz.gita.mobilebanking.presentation.main.components.FillTransactPay
@@ -40,7 +40,7 @@ import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.main.components.UserBalanceWithEye
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.previewStateOf
 
 class MainScreen : Screen {
     @Composable
@@ -50,7 +50,7 @@ class MainScreen : Screen {
 
             viewModel.onEventDispatcher(MainContract.Intent.Init)
             MainContent(
-                uiState = viewModel.collectAsState().value,
+                uiState = viewModel.collectAsState(),
                 onEventDispatcher = viewModel::onEventDispatcher
             )
         }
@@ -59,7 +59,7 @@ class MainScreen : Screen {
 
 @Composable
 private fun MainContent(
-    uiState: MainContract.UIState,
+    uiState: State<MainContract.UIState>,
     onEventDispatcher: (MainContract.Intent) -> Unit
 ) {
     val context = LocalContext.current
@@ -103,7 +103,6 @@ private fun MainContent(
                         .fillMaxWidth(),
                     balance = if (isVisibleMoney) "1 192 891" else "• •••",
                     onClickEye = {
-                        logger("MainScreen.changing isVisibleMoney =$isVisibleMoney")
                         isVisibleMoney = !isVisibleMoney
                     },
                     isVisible = isVisibleMoney
@@ -151,9 +150,8 @@ private fun MainContent(
                         .height(220.dp)
                 ) {
 
-                    logger("MAIN UISTATE CARDS SIZE: " + uiState.cards.size.toString())
 
-                    when (uiState.cards.size) {
+                    when (uiState.value.cards.size) {
                         0 -> MyCardsEmpty(
                             Modifier.weight(1f),
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) }
@@ -163,7 +161,7 @@ private fun MainContent(
                             modifier = Modifier.weight(1f),
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickCard = { },
-                            card = uiState.cards[0]
+                            card = uiState.value.cards[0]
                         )
 
                         2 -> MyCardsTwoCards(
@@ -173,16 +171,16 @@ private fun MainContent(
                             onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
                             onClickFrontCard = {},
                             onClickBackCard = {},
-                            frontCard = uiState.cards[0],
-                            backCard = uiState.cards[1],
+                            frontCard = uiState.value.cards[0],
+                            backCard = uiState.value.cards[1],
                         )
 
                         else -> MyCardsMoreCards(
                             modifier = Modifier.weight(1f),
-                            onClickAddCard = { onEventDispatcher(MainContract.Intent.OpenAddCardScreen) },
-                            onClickFrontCard = { },
-                            onClickBackCard = { },
-                            cards = uiState.cards
+                            onClickShowCards = { onEventDispatcher(MainContract.Intent.OpenMyCardsScreen) },
+                            onClickFrontCard = {},
+                            onClickBackCard = {},
+                            cards = uiState.value.cards
                         )
                     }
 
@@ -226,5 +224,5 @@ private fun MainContent(
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
-    MainContent(MainContract.UIState(), {})
+    MainContent(previewStateOf(value = MainContract.UIState()), {})
 }

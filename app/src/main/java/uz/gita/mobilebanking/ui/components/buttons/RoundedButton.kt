@@ -8,13 +8,15 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
+import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 
 @Composable
 fun RoundedButton(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     text: String,
     ) {
@@ -26,5 +28,13 @@ fun RoundedButton(
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
     ) {
         TextBoldBlack(modifier = Modifier.padding(2.dp), text = text, fontSize = 18.sp)
+    }
+}
+
+@Preview
+@Composable
+fun RoundedButtonPreview() {
+    MobileBankingTheme {
+        RoundedButton(modifier = Modifier, onClick = { }, text = "Hello")
     }
 }

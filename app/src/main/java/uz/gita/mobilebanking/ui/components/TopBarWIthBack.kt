@@ -21,8 +21,8 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 
 @Composable
 fun TopBarWithBack(
-    modifier: Modifier,
-    @DrawableRes icon: Int,
+    modifier: Modifier = Modifier,
+    @DrawableRes icon: Int = R.drawable.ic_back,
     title: String,
     onClickIcon: () -> Unit
 ) {

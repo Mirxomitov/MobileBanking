@@ -10,6 +10,8 @@ import uz.gita.mobilebanking.presentation.auth.AuthDirection
 import uz.gita.mobilebanking.presentation.auth.AuthDirectionImpl
 import uz.gita.mobilebanking.presentation.main.MainDirection
 import uz.gita.mobilebanking.presentation.main.MainDirectionImpl
+import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirection
+import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirectionImpl
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirection
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirectionImpl
 import uz.gita.mobilebanking.presentation.paynet_card.PaynetCardDirection
@@ -73,5 +75,8 @@ interface DirectionModule {
 
     @Binds
     fun paynetCardDirection(impl: PaynetCardDirectionImpl): PaynetCardDirection
+
+    @Binds
+    fun myCardsDirection(impl: MyCardsDirectionImpl): MyCardsDirection
 
 }

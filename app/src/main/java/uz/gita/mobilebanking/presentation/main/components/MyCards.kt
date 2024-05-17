@@ -250,7 +250,7 @@ fun MyCardsTwoCards(
 @Composable
 fun MyCardsMoreCards(
     modifier: Modifier = Modifier,
-    onClickAddCard: () -> Unit,
+    onClickShowCards: () -> Unit,
     onClickFrontCard: () -> Unit,
     onClickBackCard: () -> Unit,
     cards: List<CardData>
@@ -270,7 +270,7 @@ fun MyCardsMoreCards(
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
-                    onClick = onClickAddCard
+                    onClick = onClickShowCards
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -315,8 +315,8 @@ fun MyCardsMoreCards(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
-                        onClick = onClickBackCard
-                    ), cardData = cards[1]
+                        onClick = onClickFrontCard
+                    ), cardData = cards[0]
             )
 
             ItemCard(
@@ -328,8 +328,8 @@ fun MyCardsMoreCards(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
-                        onClick = onClickFrontCard
-                    ), cardData = cards[2]
+                        onClick = onClickBackCard
+                    ), cardData = cards[1]
             )
         }
 
@@ -427,7 +427,7 @@ fun TwoCardsPreview() {
 @[Composable Preview]
 fun MoreCardsPreview() {
     MyCardsMoreCards(
-        onClickAddCard = {},
+        onClickShowCards = {},
         onClickFrontCard = {},
         onClickBackCard = {},
         cards = listOf(

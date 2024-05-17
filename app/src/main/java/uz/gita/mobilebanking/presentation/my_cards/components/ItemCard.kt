@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +18,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
@@ -48,7 +50,8 @@ fun ItemCard(
             .angledGradientBackground(
                 colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
             )
-            .padding(8.dp), verticalArrangement = Arrangement.SpaceBetween
+            .padding(8.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Icon(
@@ -99,4 +102,10 @@ fun ItemCard(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ItemCardPreview() {
+    ItemCard(cardData = CardData("0005", "2028", "6", "Personal", "10000000"))
 }

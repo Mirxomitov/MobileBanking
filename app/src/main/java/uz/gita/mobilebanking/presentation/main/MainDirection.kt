@@ -1,6 +1,8 @@
 package uz.gita.mobilebanking.presentation.main
 
+import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.addcard.AddCardScreen
+import uz.gita.mobilebanking.presentation.my_cards.MyCardsScreen
 import uz.gita.mobilebanking.presentation.paynet_card.PaynetCard
 import uz.gita.mobilebanking.presentation.profile.ProfileScreen
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
@@ -12,6 +14,7 @@ interface MainDirection {
     suspend fun toProfileScreen()
     suspend fun toAddCardScreen()
     suspend fun toWhatIsIt()
+    suspend fun toMyCardsScreen(listOfCards : List<CardData>)
 }
 
 @Singleton
@@ -28,5 +31,9 @@ class MainDirectionImpl @Inject constructor(
 
     override suspend fun toWhatIsIt() {
         appNavigator.addScreen(PaynetCard())
+    }
+
+    override suspend fun toMyCardsScreen(listOfCards : List<CardData>) {
+        appNavigator.addScreen(MyCardsScreen(listOfCards))
     }
 }

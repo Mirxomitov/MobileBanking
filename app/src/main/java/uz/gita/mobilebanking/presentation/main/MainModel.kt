@@ -26,7 +26,7 @@ class MainModel @Inject constructor(
                 intent { reduce { MainContract.UIState(it) } }
             }
             it.onFailure {
-                container.stateFlow.value.cards = emptyList()
+                intent { reduce { MainContract.UIState(emptyList()) } }
             }
         }.launchIn(viewModelScope)
     }
@@ -37,6 +37,7 @@ class MainModel @Inject constructor(
             MainContract.Intent.OpenAddCardScreen -> direction.toAddCardScreen()
             MainContract.Intent.OpenWhatIsIt -> direction.toWhatIsIt()
             MainContract.Intent.Init -> getCards()
+            MainContract.Intent.OpenMyCardsScreen -> direction.toMyCardsScreen(container.stateFlow.value.cards)
         }
     }
 

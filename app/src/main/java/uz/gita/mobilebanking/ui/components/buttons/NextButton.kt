@@ -21,7 +21,6 @@ import uz.gita.mobilebanking.ui.theme.PrimaryContainer
 fun NextButton(
     modifier: Modifier,
     isEnabled: Boolean,
-    containerColor: Color,
     onClick: () -> Unit,
 ) {
 
@@ -31,7 +30,7 @@ fun NextButton(
         enabled = isEnabled,
         colors = ButtonDefaults
             .buttonColors(
-                containerColor = containerColor,
+                containerColor = PrimaryColor,
                 disabledContainerColor = PrimaryContainer,
             )
     ) {
@@ -52,7 +51,6 @@ fun NextButtonPrev() {
         modifier = Modifier
             .fillMaxWidth(),
         isEnabled = true,
-        containerColor = PrimaryColor,
         onClick = {},
     )
 }
