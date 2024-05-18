@@ -8,12 +8,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransferModel @Inject constructor(
-    private val direction: TransferDirection
+    private val direction: TransferDirection,
+
 ) : TransferContract.Model, ViewModel() {
     override fun onEventDispatchers(intent: TransferContract.Intent) {
         when (intent) {
-            TransferContract.Intent.ToP2PScreen -> {
-                intent { direction.toP2PScreen() }
+            TransferContract.Intent.ToP2PScreen ->  intent { direction.toP2PScreen() }
+            is TransferContract.Intent.GetUserByCardNumber -> {
+
             }
         }
     }

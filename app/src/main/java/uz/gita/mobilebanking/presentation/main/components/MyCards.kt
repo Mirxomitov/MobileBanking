@@ -416,10 +416,10 @@ fun TwoCardsPreview() {
         onClickFrontCard = {},
         onClickBackCard = {},
         frontCard = CardData(
-            "", "", "", "", ""
+            "", "", "", "", "", ""
         ),
         backCard = CardData(
-            "", "", "", "", ""
+            "", "", "", "", "", ""
         ),
     )
 }
@@ -431,10 +431,10 @@ fun MoreCardsPreview() {
         onClickFrontCard = {},
         onClickBackCard = {},
         cards = listOf(
-            CardData("", "", "", "", ""),
-            CardData("", "", "", "", ""),
-            CardData("", "", "", "", ""),
-            CardData("", "", "", "", ""),
+            CardData("", "", "", "", "", ""),
+            CardData("", "", "", "", "", ""),
+            CardData("", "", "", "", "", ""),
+            CardData("", "", "", "", "", ""),
         )
     )
 }

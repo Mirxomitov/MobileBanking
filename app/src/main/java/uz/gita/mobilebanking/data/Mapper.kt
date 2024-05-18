@@ -5,6 +5,7 @@ import uz.gita.mobilebanking.data.model.ui.CardData
 
 fun CardGetResponse.toCardData() =
     CardData(
+        id = this.id.toString(),
         pan = this.pan,
         expiredYear = "${this.expiredYear}",
         expiredMonth = "${this.expiredMonth}",

@@ -8,26 +8,23 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.CardRepository
+import uz.gita.mobilebanking.domain.use_case.AddCardUseCase
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
 class AddCardModel @Inject constructor(
     private val addCardDirection: AddCardDirection,
-    private val cardRepository: CardRepository,
+    private val addCardUseCase: AddCardUseCase
 ) : ViewModel(), AddCardContract.Model {
     override fun onEventDispatchers(intent: AddCardContract.Intent) {
         when (intent) {
             AddCardContract.Intent.ToScanCardScreen -> intent { addCardDirection.toScanCardScreen() }
             AddCardContract.Intent.Back -> intent { addCardDirection.back() }
             is AddCardContract.Intent.AddCard -> {
-                cardRepository.addCard(intent.cardNumber, intent.expirationDate).onEach {
+                addCardUseCase(intent.cardNumber, intent.expirationDate).onEach {
                     it.onSuccess {
                         addCardDirection.back()
-                        logger("cardRepository.addCard.onSuccess")
-                    }
-                    it.onFailure {
-                        logger("cardRepository.addCard.onFailure ${it.message}")
                     }
                 }.launchIn(viewModelScope)
             }
@@ -35,8 +32,6 @@ class AddCardModel @Inject constructor(
             is AddCardContract.Intent.SaveCard -> {
                 container.stateFlow.value.cardNumber = intent.cardNumber
                 container.stateFlow.value.expirationDate = intent.expirationDate
-
-                logger("AddCardModel.AddCardContract.Intent.SaveCard: ${intent.cardNumber} ${intent.expirationDate}")
             }
         }
     }

@@ -107,5 +107,5 @@ fun ItemCard(
 @Preview
 @Composable
 fun ItemCardPreview() {
-    ItemCard(cardData = CardData("0005", "2028", "6", "Personal", "10000000"))
+    ItemCard(cardData = CardData("", "0005", "2028", "6", "Personal", "10000000"))
 }

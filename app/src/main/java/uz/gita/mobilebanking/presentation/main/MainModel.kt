@@ -8,21 +8,20 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.CardRepository
+import uz.gita.mobilebanking.domain.use_case.GetCardsUseCase
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
 class MainModel @Inject constructor(
-    private val cardRepository: CardRepository,
+    private val getCardsUseCase: GetCardsUseCase,
     private val direction: MainDirection,
 ) : MainContract.Model, ViewModel() {
 
     private fun getCards() {
-        cardRepository.getCards().onEach {
+        getCardsUseCase().onEach {
             it.onSuccess {
                 logger("MainModel.getCards.success ${it.size} $it")
-                //container.stateFlow.value.cards = it
                 intent { reduce { MainContract.UIState(it) } }
             }
             it.onFailure {

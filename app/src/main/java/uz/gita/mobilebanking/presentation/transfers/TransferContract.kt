@@ -10,6 +10,8 @@ interface TransferContract {
     data object UIState
     sealed interface SideEffect
     sealed interface Intent {
+        data class GetUserByCardNumber(val searchText: String,) : Intent
         data object ToP2PScreen : Intent
+
     }
 }

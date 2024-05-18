@@ -46,7 +46,7 @@ class P2PScreen : Screen {
 @Composable
 private fun P2PContent(
     uiState: State<P2PContract.UIState>,
-    onEventDispatcher: (P2PContract.Intent) -> Unit
+    onEventDispatcher: (P2PContract.Intent) -> Unit,
 ) {
     val isInputIncorrect by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
@@ -61,9 +61,7 @@ private fun P2PContent(
         TopBarWithBack(
             modifier = Modifier,
             title = stringResource(R.string.transfer_to_card),
-            onClickIcon = {
-                onEventDispatcher(P2PContract.Intent.Back)
-            }
+            onClickIcon = { onEventDispatcher(P2PContract.Intent.Back) }
         )
 
         TextBoldBlack(
@@ -100,7 +98,10 @@ private fun P2PContent(
             onError = {},
             focusRequester = focusRequester,
             onValueChange = {
-                isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
+                try {
+                    isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
+                } catch (e: Exception) {
+                }
             }
         )
 
@@ -116,7 +117,15 @@ private fun P2PContent(
         NextButton(
             modifier = Modifier.fillMaxWidth(),
             isEnabled = isTransferButtonEnabled,
-            onClick = { onEventDispatcher(P2PContract.Intent.Pay) }
+            onClick = {
+                onEventDispatcher(
+                    P2PContract.Intent.Pay(
+                        senderId = "32",
+                        receiverPan = "0008000800080026",
+                        amount = 10_000
+                    )
+                )
+            }
         )
     }
 }

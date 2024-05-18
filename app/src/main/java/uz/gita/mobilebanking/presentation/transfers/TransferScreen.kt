@@ -43,7 +43,8 @@ class TransfersScreen : Screen {
 
 @Composable
 private fun TransactionsScreenContent(
-    uiState: State<TransferContract.UIState>, onEventDispatchers: (TransferContract.Intent) -> Unit
+    uiState: State<TransferContract.UIState>,
+    onEventDispatchers: (TransferContract.Intent) -> Unit,
 ) {
     var searchText by remember { mutableStateOf("") }
     var isSearchingStateActive by remember { mutableStateOf(false) }
@@ -72,7 +73,12 @@ private fun TransactionsScreenContent(
             SearchBar(modifier = Modifier.padding(horizontal = 12.dp),
                 onClickContacts = {},
                 onClickScan = {},
-                onValueChange = { searchText = it },
+                onValueChange = {
+                    searchText = it
+                    if (searchText.length == 16) {
+                       onEventDispatchers(TransferContract.Intent.GetUserByCardNumber(searchText))
+                    }
+                },
                 focusRequester = focusRequester,
                 onFocusChanged = {
                     isSearchBarFocused = it.isFocused

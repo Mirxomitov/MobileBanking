@@ -45,7 +45,7 @@ fun P2PMoneyInputWithTitle(
     onValueChange: (String) -> Unit
 ) {
 
-    var value by remember { mutableStateOf("0 so'm") }
+    var value by remember { mutableStateOf("0") }
     var isValueInputFocused by remember { mutableStateOf(true) }
 
     Row(

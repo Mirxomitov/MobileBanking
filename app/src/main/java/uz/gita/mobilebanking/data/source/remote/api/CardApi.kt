@@ -19,8 +19,8 @@ interface CardApi {
     suspend fun addCard(@Body data: CardAddRequest): Response<CardAddResponse>
     @GET("mobile-bank/v1/card")
     suspend fun getCards(): Response<List<CardGetResponse>>
-    @DELETE("mobile-bank/v1/card/{number}")
-    suspend fun deleteCard(@Path("number") cardNumber: String): Response<CardDeleteResponse>
+    @DELETE("mobile-bank/v1/card/{id}")
+    suspend fun deleteCard(@Path("id") id: String): Response<CardDeleteResponse>
     @POST("mobile-bank/v1/auth/update-token")
     fun refreshToken(@Body data: UpdateTokenRequest): Call<UpdateTokenResponse>
 }

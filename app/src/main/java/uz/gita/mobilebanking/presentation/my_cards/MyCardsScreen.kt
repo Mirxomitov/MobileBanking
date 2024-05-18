@@ -100,10 +100,10 @@ fun ContentPreview() {
         MyCardsContent(previewStateOf(
             MyCardsContract.UIState(
                 listOf(
-                    CardData("0005", "2028", "6", "Personal", "100000"),
-                    CardData("0004", "2028", "6", "Personal", "100000"),
-                    CardData("0004", "2028", "6", "Personal", "100000"),
-                    CardData("0004", "2028", "6", "Personal", "100000"),
+                    CardData("", "0005", "2028", "6", "Personal", "100000"),
+                    CardData("", "0004", "2028", "6", "Personal", "100000"),
+                    CardData("", "0004", "2028", "6", "Personal", "100000"),
+                    CardData("", "0004", "2028", "6", "Personal", "100000"),
                 )
             )
         ), {})
@@ -118,7 +118,7 @@ fun ItemCardPreview() {
             .fillMaxWidth()
             .height(200.dp),
         cardData = CardData(
-            "0005", "2028", "6", "Personal", "100000000"
+            "", "0005", "2028", "6", "Personal", "100000000"
         )
     )
 }

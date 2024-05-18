@@ -1,14 +1,11 @@
 package uz.gita.mobilebanking.data.source.remote
 
-import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import okhttp3.Route
 import uz.gita.mobilebanking.data.model.request.UpdateTokenRequest
 import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
-import uz.gita.mobilebanking.utils.logger
 import javax.inject.Provider
 
 class TokenAuthenticator(

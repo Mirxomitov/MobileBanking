@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -65,6 +66,7 @@ import uz.gita.mobilebanking.utils.angledGradientBackground
 import uz.gita.mobilebanking.utils.checkExpirationDateValidation
 import uz.gita.mobilebanking.utils.containsOnlyNumbers
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.previewStateOf
 import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
 import uz.gita.mobilebanking.utils.visual_transformations.ExpirationDateTransformation
 
@@ -79,7 +81,7 @@ data class AddCardScreen(
             viewModel.onEventDispatchers(AddCardContract.Intent.SaveCard(cardNumber, expirationDate))
 
             AddCardContent(
-                viewModel.collectAsState().value,
+                viewModel.collectAsState(),
                 viewModel::onEventDispatchers
             )
         }
@@ -89,14 +91,14 @@ data class AddCardScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddCardContent(
-    uiState: AddCardContract.UIState,
+    uiState: State<AddCardContract.UIState>,
     onEventDispatcher: (AddCardContract.Intent) -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
-    var cardNumber by remember { mutableStateOf(uiState.cardNumber) }
-    var expirationDate by remember { mutableStateOf(uiState.expirationDate) }
+    var cardNumber by remember { mutableStateOf(uiState.value.cardNumber) }
+    var expirationDate by remember { mutableStateOf(uiState.value.expirationDate) }
 
     var isExpirationErrorVisible by remember { mutableStateOf(false) }
     var isCardNumberFocused by remember { mutableStateOf(false) }
@@ -298,16 +300,5 @@ private fun AddCardContent(
 
 @[Preview Composable]
 fun AddCardPreview() {
-    AddCardContent(AddCardContract.UIState(), {})
+    AddCardContent(previewStateOf(value = AddCardContract.UIState()), {})
 }
-
-//
-//@Composable
-//@Preview
-//fun AddCardButtonPreview() {
-//    AddCardButton(
-//        modifier = Modifier,
-//        isEnabled = true,
-//        onClick = {}
-//    )
-//}

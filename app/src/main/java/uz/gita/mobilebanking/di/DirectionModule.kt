@@ -12,6 +12,8 @@ import uz.gita.mobilebanking.presentation.main.MainDirection
 import uz.gita.mobilebanking.presentation.main.MainDirectionImpl
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirection
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirectionImpl
+import uz.gita.mobilebanking.presentation.p2p.P2PDirection
+import uz.gita.mobilebanking.presentation.p2p.P2PDirectionImpl
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirection
 import uz.gita.mobilebanking.presentation.payments.PaymentsDirectionImpl
 import uz.gita.mobilebanking.presentation.paynet_card.PaynetCardDirection
@@ -28,6 +30,8 @@ import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirecti
 import uz.gita.mobilebanking.presentation.read_card_number.ReadCardNumberDirectionImpl
 import uz.gita.mobilebanking.presentation.splash.SplashDirection
 import uz.gita.mobilebanking.presentation.splash.SplashDirectionImpl
+import uz.gita.mobilebanking.presentation.transfer_verify.TransferVerifyDirection
+import uz.gita.mobilebanking.presentation.transfer_verify.TransferVerifyDirectionImpl
 import uz.gita.mobilebanking.presentation.transfers.TransferDirection
 import uz.gita.mobilebanking.presentation.transfers.TransferDirectionImpl
 import uz.gita.mobilebanking.presentation.verify.VerifyDirection
@@ -79,4 +83,9 @@ interface DirectionModule {
     @Binds
     fun myCardsDirection(impl: MyCardsDirectionImpl): MyCardsDirection
 
+    @Binds
+    fun transferVerifyDirection(impl: TransferVerifyDirectionImpl): TransferVerifyDirection
+
+    @Binds
+    fun p2pDirection(impl: P2PDirectionImpl): P2PDirection
 }
