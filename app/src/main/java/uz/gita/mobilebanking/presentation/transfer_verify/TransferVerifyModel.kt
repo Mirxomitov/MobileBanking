@@ -35,14 +35,9 @@ class TransferVerifyModel @Inject constructor(
             is TransferVerifyContract.Intent.CheckUserCode -> {
                 transferVerifyUseCase(intent.token, intent.verificationCode)
                     .onEach {
-                        it.onSuccess {
-                            logger("transferVerifyUseCase.isSuccess")
-                        }
-                        it.onFailure {
-                            logger("transferVerifyUseCase.onFailure")
-                        }
-                    }
-                    .launchIn(viewModelScope)
+                        it.onSuccess { transferVerifyDirection.toMainScreen() }
+                        it.onFailure { logger("transferVerifyUseCase.onFailure") }
+                    }.launchIn(viewModelScope)
             }
         }
     }

@@ -93,7 +93,7 @@ private fun P2PContent(
                 .fillMaxWidth()
                 .padding(top = 8.dp),
             onClickItem = {},
-            pan = uiState.value.receiverPan,
+            cardNumber = uiState.value.receiverPan,
             ownerName = uiState.value.ownerName,
         )
 

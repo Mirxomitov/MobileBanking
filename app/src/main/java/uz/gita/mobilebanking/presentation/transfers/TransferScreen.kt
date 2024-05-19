@@ -94,12 +94,12 @@ private fun TransactionsScreenContent(
 
             if (isSearchingStateActive) {
                 if (uiState.value.ownerName.isNotEmpty()) {
-                    logger("Owner is not name empty")
                     CardP2PWithCardNumber(
                         modifier = Modifier,
-                        pan = uiState.value.pan,
+                        cardNumber = uiState.value.pan,
                         ownerName = uiState.value.ownerName,
                         onClickItem = {
+                            logger("pan = ${uiState.value.pan}")
                             onEventDispatchers(
                                 TransferContract.Intent.ToP2PScreen(
                                     pan = uiState.value.pan,

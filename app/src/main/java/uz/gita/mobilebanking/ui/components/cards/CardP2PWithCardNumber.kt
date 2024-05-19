@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +27,7 @@ import uz.gita.mobilebanking.ui.theme.textColor
 fun CardP2PWithCardNumber(
     modifier: Modifier = Modifier,
     onClickItem: () -> Unit,
-    pan: String,
+    cardNumber: String,
     ownerName: String,
 ) {
     ElevatedCard(
@@ -45,7 +44,6 @@ fun CardP2PWithCardNumber(
                 modifier = Modifier
                     .height(36.dp)
                     .width(56.dp)
-
             )
 
             Column(
@@ -53,30 +51,40 @@ fun CardP2PWithCardNumber(
                     .weight(1f)
                     .padding(start = 2.dp)
             ) {
-                Row(modifier = Modifier.padding(vertical = 4.dp)) {
-                    TextBoldBlack(text = ownerName, fontSize = 18.sp, overflow = TextOverflow.Ellipsis)
-                }
+                TextBoldBlack(
+                    modifier = Modifier.padding(vertical = 4.dp),
+                    text = ownerName,
+                    fontSize = 18.sp,
+                    overflow = TextOverflow.Ellipsis
+                )
 
-                Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                    TextBoldBlack(text = "**** **** **** $pan", color = textColor)
-                }
-            }
-
-            IconButton(onClick = {}) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_chevronright),
-                    contentDescription = null
+                TextBoldBlack(
+                    modifier = Modifier.padding(bottom = 4.dp),
+                    text = formatCardNumber(cardNumber),
+                    color = textColor
                 )
             }
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_chevronright),
+                contentDescription = null
+            )
         }
     }
 }
 
+private fun formatCardNumber(cardNumber: String) =
+    cardNumber.substring(0, 4) + " " + cardNumber.substring(4, 6) + "** **** " + cardNumber.substring(12, 16)
+
+
 @Preview
 @Composable
 private fun Preview() {
-    CardP2PSendItem(
+    CardP2PWithCardNumber(
         modifier = Modifier,
-        onClickItem = {}
+        onClickItem = {},
+        cardNumber = "0008000800080001",
+        ownerName = "Tohir Mirxomitov"
     )
 }
+
