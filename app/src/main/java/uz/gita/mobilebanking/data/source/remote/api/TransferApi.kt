@@ -2,7 +2,9 @@ package uz.gita.mobilebanking.data.source.remote.api
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 import uz.gita.mobilebanking.data.model.request.transfer.CardOwnerByPanRequest
 import uz.gita.mobilebanking.data.model.request.transfer.TransferRequest
 import uz.gita.mobilebanking.data.model.request.transfer.TransferResendRequest
@@ -26,6 +28,8 @@ interface TransferApi {
     @POST("mobile-bank/v1/transfer/transfer/resend")
     suspend fun transferResend(@Body data: TransferResendRequest): Response<TransferResendResponse>
 
-    @POST("mobile-bank/v1/transfer/history") //?size={size}&current-page={page}
-    suspend fun getHistory(): Response<TransferHistoryResponse>
+    @GET("mobile-bank/v1/transfer/history")
+    suspend fun getHistory(@Query("size") size: Int, @Query("current-page") currentPage: Int)
+            : Response<TransferHistoryResponse>
+
 }

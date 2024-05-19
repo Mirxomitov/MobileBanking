@@ -11,6 +11,6 @@ class TransferGetHistory @Inject constructor(
     private val transferRepository: TransferRepository
 ) {
     operator fun invoke(): Flow<Result<TransferHistory>> = safetyFlow {
-        transferRepository.getTransferHistory().emitWith()
+        emit(transferRepository.getTransferHistory())
     }
 }

@@ -10,5 +10,7 @@ interface HistoryContract {
 
     data object UIState
     sealed interface SideEffect
-    interface Intent
+    sealed interface Intent {
+        data object GetHistory : Intent
+    }
 }

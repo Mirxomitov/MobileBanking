@@ -27,5 +27,5 @@ class TransferRepositoryImpl @Inject constructor(
         transferApi.transferResend(TransferResendRequest(token)).toResultData().map { it.token }
 
     override suspend fun getTransferHistory(): Result<TransferHistory> =
-        transferApi.getHistory().toResultData().map { it.toTransferHistory() }
+        transferApi.getHistory(6, 1).toResultData().map { it.toTransferHistory() }
 }
