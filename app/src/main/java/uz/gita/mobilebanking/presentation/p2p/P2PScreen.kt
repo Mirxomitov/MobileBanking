@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.p2p.components.P2PMoneyInputWithTitle
 import uz.gita.mobilebanking.ui.components.TopBarWithBack
 import uz.gita.mobilebanking.ui.components.buttons.NextButton
@@ -29,13 +31,16 @@ import uz.gita.mobilebanking.ui.components.cards.CardP2PSendItem
 import uz.gita.mobilebanking.ui.components.cards.CardP2PWithCardNumber
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.dialogs.ChangeCard
 import uz.gita.mobilebanking.ui.theme.p2pScreenBg
+import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.previewStateOf
 
 data class P2PScreen(val receiverPan: String, val ownerName: String) : Screen {
     @Composable
     override fun Content() {
         val viewModel: P2PContract.Model = getViewModel<P2PModel>()
+        logger("$receiverPan, $ownerName")
         viewModel.onEventDispatcher(P2PContract.Intent.SaveReceiverData(receiverPan, ownerName))
 
         P2PContent(
@@ -54,6 +59,7 @@ private fun P2PContent(
     val focusRequester = remember { FocusRequester() }
     var isTransferButtonEnabled by remember { mutableStateOf(true) }
     var transferAmount by remember { mutableStateOf(0) }
+    val bottomSheetNavigator = LocalBottomSheetNavigator.current
 
     Column(
         Modifier
@@ -78,7 +84,19 @@ private fun P2PContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 2.dp),
-            onClickItem = {}
+            onClickItem = {
+                bottomSheetNavigator.show(
+                    ChangeCard(
+                        cards = uiState.value.cards,
+                        onClickAddCard = {
+                            bottomSheetNavigator.hide()
+                            onEventDispatcher(P2PContract.Intent.AddCard)
+                        },
+                        onClickCard = {},
+                    )
+                )
+            },
+            cardData = CardData("", "0004", "", "", "Personal", "1000000")
         )
 
         TextBoldBlack(
@@ -104,18 +122,18 @@ private fun P2PContent(
             focusRequester = focusRequester,
             onValueChange = {
                 try {
+                    // TODO make input logic
                     isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
                     transferAmount = it.toInt()
                 } catch (e: Exception) {
                 }
             }
         )
+        TextNormal(
+            modifier = Modifier.padding(8.dp),
+            text = stringResource(if (isInputIncorrect) R.string.commission_0 else R.string.insufficient_funds)
+        )
 
-        if (isInputIncorrect) {
-            TextNormal(modifier = Modifier.padding(8.dp), text = stringResource(R.string.commission_0))
-        } else {
-            TextNormal(modifier = Modifier.padding(8.dp), text = stringResource(R.string.insufficient_funds))
-        }
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -134,6 +152,8 @@ private fun P2PContent(
             }
         )
     }
+
+    logger("UIState: receiverPan = ${uiState.value.receiverPan}, ownerName = ${uiState.value.ownerName}),\n cards = ${uiState.value.cards}")
 }
 
 @Preview

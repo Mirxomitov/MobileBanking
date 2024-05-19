@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.theme.authComponentBg
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
@@ -68,7 +68,7 @@ private fun ChangeLanguageDialog(
                 .height(6.dp)
                 .width(48.dp)
                 .clip(CircleShape)
-                .background(authComponentBg)
+                .background(AuthComponentBg)
                 .align(Alignment.CenterHorizontally)
         )
 
@@ -77,7 +77,7 @@ private fun ChangeLanguageDialog(
                 .align(Alignment.End)
                 .size(32.dp)
                 .clip(CircleShape)
-                .background(authComponentBg)
+                .background(AuthComponentBg)
                 .clickable { dismiss() }
         ) {
             Icon(

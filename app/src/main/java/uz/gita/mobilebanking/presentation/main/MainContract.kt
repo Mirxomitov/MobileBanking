@@ -8,9 +8,7 @@ interface MainContract {
         fun onEventDispatcher(intent: Intent)
     }
 
-    data class UIState(
-        var cards: List<CardData> = listOf()
-    )
+    data class UIState(var cards: List<CardData> = listOf())
 
     sealed interface SideEffect {}
     sealed interface Intent {

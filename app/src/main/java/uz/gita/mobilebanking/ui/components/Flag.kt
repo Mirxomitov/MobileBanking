@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.theme.authComponentBg
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 
 @Composable
 fun Flag(
@@ -34,7 +34,7 @@ fun Flag(
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(authComponentBg)
+            .background(AuthComponentBg)
             .clickable {
                 onClick()
             }

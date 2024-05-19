@@ -27,10 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.ui.components.DialogTopLine
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.GrayColor
 
 data class AddCardDialog(
     val onUzbClick: () -> Unit,
@@ -58,14 +59,7 @@ private fun AddCardContent(
             .padding(horizontal = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .padding(top = 12.dp)
-                .height(6.dp)
-                .width(48.dp)
-                .clip(CircleShape)
-                .background(grayColor)
-        )
+        DialogTopLine(Modifier.padding(top = 12.dp))
 
         Row(
             modifier = Modifier

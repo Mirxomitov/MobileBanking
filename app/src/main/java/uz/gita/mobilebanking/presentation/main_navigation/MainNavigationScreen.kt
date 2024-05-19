@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.tabs
+package uz.gita.mobilebanking.presentation.main_navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,7 @@ import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
-class BottomNavigation : Screen {
+class MainNavigationScreen : Screen {
     @Composable
     override fun Content() {
         TabNavigator(MainTab) {

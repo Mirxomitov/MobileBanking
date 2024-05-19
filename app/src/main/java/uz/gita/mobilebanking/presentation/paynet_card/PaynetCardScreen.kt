@@ -46,7 +46,7 @@ import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 
-class PaynetCard : Screen {
+class PaynetCardScreen : Screen {
     @Composable
     override fun Content() {
         MobileBankingTheme {

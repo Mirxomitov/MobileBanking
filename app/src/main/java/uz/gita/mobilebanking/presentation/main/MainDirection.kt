@@ -3,7 +3,7 @@ package uz.gita.mobilebanking.presentation.main
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.addcard.AddCardScreen
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsScreen
-import uz.gita.mobilebanking.presentation.paynet_card.PaynetCard
+import uz.gita.mobilebanking.presentation.paynet_card.PaynetCardScreen
 import uz.gita.mobilebanking.presentation.profile.ProfileScreen
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject
@@ -30,7 +30,7 @@ class MainDirectionImpl @Inject constructor(
     }
 
     override suspend fun toWhatIsIt() {
-        appNavigator.addScreen(PaynetCard())
+        appNavigator.addScreen(PaynetCardScreen())
     }
 
     override suspend fun toMyCardsScreen(listOfCards : List<CardData>) {

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.authComponentBg
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -45,7 +45,7 @@ fun Template(
             modifier = Modifier
                 .size(60.dp)
                 .border(
-                    BorderStroke(2.dp, authComponentBg), CircleShape
+                    BorderStroke(2.dp, AuthComponentBg), CircleShape
                 )
                 .padding(1.dp)
                 .clip(CircleShape)

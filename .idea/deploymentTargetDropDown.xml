@@ -2,13 +2,13 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ChangeCardPreview">
+        <State />
+      </entry>
       <entry key="ContentPreview">
         <State />
       </entry>
       <entry key="P2PPreview">
-        <State />
-      </entry>
-      <entry key="ReadCardNumberPreview">
         <State />
       </entry>
       <entry key="TransactionsScreenPreview">

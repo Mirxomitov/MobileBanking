@@ -7,22 +7,20 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.CardRepository
-import uz.gita.mobilebanking.domain.use_case.AddCardUseCase
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.domain.use_case.CardAddUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class AddCardModel @Inject constructor(
     private val addCardDirection: AddCardDirection,
-    private val addCardUseCase: AddCardUseCase
+    private val cardAddUseCase: CardAddUseCase
 ) : ViewModel(), AddCardContract.Model {
     override fun onEventDispatchers(intent: AddCardContract.Intent) {
         when (intent) {
             AddCardContract.Intent.ToScanCardScreen -> intent { addCardDirection.toScanCardScreen() }
             AddCardContract.Intent.Back -> intent { addCardDirection.back() }
             is AddCardContract.Intent.AddCard -> {
-                addCardUseCase(intent.cardNumber, intent.expirationDate).onEach {
+                cardAddUseCase(intent.cardNumber, intent.expirationDate).onEach {
                     it.onSuccess {
                         addCardDirection.back()
                     }

@@ -16,13 +16,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.GrayColor
 
 @Composable
 fun TextBold(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = grayColor,
+    color: Color = GrayColor,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,

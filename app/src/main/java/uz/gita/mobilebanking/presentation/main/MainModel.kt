@@ -8,18 +8,18 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.use_case.GetCardsUseCase
+import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
 class MainModel @Inject constructor(
-    private val getCardsUseCase: GetCardsUseCase,
+    private val cardsGetUseCase: CardsGetUseCase,
     private val direction: MainDirection,
 ) : MainContract.Model, ViewModel() {
 
     private fun getCards() {
-        getCardsUseCase().onEach {
+        cardsGetUseCase().onEach {
             it.onSuccess {
                 logger("MainModel.getCards.success ${it.size} $it")
                 intent { reduce { MainContract.UIState(it) } }
@@ -32,10 +32,10 @@ class MainModel @Inject constructor(
 
     override fun onEventDispatcher(intent: MainContract.Intent) = intent {
         when (intent) {
+            MainContract.Intent.Init -> getCards()
             MainContract.Intent.OpenProfileScreen -> direction.toProfileScreen()
             MainContract.Intent.OpenAddCardScreen -> direction.toAddCardScreen()
             MainContract.Intent.OpenWhatIsIt -> direction.toWhatIsIt()
-            MainContract.Intent.Init -> getCards()
             MainContract.Intent.OpenMyCardsScreen -> direction.toMyCardsScreen(container.stateFlow.value.cards)
         }
     }

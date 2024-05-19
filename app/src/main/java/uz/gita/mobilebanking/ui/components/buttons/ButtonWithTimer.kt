@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
-import uz.gita.mobilebanking.ui.theme.authComponentBg
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -35,9 +35,9 @@ fun ButtonWithTimer(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             contentColor = textColor,
-            disabledContentColor = authComponentBg,
-            containerColor = authComponentBg,
-            disabledContainerColor = authComponentBg,
+            disabledContentColor = AuthComponentBg,
+            containerColor = AuthComponentBg,
+            disabledContainerColor = AuthComponentBg,
         )
     ) {
         Icon(

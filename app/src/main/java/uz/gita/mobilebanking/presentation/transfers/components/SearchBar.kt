@@ -3,11 +3,12 @@ package uz.gita.mobilebanking.presentation.transfers.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -26,14 +27,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
+import uz.gita.mobilebanking.ui.theme.GrayColor
+import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
 
 @Composable
 fun SearchBar(
@@ -46,71 +50,69 @@ fun SearchBar(
 ) {
 
     var text by remember { mutableStateOf("") }
-    //var isSearchBarFocused by remember { mutableStateOf(false) }
 
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(18.dp))
-            .background(authComponentBg)
+            .background(AuthComponentBg)
             .padding(top = 2.dp, bottom = 2.dp, start = 12.dp)
     ) {
-        Row(
-            modifier = Modifier,
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 4.dp),
+            contentAlignment = Alignment.CenterStart,
         ) {
-            Box(
-                modifier = Modifier.padding(start = 4.dp),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                if (text.isEmpty()) TextNormal(
-                    text = stringResource(id = R.string.card_or_phone),
-                    color = grayColor,
-                    fontSize = 18.sp
-                )
+            if (text.isEmpty()) TextNormal(
+                text = stringResource(id = R.string.card_or_phone),
+                color = GrayColor,
+                fontSize = 18.sp
+            )
 
-                BasicTextField(
-                    value = text,
-                    onValueChange = {
-                        text = it
-                        onValueChange(text)
-                        logger("$it -> $text")
+            BasicTextField(
+                value = text,
+                onValueChange = {
+                    text = it
+                    onValueChange(text)
+                    logger("$it -> $text")
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester)
+                    .onFocusChanged {
+                        onFocusChanged(it)
                     },
-                    modifier = Modifier
-                        .focusRequester(focusRequester)
-                        .onFocusChanged {
-                            // isSearchBarFocused = it.isFocused
-                            onFocusChanged(it)
-                        },
-                    textStyle = TextStyle(color = Color.Black)
-                )
-            }
+                textStyle = TextStyle(color = Color.Black, fontSize = 18.sp),
+                visualTransformation = CardNumberTransformation,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
 
-            Spacer(modifier = Modifier.weight(1f))
+            Row(modifier = Modifier.align(Alignment.CenterEnd)) {
+                if (text.isEmpty()) {
+                    IconButton(onClick = { onClickContacts() }) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            painter = painterResource(id = R.drawable.ic_contacts),
+                            contentDescription = null
+                        )
+                    }
 
-            if (text.isEmpty()) {
-                IconButton(onClick = { onClickContacts() }) {
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = R.drawable.ic_contacts),
-                        contentDescription = null
-                    )
-                }
-
-                IconButton(onClick = { onClickScan() }) {
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = R.drawable.ic_scan),
-                        contentDescription = null
-                    )
-                }
-            } else {
-                IconButton(onClick = { text = "" }) {
-                    Icon(
-                        modifier = Modifier.size(18.dp),
-                        painter = painterResource(id = R.drawable.search_clear),
-                        contentDescription = null,
-                        tint = Color.Gray
-                    )
+                    IconButton(onClick = { onClickScan() }) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            painter = painterResource(id = R.drawable.ic_scan),
+                            contentDescription = null
+                        )
+                    }
+                } else {
+                    IconButton(onClick = { text = "" }) {
+                        Icon(
+                            modifier = Modifier.size(18.dp),
+                            painter = painterResource(id = R.drawable.search_clear),
+                            contentDescription = null,
+                            tint = Color.Gray
+                        )
+                    }
                 }
             }
         }
@@ -121,12 +123,14 @@ fun SearchBar(
 @Preview
 @Composable
 fun SearchBarPreview() {
-    SearchBar(
-        modifier = Modifier,
-        onClickContacts = {},
-        onClickScan = {},
-        onValueChange = {},
-        focusRequester = FocusRequester(),
-        onFocusChanged = {}
-    )
+    MobileBankingTheme {
+        SearchBar(
+            modifier = Modifier,
+            onClickContacts = {},
+            onClickScan = {},
+            onValueChange = {},
+            focusRequester = FocusRequester(),
+            onFocusChanged = {}
+        )
+    }
 }

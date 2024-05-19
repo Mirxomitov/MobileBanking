@@ -40,8 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.buttons.NextButton
-import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 
 @Composable
 fun CodeTextField(
@@ -98,9 +97,9 @@ fun CodeTextField(
                                 .clip(shape = RoundedCornerShape(16.dp))
                                 .border(
                                     width = 1.dp,
-                                    color = if (currentChar != null) Color.White else authComponentBg,
+                                    color = if (currentChar != null) Color.White else AuthComponentBg,
                                 )
-                                .background(authComponentBg)
+                                .background(AuthComponentBg)
                                 .align(Alignment.CenterVertically),
                         ) {
                             if (currentChar != null) {

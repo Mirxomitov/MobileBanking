@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.authComponentBg
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.errorColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
@@ -92,11 +92,11 @@ fun PhoneInputComponent(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(getColorX(colorName = authComponentBg))
+                        .background(getColorX(colorName = AuthComponentBg))
                         .border(
                             width = 1.dp,
                             color = if (isError) getColorX(colorName = errorColor) else getColorX(
-                                colorName = authComponentBg
+                                colorName = AuthComponentBg
                             ),
                             shape = RoundedCornerShape(8.dp)
                         )

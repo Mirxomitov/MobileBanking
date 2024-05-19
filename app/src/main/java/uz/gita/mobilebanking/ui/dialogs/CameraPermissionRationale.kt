@@ -8,10 +8,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -29,13 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.ui.components.DialogTopLine
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
-import uz.gita.mobilebanking.ui.theme.authComponentBg
 import uz.gita.mobilebanking.ui.theme.textColor
 
 data class CameraPermissionRationaleDialog(val onHide: () -> Unit) : Screen {
@@ -57,14 +56,10 @@ fun CameraPermissionRationaleDialogContent(onHide: () -> Unit) {
             .padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
+        DialogTopLine(
             modifier = Modifier
-                .height(6.dp)
-                .width(48.dp)
-                .clip(CircleShape)
-                .background(authComponentBg)
+                .padding(top = 12.dp)
                 .align(Alignment.CenterHorizontally)
-                .padding(12.dp)
         )
 
         Box(
@@ -72,7 +67,7 @@ fun CameraPermissionRationaleDialogContent(onHide: () -> Unit) {
                 .align(Alignment.End)
                 .size(32.dp)
                 .clip(CircleShape)
-                .background(authComponentBg)
+                .background(AuthComponentBg)
                 .clickable { onHide() }
         ) {
             Icon(
@@ -99,7 +94,9 @@ fun CameraPermissionRationaleDialogContent(onHide: () -> Unit) {
         )
 
         Button(
-            modifier = Modifier.padding(top = 24.dp, bottom = 6.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(top = 24.dp, bottom = 6.dp)
+                .fillMaxWidth(),
             onClick = {
                 onHide()
                 val intent = Intent(

@@ -5,17 +5,20 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.orbitmvi.orbit.syntax.simple.SimpleContext
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.TransferVerifyUseCase
+import uz.gita.mobilebanking.presentation.main.TransferResendUseCase
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
 class TransferVerifyModel @Inject constructor(
+    private val transferVerifyDirection: TransferVerifyDirection,
     private val transferVerifyUseCase: TransferVerifyUseCase,
-    private val transferVerifyDirection: TransferVerifyDirection
+    private val transferResendUseCase: TransferResendUseCase
 ) : TransferVerifyContract.Model, ViewModel() {
     override fun onEventDispatcher(intent: TransferVerifyContract.Intent) {
         when (intent) {
@@ -29,7 +32,19 @@ class TransferVerifyModel @Inject constructor(
                 intent { reduce { TransferVerifyContract.UIState(token = intent.token) } }
 
             is TransferVerifyContract.Intent.ResendSms -> {
-
+                transferResendUseCase(intent.token).onEach {
+                    it.onSuccess { token ->
+                        intent {
+                            reduce {
+                                TransferVerifyContract.UIState(
+                                    phoneNumber = this.state.phoneNumber,
+                                    token = token
+                                )
+                            }
+                        }
+                    }
+                    it.onFailure { logger("transferResendUseCase.onFailure") }
+                }.launchIn(viewModelScope)
             }
 
             is TransferVerifyContract.Intent.CheckUserCode -> {
@@ -44,6 +59,6 @@ class TransferVerifyModel @Inject constructor(
 
     override val container =
         container<TransferVerifyContract.UIState, TransferVerifyContract.SideEffect>(
-            TransferVerifyContract.UIState("", "")
+            TransferVerifyContract.UIState()
         )
 }

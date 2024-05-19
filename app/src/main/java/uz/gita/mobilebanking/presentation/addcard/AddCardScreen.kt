@@ -61,7 +61,7 @@ import uz.gita.mobilebanking.ui.dialogs.CameraPermissionRationaleDialog
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.errorColor2
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.utils.angledGradientBackground
 import uz.gita.mobilebanking.utils.checkExpirationDateValidation
 import uz.gita.mobilebanking.utils.containsOnlyNumbers
@@ -162,7 +162,7 @@ private fun AddCardContent(
                         if (cardNumber == "")
                             TextNormal(
                                 fontSize = 18.sp,
-                                color = if (isCardNumberFocused) Color.Black else grayColor,
+                                color = if (isCardNumberFocused) Color.Black else GrayColor,
                                 text = "Karta raqami",
                                 modifier = Modifier
                                     .align(Alignment.CenterStart)
@@ -238,7 +238,7 @@ private fun AddCardContent(
                         if (expirationDate == "")
                             TextNormal(
                                 fontSize = 18.sp,
-                                color = if (isExpirationDateFocused) Color.Black else grayColor,
+                                color = if (isExpirationDateFocused) Color.Black else GrayColor,
                                 text = "oo/yy",
                                 modifier = Modifier.align(Alignment.CenterStart)
                             )

@@ -8,20 +8,20 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.use_case.GetCardOwnerByPan
+import uz.gita.mobilebanking.domain.use_case.CardGetOwnerByPan
 import javax.inject.Inject
 
 @HiltViewModel
 class TransferModel @Inject constructor(
     private val direction: TransferDirection,
-    private val getCardOwnerByPan: GetCardOwnerByPan
+    private val cardGetOwnerByPan: CardGetOwnerByPan
 
 ) : TransferContract.Model, ViewModel() {
     override fun onEventDispatchers(intent: TransferContract.Intent) {
         when (intent) {
             is TransferContract.Intent.ToP2PScreen -> intent { direction.toP2PScreen(intent.pan, intent.ownerName) }
             is TransferContract.Intent.GetCardOwnerByCardNumber -> {
-                getCardOwnerByPan(intent.pan).onEach {
+                cardGetOwnerByPan(intent.pan).onEach {
                     it.onSuccess { ownerName ->
                         intent {
                             reduce { TransferContract.UIState(ownerName = ownerName, pan = intent.pan) }

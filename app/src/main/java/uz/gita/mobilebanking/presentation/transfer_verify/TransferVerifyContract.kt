@@ -18,7 +18,6 @@ interface TransferVerifyContract {
         data class ResendSms(val token: String) : Intent
         data object Back : Intent
         data class SaveToken(val token : String,) : Intent
-        data class SavePhoneNumber(val phoneNumber : String,) : Intent
-
+        data class SavePhoneNumber(val phoneNumber: String) : Intent
     }
 }

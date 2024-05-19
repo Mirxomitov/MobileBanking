@@ -18,12 +18,12 @@ interface P2PContract {
     sealed interface SideEffect
     sealed interface Intent {
         data object Back : Intent
+        data object AddCard : Intent
         data class Pay(
             val senderId: String,
             val receiverPan: String,
             val amount: Int,
         ) : Intent
-
         data class SaveReceiverData(val receiverPan: String, val ownerName: String) : Intent
     }
 }

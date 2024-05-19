@@ -93,9 +93,9 @@ private fun TransactionsScreenContent(
                 })
 
             if (isSearchingStateActive) {
-                if (uiState.value.ownerName.isNotEmpty()) {
+                if (uiState.value.ownerName.isNotEmpty() && uiState.value.pan.length == 16) {
                     CardP2PWithCardNumber(
-                        modifier = Modifier,
+                        modifier = Modifier.padding(top = 12.dp),
                         cardNumber = uiState.value.pan,
                         ownerName = uiState.value.ownerName,
                         onClickItem = {

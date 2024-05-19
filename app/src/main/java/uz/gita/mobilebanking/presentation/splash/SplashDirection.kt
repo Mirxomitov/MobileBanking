@@ -2,7 +2,6 @@ package uz.gita.mobilebanking.presentation.splash
 
 import uz.gita.mobilebanking.presentation.auth.AuthScreen
 import uz.gita.mobilebanking.presentation.pin.PinScreen
-import uz.gita.mobilebanking.presentation.tabs.BottomNavigation
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.tabs
+package uz.gita.mobilebanking.presentation.main_navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

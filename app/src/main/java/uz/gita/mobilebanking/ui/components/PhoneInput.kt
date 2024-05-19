@@ -39,10 +39,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.presentation.auth.components.PhoneMaskTransformation
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.theme.authComponentBg
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.AuthComponentBg
+import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.utils.logger
 
 @Composable
@@ -58,7 +57,7 @@ fun PhoneInput(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(50.dp))
-            .background(authComponentBg)
+            .background(AuthComponentBg)
             .padding(horizontal = 8.dp, vertical = 12.dp)
     ) {
         Row(
@@ -104,7 +103,7 @@ fun PhoneInput(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ),
-                tint = grayColor,
+                tint = GrayColor,
             )
         }
     }
@@ -129,7 +128,7 @@ private fun Flag(
             painter = rememberVectorPainter(image = Icons.Default.KeyboardArrowDown),
             contentDescription = "down",
             modifier = Modifier.size(24.dp),
-            tint = grayColor
+            tint = GrayColor
         )
     }
 }

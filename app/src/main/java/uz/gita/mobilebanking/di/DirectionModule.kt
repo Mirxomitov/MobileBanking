@@ -8,6 +8,8 @@ import uz.gita.mobilebanking.presentation.addcard.AddCardDirection
 import uz.gita.mobilebanking.presentation.addcard.AddCardDirectionImpl
 import uz.gita.mobilebanking.presentation.auth.AuthDirection
 import uz.gita.mobilebanking.presentation.auth.AuthDirectionImpl
+import uz.gita.mobilebanking.presentation.hisotory.HistoryDirection
+import uz.gita.mobilebanking.presentation.hisotory.HistoryDirectionImpl
 import uz.gita.mobilebanking.presentation.main.MainDirection
 import uz.gita.mobilebanking.presentation.main.MainDirectionImpl
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirection
@@ -43,34 +45,24 @@ import uz.gita.mobilebanking.presentation.verify.VerifyDirectionImpl
 interface DirectionModule {
     @Binds
     fun splashDirection(impl: SplashDirectionImpl): SplashDirection
-
     @Binds
     fun authDirection(impl: AuthDirectionImpl): AuthDirection
-
     @Binds
     fun pinDirection(impl: PinDirectionImpl): PinDirection
-
     @Binds
     fun pinCreateDirection(impl: PinCreateDirectionImpl): PinCreateDirection
-
     @Binds
     fun pinCheckDirection(impl: PinCheckDirectionImpl): PinCheckDirection
-
     @Binds
     fun verifyDirection(impl: VerifyDirectionImpl): VerifyDirection
-
     @Binds
     fun transferDirection(impl: TransferDirectionImpl): TransferDirection
-
     @Binds
     fun paymentDirection(impl: PaymentsDirectionImpl): PaymentsDirection
-
     @Binds
     fun profileDirection(impl: ProfileDirectionImpl): ProfileDirection
-
     @Binds
     fun mainDirection(impl: MainDirectionImpl): MainDirection
-
     @Binds
     fun addCardDirection(impl: AddCardDirectionImpl): AddCardDirection
 
@@ -88,4 +80,7 @@ interface DirectionModule {
 
     @Binds
     fun p2pDirection(impl: P2PDirectionImpl): P2PDirection
+
+    @Binds
+    fun historyDirection(impl: HistoryDirectionImpl): HistoryDirection
 }

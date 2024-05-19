@@ -26,7 +26,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.grayColor
+import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
@@ -117,7 +117,7 @@ fun CashBack(
                                 .clip(
                                     RoundedCornerShape(4.dp)
                                 )
-                                .background(grayColor)
+                                .background(GrayColor)
                         )
 
                     }
