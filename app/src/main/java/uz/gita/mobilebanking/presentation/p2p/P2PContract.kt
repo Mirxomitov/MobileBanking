@@ -10,16 +10,20 @@ interface P2PContract {
     }
 
     data class UIState(
-        val cards: List<CardData> = emptyList()
+        val cards: List<CardData> = emptyList(),
+        val receiverPan: String = "",
+        val ownerName: String = "",
     )
 
     sealed interface SideEffect
     sealed interface Intent {
         data object Back : Intent
         data class Pay(
-            val senderId : String,
-            val receiverPan : String,
-            val amount : Int,
+            val senderId: String,
+            val receiverPan: String,
+            val amount: Int,
         ) : Intent
+
+        data class SaveReceiverData(val receiverPan: String, val ownerName: String) : Intent
     }
 }

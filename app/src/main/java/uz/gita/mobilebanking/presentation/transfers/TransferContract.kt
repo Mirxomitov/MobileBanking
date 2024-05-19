@@ -4,14 +4,18 @@ import org.orbitmvi.orbit.ContainerHost
 
 interface TransferContract {
     interface Model : ContainerHost<UIState, SideEffect> {
-        fun onEventDispatchers(intent : Intent)
+        fun onEventDispatchers(intent: Intent)
     }
 
-    data object UIState
-    sealed interface SideEffect
-    sealed interface Intent {
-        data class GetUserByCardNumber(val searchText: String,) : Intent
-        data object ToP2PScreen : Intent
+    data class UIState(
+        var ownerName: String = "",
+        val pan: String = ""
+    )
 
+    interface SideEffect
+    sealed interface Intent {
+        data class GetCardOwnerByCardNumber(val pan: String) : Intent
+        data class ToP2PScreen(val pan: String, val ownerName: String) : Intent
+        data object ClearOwnerName : Intent
     }
 }

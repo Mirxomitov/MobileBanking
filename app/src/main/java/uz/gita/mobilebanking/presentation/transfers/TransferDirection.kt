@@ -6,14 +6,15 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 interface TransferDirection {
-    suspend fun toP2PScreen()
+    suspend fun toP2PScreen(pan : String, ownerName : String)
 }
 
 @Singleton
 class TransferDirectionImpl @Inject constructor(
     private val appNavigator: AppNavigator
 ) : TransferDirection {
-    override suspend fun toP2PScreen() {
-        appNavigator.addScreen(P2PScreen())
+
+    override suspend fun toP2PScreen(pan: String, ownerName: String) {
+        appNavigator.addScreen(P2PScreen(pan, ownerName))
     }
 }

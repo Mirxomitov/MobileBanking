@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,8 +26,10 @@ import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun CardP2PWithCardNumber(
-    modifier: Modifier, onClickItem: () -> Unit,
-    cardNumber: String = "9860 19** **** 3540"
+    modifier: Modifier = Modifier,
+    onClickItem: () -> Unit,
+    pan: String,
+    ownerName: String,
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -51,13 +54,11 @@ fun CardP2PWithCardNumber(
                     .padding(start = 2.dp)
             ) {
                 Row(modifier = Modifier.padding(vertical = 4.dp)) {
-                    TextBoldBlack(text = "Uzcard", fontSize = 18.sp)
-                    TextBoldBlack(text = " * ", fontSize = 18.sp)
-                    TextBoldBlack(text = "1137", fontSize = 18.sp)
+                    TextBoldBlack(text = ownerName, fontSize = 18.sp, overflow = TextOverflow.Ellipsis)
                 }
 
                 Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                    TextBoldBlack(text = cardNumber, color = textColor)
+                    TextBoldBlack(text = "**** **** **** $pan", color = textColor)
                 }
             }
 
@@ -75,8 +76,7 @@ fun CardP2PWithCardNumber(
 @Composable
 private fun Preview() {
     CardP2PSendItem(
-        modifier = Modifier
-    ) {
-
-    }
+        modifier = Modifier,
+        onClickItem = {}
+    )
 }

@@ -24,7 +24,7 @@ fun DefaultState(
     LazyRow(
         contentPadding = PaddingValues(start = 12.dp), modifier = Modifier.padding(top = 24.dp)
     ) {
-        items(10) {
+        items(0) {
             LastPayedCards(
                 modifier = Modifier.padding(horizontal = 8.dp),
                 imageID = R.drawable.logo_tbc,
@@ -70,7 +70,7 @@ fun DefaultState(
         item {
             AddTemplate(Modifier.padding(end = 24.dp), onClick = {})
         }
-        items(10) {
+        items(0) {
             Template(
                 modifier = Modifier.padding(end = 24.dp), firstName = "Saidrasul", imageID = R.drawable.logo_tbc
             )

@@ -27,7 +27,8 @@ import uz.gita.mobilebanking.ui.theme.textColor
 
 @Composable
 fun CardP2PSendItem(
-    modifier: Modifier, onClickItem: () -> Unit,
+    modifier: Modifier = Modifier,
+    onClickItem: () -> Unit,
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -77,8 +78,7 @@ fun CardP2PSendItem(
 @Composable
 private fun Preview() {
     CardP2PSendItem(
-        modifier = Modifier
-    ) {
-
-    }
+        modifier = Modifier,
+        onClickItem = {}
+    )
 }

@@ -25,8 +25,10 @@ import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.presentation.transfers.components.DefaultState
 import uz.gita.mobilebanking.presentation.transfers.components.SearchBar
 import uz.gita.mobilebanking.presentation.transfers.components.TopBarTransfer
+import uz.gita.mobilebanking.ui.components.cards.CardP2PWithCardNumber
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
+import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.previewStateOf
 
 class TransfersScreen : Screen {
@@ -74,9 +76,14 @@ private fun TransactionsScreenContent(
                 onClickContacts = {},
                 onClickScan = {},
                 onValueChange = {
-                    searchText = it
+                    if (it.length <= 16) {
+                        searchText = it
+                    }
+
                     if (searchText.length == 16) {
-                       onEventDispatchers(TransferContract.Intent.GetUserByCardNumber(searchText))
+                        onEventDispatchers(TransferContract.Intent.GetCardOwnerByCardNumber(searchText))
+                    } else {
+                        onEventDispatchers(TransferContract.Intent.ClearOwnerName)
                     }
                 },
                 focusRequester = focusRequester,
@@ -86,9 +93,33 @@ private fun TransactionsScreenContent(
                 })
 
             if (isSearchingStateActive) {
-                OnSearchState()
+                if (uiState.value.ownerName.isNotEmpty()) {
+                    logger("Owner is not name empty")
+                    CardP2PWithCardNumber(
+                        modifier = Modifier,
+                        pan = uiState.value.pan,
+                        ownerName = uiState.value.ownerName,
+                        onClickItem = {
+                            onEventDispatchers(
+                                TransferContract.Intent.ToP2PScreen(
+                                    pan = uiState.value.pan,
+                                    ownerName = uiState.value.ownerName
+                                )
+                            )
+                        }
+                    )
+                }
             } else {
-                DefaultState(onClickLastPayedCard = { onEventDispatchers(TransferContract.Intent.ToP2PScreen) })
+                DefaultState(
+                    onClickLastPayedCard = {
+                        onEventDispatchers(
+                            TransferContract.Intent.ToP2PScreen(
+                                "TODO last payed items",
+                                "TODO last payed items"
+                            )
+                        )
+                    }
+                )
             }
         }
     }
@@ -98,9 +129,6 @@ private fun TransactionsScreenContent(
 @Composable
 fun TransactionsScreenPreview() {
     MobileBankingTheme {
-        TransactionsScreenContent(previewStateOf(value = TransferContract.UIState), {})
+        TransactionsScreenContent(previewStateOf(value = TransferContract.UIState("Tohir Mirxomitov")), {})
     }
 }
-
-@Composable
-fun OnSearchState() {}

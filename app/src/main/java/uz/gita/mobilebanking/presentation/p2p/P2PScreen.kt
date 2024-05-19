@@ -32,10 +32,12 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.p2pScreenBg
 import uz.gita.mobilebanking.utils.previewStateOf
 
-class P2PScreen : Screen {
+data class P2PScreen(val receiverPan: String, val ownerName: String) : Screen {
     @Composable
     override fun Content() {
         val viewModel: P2PContract.Model = getViewModel<P2PModel>()
+        viewModel.onEventDispatcher(P2PContract.Intent.SaveReceiverData(receiverPan, ownerName))
+
         P2PContent(
             viewModel.collectAsState(),
             viewModel::onEventDispatcher
@@ -51,6 +53,7 @@ private fun P2PContent(
     val isInputIncorrect by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     var isTransferButtonEnabled by remember { mutableStateOf(true) }
+    var transferAmount by remember { mutableStateOf(0) }
 
     Column(
         Modifier
@@ -89,7 +92,9 @@ private fun P2PContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp),
-            onClickItem = {}
+            onClickItem = {},
+            pan = uiState.value.receiverPan,
+            ownerName = uiState.value.ownerName,
         )
 
         P2PMoneyInputWithTitle(
@@ -100,6 +105,7 @@ private fun P2PContent(
             onValueChange = {
                 try {
                     isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
+                    transferAmount = it.toInt()
                 } catch (e: Exception) {
                 }
             }
@@ -121,8 +127,8 @@ private fun P2PContent(
                 onEventDispatcher(
                     P2PContract.Intent.Pay(
                         senderId = "32",
-                        receiverPan = "0008000800080026",
-                        amount = 10_000
+                        receiverPan = uiState.value.receiverPan,
+                        amount = transferAmount
                     )
                 )
             }
@@ -134,7 +140,7 @@ private fun P2PContent(
 @Composable
 fun P2PPreview() {
     P2PContent(
-        uiState = previewStateOf(value = P2PContract.UIState()),
+        uiState = previewStateOf(value = P2PContract.UIState(receiverPan = "0002", ownerName = "Tohir Mirxomitov")),
         onEventDispatcher = {}
     )
 }

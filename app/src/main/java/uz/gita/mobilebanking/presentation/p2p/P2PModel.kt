@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.TransferUseCase
 import uz.gita.mobilebanking.utils.logger
@@ -19,16 +21,24 @@ class P2PModel @Inject constructor(
         when (intent) {
             P2PContract.Intent.Back -> {}
             is P2PContract.Intent.Pay -> {
-                logger("Pay ${intent.senderId}, ${intent.receiverPan}, ${intent.amount}")
-
-                transferUseCase(intent.senderId, intent.receiverPan, intent.amount).onEach {
+                 transferUseCase(intent.senderId, intent.receiverPan, intent.amount).onEach {
                     it.onSuccess { token ->
                         p2P2PDirection.toTransferVerifyScreen(token)
-                        
                     }
                     it.onFailure { logger("on failure transfer ${it.message}") }
                 }.launchIn(viewModelScope)
             }
+
+            is P2PContract.Intent.SaveReceiverData ->
+                intent {
+                    reduce {
+                        P2PContract.UIState(
+                            receiverPan = intent.receiverPan,
+                            ownerName = intent.ownerName
+                        )
+                    }
+                }
+
         }
     }
 
