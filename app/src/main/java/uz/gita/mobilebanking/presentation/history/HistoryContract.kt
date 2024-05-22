@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.hisotory
+package uz.gita.mobilebanking.presentation.history
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow

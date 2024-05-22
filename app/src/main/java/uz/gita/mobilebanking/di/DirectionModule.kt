@@ -8,8 +8,12 @@ import uz.gita.mobilebanking.presentation.addcard.AddCardDirection
 import uz.gita.mobilebanking.presentation.addcard.AddCardDirectionImpl
 import uz.gita.mobilebanking.presentation.auth.AuthDirection
 import uz.gita.mobilebanking.presentation.auth.AuthDirectionImpl
-import uz.gita.mobilebanking.presentation.hisotory.HistoryDirection
-import uz.gita.mobilebanking.presentation.hisotory.HistoryDirectionImpl
+import uz.gita.mobilebanking.presentation.card_details.CardDetailsDirections
+import uz.gita.mobilebanking.presentation.card_details.CardDetailsDirectionsImpl
+import uz.gita.mobilebanking.presentation.card_theme.CardThemeDirections
+import uz.gita.mobilebanking.presentation.card_theme.CardThemeDirectionsImpl
+import uz.gita.mobilebanking.presentation.history.HistoryDirection
+import uz.gita.mobilebanking.presentation.history.HistoryDirectionImpl
 import uz.gita.mobilebanking.presentation.main.MainDirection
 import uz.gita.mobilebanking.presentation.main.MainDirectionImpl
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsDirection
@@ -83,4 +87,10 @@ interface DirectionModule {
 
     @Binds
     fun historyDirection(impl: HistoryDirectionImpl): HistoryDirection
+
+    @Binds
+    fun cardThemeDirection(impl: CardThemeDirectionsImpl): CardThemeDirections
+
+    @Binds
+    fun cardDetailsDirections(impl: CardDetailsDirectionsImpl): CardDetailsDirections
 }

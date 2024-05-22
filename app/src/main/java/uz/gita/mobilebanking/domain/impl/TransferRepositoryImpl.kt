@@ -12,23 +12,31 @@ import uz.gita.mobilebanking.data.model.request.transfer.TransferVerifyRequest
 import uz.gita.mobilebanking.data.model.response.transfer.TransferHistoryResponse
 import uz.gita.mobilebanking.data.source.remote.api.TransferApi
 import uz.gita.mobilebanking.domain.TransferRepository
+import uz.gita.mobilebanking.utils.emitWith
+import uz.gita.mobilebanking.utils.safetyFlow
 import uz.gita.mobilebanking.utils.toResultData
 import javax.inject.Inject
 
 class TransferRepositoryImpl @Inject constructor(
     private val transferApi: TransferApi,
 ) : TransferRepository {
-    override suspend fun transfer(type: String, senderId: String, receiverPan: String, amount: Int): Result<String> =
-        transferApi.transfer(TransferRequest(type, senderId, receiverPan, amount)).toResultData().map { it.token }
+    override fun transfer(type: String, senderId: String, receiverPan: String, amount: Int): Flow<Result<String>> =
+        safetyFlow {
+            transferApi.transfer(TransferRequest(type, senderId, receiverPan, amount)).toResultData().map { it.token }
+                .emitWith()
+        }
 
-    override suspend fun transferVerify(token: String, code: String): Result<Unit> =
+    override fun transferVerify(token: String, code: String): Flow<Result<Unit>> = safetyFlow {
         transferApi.transferVerify(TransferVerifyRequest(token, code)).toResultData().map { }
+    }
 
-    override suspend fun getCardOwnerByPan(pan: String): Result<String> =
+    override fun getCardOwnerByPan(pan: String): Flow<Result<String>> = safetyFlow {
         transferApi.getCardOwnerByPan(CardOwnerByPanRequest(pan)).toResultData().map { it.pan }
+    }
 
-    override suspend fun transferResend(token: String): Result<String> =
+    override fun transferResend(token: String): Flow<Result<String>> = safetyFlow {
         transferApi.transferResend(TransferResendRequest(token)).toResultData().map { it.token }
+    }
 
     override fun getHistory(size: Int, pageCount: Int): Flow<PagingData<TransferHistoryResponse>> =
         Pager(

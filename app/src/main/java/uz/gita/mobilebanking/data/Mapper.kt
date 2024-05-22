@@ -13,14 +13,16 @@ import uz.gita.mobilebanking.data.model.ui.TransferHistoryData
 
 fun CardGetResponse.toCardData() =
     CardData(
-        id = this.id.toString(),
-        pan = this.pan,
-        expiredYear = "${this.expiredYear}",
-        expiredMonth = "${this.expiredMonth}",
-        name = this.name,
-        money = "${this.amount}"
+        id = id,
+        name = name,
+        amount = amount,
+        owner = owner,
+        pan = pan,
+        expiredYear = expiredYear,
+        expiredMonth = expiredMonth,
+        themeType = themeType,
+        isVisible = isVisible,
     )
-
 
 fun HistoryChildResponse.toHistoryChild() =
     TransferHistoryChildData(

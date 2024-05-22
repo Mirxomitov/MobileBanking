@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -26,7 +25,7 @@ import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.my_cards.components.ItemCard
-import uz.gita.mobilebanking.ui.components.TopBarWithBack
+import uz.gita.mobilebanking.presentation.my_cards.components.TopBar
 import uz.gita.mobilebanking.ui.components.buttons.BoxedButton
 import uz.gita.mobilebanking.ui.dialogs.AddCardDialog
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
@@ -73,9 +72,8 @@ fun MyCardsContent(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopBarWithBack(
-                title = stringResource(R.string.my_cards2),
-                onClickIcon = { onEventDispatcher(MyCardsContract.Intent.Back) }
+            TopBar(
+                onClickBack = { onEventDispatcher(MyCardsContract.Intent.Back) }
             )
         }
     ) { paddingValues ->
@@ -121,12 +119,12 @@ fun ContentPreview() {
     MobileBankingTheme {
         MyCardsContent(previewStateOf(
             MyCardsContract.UIState(
-                listOf(
-                    CardData("", "0005", "2028", "6", "Personal", "100000"),
-                    CardData("", "0004", "2028", "6", "Personal", "100000"),
-                    CardData("", "0004", "2028", "6", "Personal", "100000"),
-                    CardData("", "0004", "2028", "6", "Personal", "100000"),
-                )
+//                listOf(
+//                    CardData("", "0005", "2028", "6", "Personal", "100000"),
+//                    CardData("", "0004", "2028", "6", "Personal", "100000"),
+//                    CardData("", "0004", "2028", "6", "Personal", "100000"),
+//                    CardData("", "0004", "2028", "6", "Personal", "100000"),
+//                )
             )
         ), {})
     }
@@ -135,12 +133,12 @@ fun ContentPreview() {
 @Preview
 @Composable
 fun ItemCardPreview() {
-    ItemCard(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp),
-        cardData = CardData(
-            "", "0005", "2028", "6", "Personal", "100000000"
-        )
-    )
+//    ItemCard(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .height(200.dp),
+//        cardData = CardData(
+//            "", "0005", "2028", "6", "Personal", "100000000"
+//        )
+//    )
 }

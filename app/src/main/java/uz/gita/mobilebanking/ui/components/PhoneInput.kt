@@ -42,7 +42,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayColor
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 
 @Composable
 fun PhoneInput(
@@ -68,7 +68,7 @@ fun PhoneInput(
             BasicTextField(
                 value = phone,
                 onValueChange = {
-                    logger("phone.length=${phone.length}")
+                    toLog("phone.length=${phone.length}")
                     if (it.length <= 9) {
                         phone = it.trim()
                         getInput(phone)
@@ -96,7 +96,7 @@ fun PhoneInput(
                     .size(24.dp)
                     .clickable(
                         onClick = {
-                            logger("onClick.Clear")
+                            toLog("onClick.Clear")
                             phone = ""
                             clear(phone)
                         },

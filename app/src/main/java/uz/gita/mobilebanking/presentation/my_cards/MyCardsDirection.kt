@@ -6,7 +6,6 @@ import javax.inject.Inject
 
 interface MyCardsDirection {
     suspend fun back()
-
     suspend fun toAddCardScreen()
 }
 

@@ -8,18 +8,24 @@ interface MainContract {
         fun onEventDispatcher(intent: Intent)
     }
 
-    data class UIState(
-        var cards: List<CardData> = listOf(),
-        val totalBalance: String = "",
-        val firstName: String = "",
-    )
+    sealed interface UIState {
+        data class Content(
+            var cards: List<CardData>,
+            val totalBalance: String,
+            val firstName: String,
+        ) : UIState
+
+        data object Loading : UIState
+        data class Error(val message: String) : UIState
+    }
 
     sealed interface SideEffect
     sealed interface Intent {
+        data class OpenCardDetails(val cardData: CardData) : Intent
+
         data object OpenProfileScreen : Intent
         data object OpenAddCardScreen : Intent
         data object OpenWhatIsIt : Intent
-        data object Init : Intent
         data object OpenMyCardsScreen : Intent
     }
 }

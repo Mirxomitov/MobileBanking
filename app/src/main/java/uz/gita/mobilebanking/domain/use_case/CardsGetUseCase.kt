@@ -9,7 +9,7 @@ import javax.inject.Inject
 class CardsGetUseCase @Inject constructor(
     private val cardRepository: CardRepository
 ) {
-    operator fun invoke(): Flow<Result<List<CardData>>> = safetyFlow {
-        emit(cardRepository.getCards())
-    }
+    operator fun invoke(): Flow<Result<List<CardData>>> =
+        cardRepository.getCards()
+
 }

@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.hisotory.components
+package uz.gita.mobilebanking.presentation.history.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

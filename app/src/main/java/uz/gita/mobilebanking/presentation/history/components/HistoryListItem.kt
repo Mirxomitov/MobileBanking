@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.hisotory.components
+package uz.gita.mobilebanking.presentation.history.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

@@ -56,8 +56,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.Constants
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.payments.components.ItemPaySmall
 import uz.gita.mobilebanking.presentation.payments.components.TrainTicket
@@ -71,9 +73,24 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.TextColorLight
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 
-class PaymentsScreen : Screen {
+object PaymentsScreen : Tab {
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title = stringResource(R.string.payment)
+            val icon = painterResource(id = R.drawable.wallet)
+
+            return remember {
+                TabOptions(
+                    index = 2u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
+
     @Composable
     override fun Content() {
         PaymentContent()
@@ -149,7 +166,7 @@ fun PaymentContent() {
                     .clickable(interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = {
-                            logger("request focus")
+                            toLog("request focus")
                             focusRequester.requestFocus()
                         }
                     )
@@ -216,10 +233,15 @@ fun PaymentContent() {
                 true -> Searching()
                 false -> Default()
             }
+
+            Spacer(
+                modifier = Modifier
+                    .padding(bottom = 12.dp)
+                    .height(Constants.BOTTOM_NAVIGATION_HEIGHT.dp)
+            )
         }
     }
 }
-
 
 @Composable
 private fun Searching() {
@@ -517,6 +539,7 @@ private fun Default() {
                 onClick = {}
             )
         }
+
     }
 }
 

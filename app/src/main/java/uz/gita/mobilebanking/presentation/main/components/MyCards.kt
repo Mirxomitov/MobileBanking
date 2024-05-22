@@ -45,7 +45,7 @@ import uz.gita.mobilebanking.utils.toValue
 
 @Composable
 fun MyCardsEmpty(
-    modifier: Modifier = Modifier, onClickAddCard: () -> Unit
+    modifier: Modifier = Modifier, onClickAddCard: () -> Unit,
 ) {
     Column(
         modifier
@@ -102,7 +102,7 @@ fun MyCardsEmpty(
 
 @Composable
 fun MyCardsOneCard(
-    modifier: Modifier = Modifier, onClickAddCard: () -> Unit, onClickCard: () -> Unit, card: CardData
+    modifier: Modifier = Modifier, onClickAddCard: () -> Unit, onClickCard: (CardData) -> Unit, card: CardData
 ) {
     Column(
         modifier = modifier
@@ -153,12 +153,9 @@ fun MyCardsOneCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .height(120.dp)
-                    .aspectRatio(ratio = 1.5857725f)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = onClickCard
-                    ), cardData = card
+                    .aspectRatio(ratio = 1.5857725f),
+                cardData = card,
+                onClick = { onClickCard(it) }
             )
         }
     }
@@ -222,26 +219,18 @@ fun MyCardsTwoCards(
             ItemCard(
                 modifier = Modifier
                     .height(96.dp)
-                    .fillMaxWidth()
-                    //.aspectRatio(ratio = 1.5857725f)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = onClickBackCard
-                    ), cardData = backCard
+                    .fillMaxWidth(),
+                cardData = backCard,
+                onClick = { onClickBackCard() }
             )
 
             ItemCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .height(96.dp)
-                    .fillMaxWidth()
-                    //.aspectRatio(ratio = 1.5857725f)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = onClickFrontCard
-                    ), cardData = frontCard
+                    .fillMaxWidth(),
+                cardData = frontCard,
+                onClick = { onClickFrontCard() }
             )
         }
     }
@@ -310,26 +299,16 @@ fun MyCardsMoreCards(
             ItemCard(
                 modifier = Modifier
                     .height(96.dp)
-                    .fillMaxWidth()
-                    //.aspectRatio(ratio = 1.5857725f)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = onClickFrontCard
-                    ), cardData = cards[0]
+                    .fillMaxWidth(), cardData = cards[0],
+                onClick = { onClickFrontCard() }
             )
 
             ItemCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .height(96.dp)
-                    .fillMaxWidth()
-                    //.aspectRatio(ratio = 1.5857725f)
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null,
-                        onClick = onClickBackCard
-                    ), cardData = cards[1]
+                    .fillMaxWidth(), cardData = cards[1],
+                onClick = { onClickBackCard() }
             )
         }
 
@@ -339,11 +318,12 @@ fun MyCardsMoreCards(
 @Composable
 private fun ItemCard(
     modifier: Modifier = Modifier,
-    cardData: CardData
+    cardData: CardData,
+    onClick: (CardData) -> Unit
 ) {
     val bankImageID = R.drawable.logo_tbc
     val typeImageID = R.drawable.uzcard_logo
-    val money = cardData.money
+    val money = cardData.amount
     val type = "Uzcard"
 
     Column(
@@ -356,7 +336,12 @@ private fun ItemCard(
             .angledGradientBackground(
                 colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
             )
-            .padding(8.dp), verticalArrangement = Arrangement.SpaceBetween
+            .padding(8.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = { onClick(cardData) }
+            ), verticalArrangement = Arrangement.SpaceBetween
     ) {
         Box(
             Modifier.fillMaxWidth()
@@ -388,7 +373,7 @@ private fun ItemCard(
             Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
         ) {
             TextBold(
-                text = money.toValue(), fontSize = 14.sp, color = Color.White
+                text = money.toString().toValue(), fontSize = 14.sp, color = Color.White
             )
             TextBold(
                 text = " " + stringResource(id = R.string.som), fontSize = 14.sp, color = Color(0x80FFFFFF)
@@ -410,31 +395,31 @@ private fun ItemCard(
 @Preview
 @Composable
 fun TwoCardsPreview() {
-    MyCardsTwoCards(
-        modifier = Modifier,
-        onClickAddCard = {},
-        onClickFrontCard = {},
-        onClickBackCard = {},
-        frontCard = CardData(
-            "", "", "", "", "", ""
-        ),
-        backCard = CardData(
-            "", "", "", "", "", ""
-        ),
-    )
+//    MyCardsTwoCards(
+//        modifier = Modifier,
+//        onClickAddCard = {},
+//        onClickFrontCard = {},
+//        onClickBackCard = {},
+//        frontCard = CardData(
+//
+//        ),
+//        backCard = CardData(
+//
+//        ),
+//    )
 }
 
 @[Composable Preview]
 fun MoreCardsPreview() {
-    MyCardsMoreCards(
-        onClickShowCards = {},
-        onClickFrontCard = {},
-        onClickBackCard = {},
-        cards = listOf(
-            CardData("", "", "", "", "", ""),
-            CardData("", "", "", "", "", ""),
-            CardData("", "", "", "", "", ""),
-            CardData("", "", "", "", "", ""),
-        )
-    )
+//    MyCardsMoreCards(
+//        onClickShowCards = {},
+//        onClickFrontCard = {},
+//        onClickBackCard = {},
+//        cards = listOf(
+//            CardData("", "", "", "", "", ""),
+//            CardData("", "", "", "", "", ""),
+//            CardData("", "", "", "", "", ""),
+//            CardData("", "", "", "", "", ""),
+//        )
+//    )
 }

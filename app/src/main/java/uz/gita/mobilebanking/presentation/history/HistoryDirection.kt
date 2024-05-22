@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.presentation.hisotory
+package uz.gita.mobilebanking.presentation.history
 
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject

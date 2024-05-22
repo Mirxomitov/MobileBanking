@@ -12,9 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.ui.components.custom_text.TextBold
+import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.GrayIcon
 
 @Composable
@@ -41,5 +46,7 @@ fun TopBar(
                     onClick = onClickBack
                 )
         )
+
+        TextBold(text = stringResource(id = R.string.my_cards2), fontSize = 18.sp, color = Color.Black)
     }
 }

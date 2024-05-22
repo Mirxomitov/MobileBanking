@@ -7,7 +7,7 @@ import androidx.core.text.isDigitsOnly
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 
 @ExperimentalGetImage
 class ImageAnalyzer(
@@ -51,7 +51,7 @@ class ImageAnalyzer(
                 }
 
                 if (cardNumber != "" && cardDate != "") {
-                    logger("cardNumber=$cardNumber, cardDate=$cardDate")
+                    toLog("cardNumber=$cardNumber, cardDate=$cardDate")
                     textListener(CardScanData(cardNumber, cardDate))
                 }
 
@@ -59,7 +59,7 @@ class ImageAnalyzer(
                 imageProxy.close()
             }.addOnFailureListener { e ->
                 e.printStackTrace()
-                logger("${e.message}")
+                toLog("${e.message}")
             }
         }
     }

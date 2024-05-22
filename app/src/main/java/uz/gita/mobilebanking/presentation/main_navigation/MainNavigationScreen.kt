@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
@@ -11,12 +12,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import uz.gita.mobilebanking.data.Constants.BOTTOM_NAVIGATION_HEIGHT
+import uz.gita.mobilebanking.presentation.history.HistoryScreen
+import uz.gita.mobilebanking.presentation.main.MainScreen
+import uz.gita.mobilebanking.presentation.payments.PaymentsScreen
+import uz.gita.mobilebanking.presentation.transfers.TransfersScreen
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
@@ -25,7 +32,7 @@ import uz.gita.mobilebanking.ui.theme.TextColor
 class MainNavigationScreen : Screen {
     @Composable
     override fun Content() {
-        TabNavigator(MainTab) {
+        TabNavigator(MainScreen) {
             Scaffold(
                 content = {
                     Box(modifier = Modifier.padding(it))
@@ -33,12 +40,14 @@ class MainNavigationScreen : Screen {
                 },
                 bottomBar = {
                     Row(
-                        modifier = Modifier.background(MainBgLight)
+                        modifier = Modifier
+                            .height(BOTTOM_NAVIGATION_HEIGHT.dp)
+                            .background(MainBgLight)
                     ) {
-                        TabNavigationItem(MainTab)
-                        TabNavigationItem(TransfersTab)
-                        TabNavigationItem(PaymentTab)
-                        TabNavigationItem(HistoryTab)
+                        TabNavigationItem(MainScreen)
+                        TabNavigationItem(TransfersScreen)
+                        TabNavigationItem(PaymentsScreen)
+                        TabNavigationItem(HistoryScreen)
                     }
                 }
             )

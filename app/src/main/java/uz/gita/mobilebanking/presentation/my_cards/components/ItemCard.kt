@@ -37,7 +37,7 @@ fun ItemCard(
     cardData: CardData
 ) {
     val typeImageID = R.drawable.uzcard_logo
-    val money = cardData.money
+    val money = cardData.amount.toString()
     val type = "Uzcard"
 
     Column(
@@ -107,5 +107,5 @@ fun ItemCard(
 @Preview
 @Composable
 fun ItemCardPreview() {
-    ItemCard(cardData = CardData("", "0005", "2028", "6", "Personal", "10000000"))
+    //ItemCard(cardData = CardData("", "0005", "2028", "6", "Personal", "10000000"))
 }

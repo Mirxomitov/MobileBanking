@@ -70,7 +70,7 @@ fun CardP2PSendItem(
             }
 
             Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                TextBoldBlack(text = cardData.money.toValue() + " ", color = TextColor)
+                TextBoldBlack(text = cardData.amount.toString().toValue() + " ", color = TextColor)
                 TextNormal(text = stringResource(id = R.string.som), color = TextColor)
             }
         }
@@ -89,9 +89,9 @@ fun CardP2PSendItem(
 @Preview
 @Composable
 private fun Preview() {
-    CardP2PSendItem(
-        modifier = Modifier,
-        onClickItem = {},
-            cardData = CardData("", "0004", "", "", "Personal", "1000000")
-    )
+//    CardP2PSendItem(
+//        modifier = Modifier,
+//        onClickItem = {},
+//            cardData = CardData("", "0004", "", "", "Personal", "1000000")
+//    )
 }

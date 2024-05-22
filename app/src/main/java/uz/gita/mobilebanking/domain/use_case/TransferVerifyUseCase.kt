@@ -12,7 +12,6 @@ class TransferVerifyUseCase @Inject constructor(
     operator fun invoke(
         token: String,
         code: String,
-    ): Flow<Result<Unit>> = safetyFlow {
-        emit(transferRepository.transferVerify(token, code))
-    }
+    ): Flow<Result<Unit>> = transferRepository.transferVerify(token, code)
+
 }

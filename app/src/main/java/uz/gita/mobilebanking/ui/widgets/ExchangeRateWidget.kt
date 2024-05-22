@@ -9,7 +9,7 @@ import android.widget.RemoteViews
 import uz.gita.mobilebanking.MainActivity
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.source.remote.currency.CurrencyThread
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 
 /**
  * Implementation of App Widget functionality.
@@ -54,13 +54,13 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     val refreshPendingIntent = PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_IMMUTABLE)
     views.setOnClickPendingIntent(R.id.refresh, refreshPendingIntent)
 
-    logger("UPDATE WIDGET id = $appWidgetId")
+    toLog("UPDATE WIDGET id = $appWidgetId")
 
     // update data
     CurrencyThread { list ->
         if (list.isEmpty()) return@CurrencyThread
 
-        logger("CURRENCY THREAD ${list.size}")
+        toLog("CURRENCY THREAD ${list.size}")
         for (it in list) {
             if (it.Ccy == "USD") {
                 views.setTextViewText(R.id.usd_cb, it.Rate)
@@ -78,7 +78,7 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
                 views.setTextViewText(R.id.rub_cb, it.Rate)
                 views.setTextViewText(R.id.rub_buy, "${(it.Rate.toFloat() + 12).toInt()}.00")
                 views.setTextViewText(R.id.rub_sell, "${(it.Rate.toFloat() - 4).toInt()}.00")
-                logger("update widget data")
+                toLog("update widget data")
                 appWidgetManager.updateAppWidget(appWidgetId, views)
             }
         }

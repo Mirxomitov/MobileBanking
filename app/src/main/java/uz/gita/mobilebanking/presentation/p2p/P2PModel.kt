@@ -10,7 +10,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.domain.use_case.TransferUseCase
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +27,7 @@ class P2PModel @Inject constructor(
                     it.onSuccess { token ->
                         p2PDirection.toTransferVerifyScreen(token)
                     }
-                    it.onFailure { logger("on failure transfer ${it.message}") }
+                    it.onFailure { toLog("on failure transfer ${it.message}") }
                 }.launchIn(viewModelScope)
             }
 

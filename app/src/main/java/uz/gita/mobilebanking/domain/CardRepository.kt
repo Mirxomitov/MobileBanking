@@ -5,7 +5,8 @@ import uz.gita.mobilebanking.data.model.ui.CardData
 
 
 interface CardRepository {
-    suspend fun addCard(cardNumber: String, expirationDate: String): Result<Unit>
-    suspend fun getCards(): Result<List<CardData>>
-    suspend fun deleteCard(id: String): Result<Unit>
+    fun addCard(cardNumber: String, expirationDate: String): Flow<Result<Unit>>
+    fun getCards(): Flow<Result<List<CardData>>>
+    fun deleteCard(id: String): Flow<Result<Unit>>
+    fun updateCard(id: Int, name: String, themeType: Int, visible: Boolean): Flow<Result<List<CardData>>>
 }

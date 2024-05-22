@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 
 @Composable
 fun CodeWriter(
@@ -58,7 +58,7 @@ fun CodeWriter(
                         modifier = Modifier,
                         number = "${i * 3 + j}",
                         onClick = { number ->
-                            logger("isClickNumbersEnabled = $isClickNumbersEnabled")
+                            toLog("isClickNumbersEnabled = $isClickNumbersEnabled")
                             if (isClickNumbersEnabled)
                                 if (currentPos < correctUserPin.length - 1) {
                                     currentPassword.append(number)

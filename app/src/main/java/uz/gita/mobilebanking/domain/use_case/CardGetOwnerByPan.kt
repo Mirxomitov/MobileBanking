@@ -9,7 +9,5 @@ import javax.inject.Inject
 class CardGetOwnerByPan @Inject constructor(
     private val transferRepository: TransferRepository
 ) {
-    operator fun invoke(pan: String): Flow<Result<String>> = safetyFlow {
-        emit(transferRepository.getCardOwnerByPan(pan))
-    }
+    operator fun invoke(pan: String): Flow<Result<String>> = transferRepository.getCardOwnerByPan(pan)
 }

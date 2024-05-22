@@ -104,8 +104,8 @@ fun ChangeCardPreview() {
     MobileBankingTheme {
         ChangeCardContent(
             cards = listOf(
-                CardData("", "0003", "", "", "Personal", "66600"),
-                CardData("", "0004", "", "", "Personal", "1000000")
+//                CardData("", "0003", "", "", "Personal", "66600"),
+//                CardData("", "0004", "", "", "Personal", "1000000")
             ),
             onClickAddCard = {},
             onClickCard = {},

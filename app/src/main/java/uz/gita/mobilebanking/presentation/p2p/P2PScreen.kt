@@ -156,7 +156,7 @@ private fun P2PContent(
                     onClick = {
                         onEventDispatcher(
                             P2PContract.Intent.Pay(
-                                senderId = activeCard.id,
+                                senderId = activeCard.id.toString(),
                                 receiverPan = state.receiverPan,
                                 amount = transferAmount
                             )
@@ -183,8 +183,8 @@ fun P2PPreview() {
         uiState = previewStateOf(
             value = P2PContract.UIState.Content(
                 receiverPan = "0002", ownerName = "Tohir Mirxomitov", cards = listOf(
-                    CardData("1", "0001", "2025", "4", "Personal", "2000000"),
-                    CardData("2", "0002", "2025", "5", "Personal", "2000000"),
+//                    CardData("1", "0001", "2025", "4", "Personal", "2000000"),
+//                    CardData("2", "0002", "2025", "5", "Personal", "2000000"),
                 )
             )
         ),

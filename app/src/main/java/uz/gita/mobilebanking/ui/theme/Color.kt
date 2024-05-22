@@ -38,5 +38,7 @@ val p2pScreenBg = Color(0xFFFEFEFE)
 val ShadowColorCard = Color(0xEBF5F5F5)
 
 val profileBgLight = Color(0xFFF0F6FA)
-
-
+val bgWithCards = Color(0xFFF3F4FA)
+val selectedItemColor = Color(0xFF17A53C)
+val colorInputBg = Color(0xFFECEDEE)
+val unSelectedItemColor = Color(0xFF757575)

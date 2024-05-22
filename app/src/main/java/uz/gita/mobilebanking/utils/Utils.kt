@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
+import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.utils.biometric.BiometricAuthenticator
 import java.text.SimpleDateFormat
@@ -27,11 +28,11 @@ import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.sin
 
-fun logger(message: String, tag: String = "TTT") {
+fun toLog(message: String, tag: String = "TTT") {
     Timber.tag(tag).d(message)
 }
 
-fun String.logger(msg: String = "", tag: String = "TTT") {
+fun String.toLog(msg: String = "", tag: String = "TTT") {
     Timber.tag(tag).d("%s%s", msg, this)
 }
 
@@ -182,7 +183,27 @@ fun String.toValue(): String {
 fun String.toFullMonth() =
     if (this.length == 1) "0$this" else this
 
-fun CardData.toCardExpirationDate() = "${this.expiredMonth.toFullMonth()} / ${this.expiredYear.substring(2, 4)}"
+fun CardData.toCardExpirationDate() = "${this.expiredMonth.toString().toFullMonth()} / ${this.expiredYear.toString().substring(2, 4)}"
 
 @Composable
 fun <T> previewStateOf(value: T) = remember { mutableStateOf(value) }
+
+fun getGradient(type: Int) : Brush = when(type) {
+    0 -> { Brush.verticalGradient(listOf(Color(0xFF0063B5), Color(0xFF00EBC8))) }
+    1 -> { Brush.verticalGradient(listOf(Color(0xFF06693a), Color(0xFF20d970))) }
+    2 -> { Brush.verticalGradient(listOf(Color(0xFF5b0a8a), Color(0xFFa9518d))) }
+    3 -> { Brush.verticalGradient(listOf(Color(0xFF930709), Color(0xFFff9c63))) }
+    4 -> { Brush.verticalGradient(listOf(Color(0xFF886e33), Color(0xFFffd645))) }
+    5 -> { Brush.verticalGradient(listOf(Color(0xFF282a75), Color(0xFF009ffd))) }
+    6 -> { Brush.verticalGradient(listOf(Color(0xFF191a1f), Color(0xFF55555f))) }
+    7 -> { Brush.verticalGradient(listOf(Color(0xFF6c0f17), Color(0xFFbd1373))) }
+    else -> { Brush.verticalGradient(listOf(Color(0xFFa95403), Color(0xFFecbe38))) }
+}
+
+fun getCardType(cardNumbers: String) : Int {
+    return if (cardNumbers.startsWith("9860")) R.drawable.ic_paymentsystem_humo
+    else if (cardNumbers.startsWith("8600")) R.drawable.ic_paymentsystem_uzcard
+    else if (cardNumbers.startsWith("5440")) R.drawable.ic_paymentsystem_uzcard
+    else if (cardNumbers.startsWith("5614")) R.drawable.ic_paymentsystem_uzcard
+    else R.drawable.ic_paymentsystem_humo
+}

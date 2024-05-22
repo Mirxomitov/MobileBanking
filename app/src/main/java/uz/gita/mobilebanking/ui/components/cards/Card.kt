@@ -67,7 +67,7 @@ fun Card(
             }
 
             Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                TextBoldBlack(text = cardData.money.toValue() + " ", color = TextColor)
+                TextBoldBlack(text = cardData.amount.toString().toValue() + " ", color = TextColor)
                 TextNormal(text = stringResource(id = R.string.som), color = TextColor)
             }
         }
@@ -77,9 +77,9 @@ fun Card(
 @Preview
 @Composable
 private fun Preview() {
-    Card(
+    /*Card(
         modifier = Modifier,
         onClickItem = {},
         cardData = CardData("", "0004", "", "", "Personal", "1000000")
-    )
+    )*/
 }

@@ -2,8 +2,10 @@ package uz.gita.mobilebanking.presentation.transfers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,11 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
 import org.orbitmvi.orbit.compose.collectAsState
+import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.Constants
 import uz.gita.mobilebanking.presentation.transfers.components.CardNotFound
 import uz.gita.mobilebanking.presentation.transfers.components.DefaultState
 import uz.gita.mobilebanking.presentation.transfers.components.SearchBar
@@ -30,14 +37,28 @@ import uz.gita.mobilebanking.presentation.transfers.components.TopBarTransfer
 import uz.gita.mobilebanking.ui.components.cards.CardP2PWithCardNumber
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.previewStateOf
+import uz.gita.mobilebanking.utils.toLog
 
-data class TransfersScreen(val cardNumber: String = "") : Screen {
+object TransfersScreen : Tab {
+    override val options: TabOptions
+        @Composable
+        get() {
+            val title = stringResource(R.string.transfers)
+            val icon = painterResource(id = R.drawable.ic_action_transfers)
+
+            return remember {
+                TabOptions(
+                    index = 1u,
+                    title = title,
+                    icon = icon
+                )
+            }
+        }
+
     @Composable
     override fun Content() {
         val viewModel: TransferContract.Model = getViewModel<TransferModel>()
-        viewModel.initCardNumber(cardNumber)
 
         TransactionsScreenContent(
             viewModel.collectAsState(),
@@ -101,7 +122,7 @@ private fun TransactionsScreenContent(
                 }
             )
 
-            logger("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
+            toLog("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
 
             if (isSearchingStateActive) {
                 if (uiState.value.ownerName.isNotEmpty() && uiState.value.pan.length == 16) {
@@ -110,7 +131,7 @@ private fun TransactionsScreenContent(
                         cardNumber = uiState.value.pan,
                         ownerName = uiState.value.ownerName,
                         onClickItem = {
-                            logger("pan = ${uiState.value.pan}")
+                            toLog("pan = ${uiState.value.pan}")
                             onEventDispatchers(
                                 TransferContract.Intent.ToP2PScreen(
                                     pan = uiState.value.pan,
@@ -136,6 +157,12 @@ private fun TransactionsScreenContent(
                     }
                 )
             }
+
+            Spacer(
+                modifier = Modifier
+                    .padding(bottom = 12.dp)
+                    .height(Constants.BOTTOM_NAVIGATION_HEIGHT.dp)
+            )
         }
     }
 }
