@@ -20,14 +20,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.model.ui.FullInfoData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.utils.containsOnlyNumbers
+import uz.gita.mobilebanking.utils.toPhoneNumber
 
 @Composable
 fun UserInfo(
     modifier: Modifier = Modifier,
+    userData: FullInfoData
 ) {
     Column(
         modifier = modifier
@@ -46,15 +50,15 @@ fun UserInfo(
 
             TextBold(
                 letterSpacing = 0.8.sp,
-                text = "TOHIR MIRXOMITOV MIROLIM O'G'LI",
+                text = "${userData.firstName} ${userData.lastName}",
                 color = Black,
                 fontSize = 18.sp,
                 modifier = Modifier.padding(start = 8.dp)
             )
             TextBold(
                 letterSpacing = 0.8.sp,
-                text = "+998 90 355 36 20",
-                color = textColor,
+                text = userData.phone.toPhoneNumber(),
+                color = TextColor,
                 modifier = Modifier.padding(top = 12.dp, start = 8.dp)
             )
             Column(
@@ -91,7 +95,7 @@ fun UserInfo(
                             letterSpacing = 0.8.sp,
                             text = "Sizning holatingiz",
                             fontSize = 14.sp,
-                            color = textColor
+                            color = TextColor
                         )
 
                         TextBold(
@@ -113,6 +117,14 @@ fun Preview() {
     UserInfo(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(2.dp)
+            .padding(2.dp),
+        userData = FullInfoData(
+            0L,
+            "Tohir",
+            0,
+            "Mirxomitov",
+            "+998903553620"
+        )
     )
 }
+

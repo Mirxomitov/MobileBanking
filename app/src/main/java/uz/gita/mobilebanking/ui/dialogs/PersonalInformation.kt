@@ -31,7 +31,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.GrayIcon
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
 import java.io.Serializable
 
@@ -86,7 +86,7 @@ private fun PersonalInformationContent(
 
         TextNormal(
             modifier = Modifier.padding(top = 12.dp),
-            color = textColor, text = stringResource(R.string.call_us_if_your_identification_data_changed),
+            color = TextColor, text = stringResource(R.string.call_us_if_your_identification_data_changed),
             fontSize = 16.sp,
         )
 
@@ -116,7 +116,7 @@ private fun Item(
 ) {
     Column(modifier) {
         TextNormal(color = TextColorLight, text = description)
-        TextNormal(color = textColor, text = value.uppercase())
+        TextNormal(color = TextColor, text = value.uppercase())
     }
 }
 

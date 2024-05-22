@@ -29,7 +29,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun MyHome(
@@ -63,7 +63,7 @@ fun MyHome(
 
             TextNormal(
                 text = stringResource(R.string.pay_in_time_to_elektr_gas_and_call),
-                color = textColor,
+                color = TextColor,
                 fontSize = 14.sp
             )
 

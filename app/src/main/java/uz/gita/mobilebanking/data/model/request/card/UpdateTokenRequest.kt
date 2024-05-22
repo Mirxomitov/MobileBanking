@@ -1,4 +1,4 @@
-package uz.gita.mobilebanking.data.model.request
+package uz.gita.mobilebanking.data.model.request.card
 
 import com.google.gson.annotations.SerializedName
 

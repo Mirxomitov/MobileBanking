@@ -20,7 +20,7 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 class MainNavigationScreen : Screen {
     @Composable
@@ -64,7 +64,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
             TextNormal(
                 text = tab.options.title,
                 fontSize = 10.sp,
-                color = textColor
+                color = TextColor
             )
         },
     )

@@ -23,7 +23,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.CardColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
@@ -71,8 +71,8 @@ fun ItemPaySmall(
                 .background(Color(0xFF63D18C))
                 .padding(4.dp)
         ) {
-            TextNormal(color = textColor, fontSize = 14.sp, text = "2.2")
-            TextNormal(color = textColor, fontSize = 14.sp, text = "%")
+            TextNormal(color = TextColor, fontSize = 14.sp, text = "2.2")
+            TextNormal(color = TextColor, fontSize = 14.sp, text = "%")
         }
     }
 }

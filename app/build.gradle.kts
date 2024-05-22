@@ -66,7 +66,8 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    //implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3-android:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -154,5 +155,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:$appcompat_version")
     implementation("androidx.appcompat:appcompat-resources:$appcompat_version")
 
-
+    // pagination compose paging3
+    val pagingVersion = "3.3.0"
+    implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
+    implementation("androidx.paging:paging-compose:3.3.0")
 }

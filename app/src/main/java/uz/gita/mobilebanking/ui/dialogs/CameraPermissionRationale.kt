@@ -35,7 +35,7 @@ import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 data class CameraPermissionRationaleDialog(val onHide: () -> Unit) : Screen {
     @Composable
@@ -76,7 +76,7 @@ fun CameraPermissionRationaleDialogContent(onHide: () -> Unit) {
                 Modifier
                     .size(12.dp)
                     .align(Alignment.Center),
-                tint = textColor
+                tint = TextColor
             )
         }
 

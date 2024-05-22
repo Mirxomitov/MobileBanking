@@ -1,6 +1,7 @@
 package uz.gita.mobilebanking.presentation.profile
 
 import org.orbitmvi.orbit.ContainerHost
+import uz.gita.mobilebanking.data.model.ui.FullInfoData
 
 interface ProfileContract {
 
@@ -8,7 +9,9 @@ interface ProfileContract {
         fun onEventDispatchers(intent : Intent)
     }
 
-    data object UIState
+    data class UIState(
+        val fullInfoData: FullInfoData? = null
+    )
     sealed interface Intent {
         data object Back : Intent
         data object ToMaps : Intent

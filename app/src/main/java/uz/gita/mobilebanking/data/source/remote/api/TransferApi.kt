@@ -9,6 +9,7 @@ import uz.gita.mobilebanking.data.model.request.transfer.CardOwnerByPanRequest
 import uz.gita.mobilebanking.data.model.request.transfer.TransferRequest
 import uz.gita.mobilebanking.data.model.request.transfer.TransferResendRequest
 import uz.gita.mobilebanking.data.model.request.transfer.TransferVerifyRequest
+import uz.gita.mobilebanking.data.model.response.base.BaseChildResponse
 import uz.gita.mobilebanking.data.model.response.transfer.CardOwnerByPanResponse
 import uz.gita.mobilebanking.data.model.response.transfer.TransferHistoryResponse
 import uz.gita.mobilebanking.data.model.response.transfer.TransferResendResponse
@@ -30,6 +31,5 @@ interface TransferApi {
 
     @GET("mobile-bank/v1/transfer/history")
     suspend fun getHistory(@Query("size") size: Int, @Query("current-page") currentPage: Int)
-            : Response<TransferHistoryResponse>
-
+            : Response<BaseChildResponse<TransferHistoryResponse>>
 }

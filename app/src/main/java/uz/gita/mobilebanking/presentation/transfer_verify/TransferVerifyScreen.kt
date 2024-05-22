@@ -43,7 +43,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 import uz.gita.mobilebanking.ui.theme.errorColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.utils.hidePartOfNumber
 import uz.gita.mobilebanking.utils.previewStateOf
 
@@ -108,7 +108,7 @@ fun VerifyContent(
             TextNormalBlack(
                 text = uiState.value.phoneNumber.hidePartOfNumber(),
                 fontSize = 12.sp,
-                color = textColor,
+                color = TextColor,
                 letterSpacing = 0.8.sp
             )
 
@@ -116,7 +116,7 @@ fun VerifyContent(
                 text = stringResource(R.string.sent_to_number),
                 fontSize = 12.sp,
                 letterSpacing = 0.8.sp,
-                color = textColor
+                color = TextColor
             )
         }
 

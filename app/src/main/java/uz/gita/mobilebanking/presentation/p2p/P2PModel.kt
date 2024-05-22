@@ -20,10 +20,6 @@ class P2PModel @Inject constructor(
     private val cardsGetUseCase: CardsGetUseCase
 ) : ViewModel(), P2PContract.Model {
 
-    init {
-        getCards()
-    }
-
     override fun onEventDispatcher(intent: P2PContract.Intent) {
         when (intent) {
             is P2PContract.Intent.Pay -> {
@@ -38,13 +34,14 @@ class P2PModel @Inject constructor(
             is P2PContract.Intent.SaveReceiverData -> {
                 intent {
                     reduce {
-                        P2PContract.UIState(
-                            cards = this.state.cards,
+                        P2PContract.UIState.Content(
+                            cards = emptyList(),
                             receiverPan = intent.receiverPan,
                             ownerName = intent.ownerName
                         )
                     }
                 }
+                getCards()
             }
 
             P2PContract.Intent.AddCard -> intent { p2PDirection.toAddCardScreen() }
@@ -57,18 +54,20 @@ class P2PModel @Inject constructor(
             it.onSuccess {
                 intent {
                     reduce {
-                        P2PContract.UIState(
+                        P2PContract.UIState.Content(
                             cards = it,
-                            receiverPan = this.state.receiverPan,
-                            ownerName = this.state.ownerName,
+                            receiverPan = (container.stateFlow.value as P2PContract.UIState.Content).receiverPan,
+                            ownerName = (container.stateFlow.value as P2PContract.UIState.Content).ownerName,
                         )
                     }
                 }
             }
-            it.onFailure { }
+            it.onFailure {
+                intent { reduce { P2PContract.UIState.Error(it.message ?: "an unknown error occurred") } }
+            }
         }.launchIn(viewModelScope)
     }
 
-    override val container =
-        container<P2PContract.UIState, P2PContract.SideEffect>(P2PContract.UIState())
+
+    override val container = container<P2PContract.UIState, P2PContract.SideEffect>(P2PContract.UIState.Loading)
 }

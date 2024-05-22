@@ -27,7 +27,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.utils.toValue
 
 @Composable
@@ -70,8 +70,8 @@ fun CardP2PSendItem(
             }
 
             Row(modifier = Modifier.padding(bottom = 4.dp)) {
-                TextBoldBlack(text = cardData.money.toValue() + " ", color = textColor)
-                TextNormal(text = stringResource(id = R.string.som), color = textColor)
+                TextBoldBlack(text = cardData.money.toValue() + " ", color = TextColor)
+                TextNormal(text = stringResource(id = R.string.som), color = TextColor)
             }
         }
 

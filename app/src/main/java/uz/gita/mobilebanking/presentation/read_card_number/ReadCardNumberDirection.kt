@@ -7,6 +7,8 @@ import javax.inject.Inject
 interface ReadCardNumberDirection {
     suspend fun back()
     suspend fun backWithData(cardNumber: String, expirationDate: String)
+
+    suspend fun backWithCardNumber(cardNumber: String)
 }
 
 class ReadCardNumberDirectionImpl @Inject constructor(
@@ -21,5 +23,9 @@ class ReadCardNumberDirectionImpl @Inject constructor(
         appNavigator.replaceScreen(
             AddCardScreen(cardNumber = cardNumber, expirationDate = expirationDate)
         )
+    }
+
+    override suspend fun backWithCardNumber(cardNumber: String) {
+        appNavigator.back()
     }
 }

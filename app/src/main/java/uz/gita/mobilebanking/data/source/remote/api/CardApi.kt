@@ -8,11 +8,11 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import uz.gita.mobilebanking.data.model.request.card.CardAddRequest
-import uz.gita.mobilebanking.data.model.request.UpdateTokenRequest
+import uz.gita.mobilebanking.data.model.request.card.UpdateTokenRequest
 import uz.gita.mobilebanking.data.model.response.card.CardAddResponse
 import uz.gita.mobilebanking.data.model.response.card.CardDeleteResponse
 import uz.gita.mobilebanking.data.model.response.card.CardGetResponse
-import uz.gita.mobilebanking.data.model.response.UpdateTokenResponse
+import uz.gita.mobilebanking.data.model.response.card.UpdateTokenResponse
 
 interface CardApi {
     @POST("mobile-bank/v1/card")

@@ -1,5 +1,6 @@
 package uz.gita.mobilebanking.presentation.transfers.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.toRussiaColor
 import uz.gita.mobilebanking.ui.theme.toUzbColor
 import uz.gita.mobilebanking.ui.theme.transactionItemColor
@@ -22,7 +24,9 @@ fun DefaultState(
     onClickLastPayedCard: () -> Unit,
 ) {
     LazyRow(
-        contentPadding = PaddingValues(start = 12.dp), modifier = Modifier.padding(top = 24.dp)
+        contentPadding = PaddingValues(start = 12.dp), modifier = Modifier
+            .background(CardColor)
+            .padding(top = 24.dp)
     ) {
         items(0) {
             LastPayedCards(
@@ -83,7 +87,7 @@ fun DefaultState(
         modifier = Modifier.padding(top = 36.dp, start = 12.dp)
     )
 
-    Row(modifier = Modifier.padding(top = 24.dp, start = 12.dp)) {
+    Row(modifier = Modifier.padding(top = 24.dp).padding(horizontal = 12.dp)) {
         TransferToCountry(
             modifier = Modifier
                 .weight(1f)

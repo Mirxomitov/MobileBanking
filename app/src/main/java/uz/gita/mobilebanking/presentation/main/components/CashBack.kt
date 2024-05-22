@@ -27,7 +27,7 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.GrayColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun CashBack(
@@ -50,7 +50,7 @@ fun CashBack(
         TextNormal(
             text = stringResource(id = R.string.balance),
             modifier = Modifier.padding(top = 8.dp),
-            color = textColor,
+            color = TextColor,
             fontSize = 14.sp
         )
 
@@ -62,7 +62,7 @@ fun CashBack(
             )
 
             TextBold(
-                text = "\t" + stringResource(id = R.string.som), fontSize = 18.sp, color = textColor
+                text = "\t" + stringResource(id = R.string.som), fontSize = 18.sp, color = TextColor
             )
         }
 
@@ -80,7 +80,7 @@ fun CashBack(
         ) {
 
             Row(Modifier, verticalAlignment = Alignment.CenterVertically) {
-                TextNormal(text = "Bugun", color = textColor, fontSize = 12.sp)
+                TextNormal(text = "Bugun", color = TextColor, fontSize = 12.sp)
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
                     Modifier

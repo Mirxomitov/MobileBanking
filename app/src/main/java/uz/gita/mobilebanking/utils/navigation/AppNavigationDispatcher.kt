@@ -32,7 +32,7 @@ class AppNavigationDispatcher @Inject constructor() : AppNavigator, AppNavigatio
         popUntilRoot()
     }
 
-    override suspend fun replaceAll(screen : MyScreen) = mNavigate{
+    override suspend fun replaceAll(screen: MyScreen) = mNavigate {
         replaceAll(screen)
     }
 }

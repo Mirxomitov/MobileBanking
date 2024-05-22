@@ -19,7 +19,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayIcon
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun ButtonWithTimer(
@@ -34,7 +34,7 @@ fun ButtonWithTimer(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            contentColor = textColor,
+            contentColor = TextColor,
             disabledContentColor = AuthComponentBg,
             containerColor = AuthComponentBg,
             disabledContainerColor = AuthComponentBg,
@@ -52,8 +52,8 @@ fun ButtonWithTimer(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        if (isSecondsVisible) TextBold(text = time.toString(), fontSize = 18.sp, color = textColor)
-        if (isSecondsVisible) TextBold(text = stringResource(R.string.sec), fontSize = 18.sp, color = textColor)
+        if (isSecondsVisible) TextBold(text = time.toString(), fontSize = 18.sp, color = TextColor)
+        if (isSecondsVisible) TextBold(text = stringResource(R.string.sec), fontSize = 18.sp, color = TextColor)
         else Spacer(modifier = Modifier.width(42.dp))
     }
 }

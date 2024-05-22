@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.TokenAuthenticator
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
+import uz.gita.mobilebanking.data.source.remote.api.HomeApi
 import uz.gita.mobilebanking.data.source.remote.api.RegistrationApi
 import uz.gita.mobilebanking.data.source.remote.api.TransferApi
 import javax.inject.Provider
@@ -57,4 +58,8 @@ class NetworkModule {
     @[Provides Singleton]
     fun provideTransferApi(retrofit: Retrofit): TransferApi =
         retrofit.create(TransferApi::class.java)
+
+    @[Provides Singleton]
+    fun provideHomeApi(retrofit: Retrofit): HomeApi =
+        retrofit.create(HomeApi::class.java)
 }

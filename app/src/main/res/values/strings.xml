@@ -152,5 +152,7 @@
     <string name="until_2_2_percent_cash_back">2.2% gacha keshbek</string>
     <string name="fill_cash_back_wallet">Paynet kartasi orqali to\'lovni amalga oshirganingizda keshbek hisobingizni keshbek bilan to\'ldiring</string>
     <string name="scan_card">Kartani skanerlang</string>
+    <string name="we_cant_found_such_card">Biz bunday kartani topa olmadik</string>
+    <string name="may_be_number_is_not_correct">Balki raqamda xatolik bordir</string>
 
 </resources>

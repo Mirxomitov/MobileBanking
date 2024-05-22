@@ -40,8 +40,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.dialogs.ChangeLanguage
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 class AuthScreen : Screen {
     @Composable
@@ -132,7 +131,7 @@ private fun AuthScreenContent(
             text = stringResource(
                 id = R.string.to_be_customer_or_enter
             ),
-            color = textColor,
+            color = TextColor,
             fontSize = 12.sp,
             modifier = Modifier.padding(top = 4.dp),
         )

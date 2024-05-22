@@ -28,7 +28,6 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 fun MyInformation(
     modifier: Modifier = Modifier
 ) {
-
     val textColor = Color(0xFF1D1D1D)
 
     Column(

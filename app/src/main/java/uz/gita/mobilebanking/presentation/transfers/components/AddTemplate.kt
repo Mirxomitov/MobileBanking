@@ -24,7 +24,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayIcon
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun AddTemplate(
@@ -62,7 +62,7 @@ fun AddTemplate(
             text = stringResource(id = R.string.add),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            color = textColor,
+            color = TextColor,
             fontSize = 12.sp,
             letterSpacing = 0.8.sp,
             textAlign = TextAlign.Center,

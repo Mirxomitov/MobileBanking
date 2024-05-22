@@ -5,12 +5,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.orbitmvi.orbit.syntax.simple.SimpleContext
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.TransferVerifyUseCase
-import uz.gita.mobilebanking.presentation.main.TransferResendUseCase
+import uz.gita.mobilebanking.domain.use_case.TransferResendUseCase
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 

@@ -5,17 +5,30 @@
       <entry key="ChangeCardPreview">
         <State />
       </entry>
-      <entry key="ContentPreview">
+      <entry key="P2PPreview">
         <State />
       </entry>
-      <entry key="P2PPreview">
+      <entry key="ProfileContentPreview">
         <State />
       </entry>
       <entry key="TransactionsScreenPreview">
         <State />
       </entry>
       <entry key="app">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\User\.android\avd\Medium_Phone_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-05-19T17:16:28.501099300Z" />
+        </State>
       </entry>
     </value>
   </component>

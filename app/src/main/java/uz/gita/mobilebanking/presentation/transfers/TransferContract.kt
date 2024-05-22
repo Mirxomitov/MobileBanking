@@ -5,11 +5,13 @@ import org.orbitmvi.orbit.ContainerHost
 interface TransferContract {
     interface Model : ContainerHost<UIState, SideEffect> {
         fun onEventDispatchers(intent: Intent)
+        fun initCardNumber(cardNumber: String)
     }
 
     data class UIState(
         var ownerName: String = "",
-        val pan: String = ""
+        val pan: String = "",
+        val cardNumber: String = ""
     )
 
     interface SideEffect

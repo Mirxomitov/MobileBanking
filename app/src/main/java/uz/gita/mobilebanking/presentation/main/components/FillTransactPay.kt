@@ -33,7 +33,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun FillTransactPay(
@@ -111,12 +111,12 @@ fun FillTransactPay(
                         TextNormal(
                             text = stringResource(id = R.string.pay_net_card) + " * ",
                             fontSize = 14.sp,
-                            color = textColor
+                            color = TextColor
                         )
                         TextNormal(
                             modifier = Modifier.padding(top = 2.dp),
                             text = cardNumber, fontSize = 14.sp,
-                            color = textColor
+                            color = TextColor
                         )
                     }
 

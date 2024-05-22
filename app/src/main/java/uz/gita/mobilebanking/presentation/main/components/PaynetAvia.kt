@@ -35,7 +35,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
@@ -78,7 +78,7 @@ fun PaynetAvia(modifier: Modifier = Modifier) {
                         )
                     }
 
-                    TextNormal(text = stringResource(R.string.useful_and_reliable), color = textColor, fontSize = 14.sp)
+                    TextNormal(text = stringResource(R.string.useful_and_reliable), color = TextColor, fontSize = 14.sp)
                 }
 
                 Image(

@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun TrainTicket(modifier: Modifier = Modifier) {
@@ -57,7 +57,7 @@ fun TrainTicket(modifier: Modifier = Modifier) {
                 ) {
                     TextBold(text = stringResource(id = R.string.train_ticket), fontSize = 18.sp)
 
-                    TextNormal(text = stringResource(R.string.convenient_and_fast), color = textColor, fontSize = 14.sp)
+                    TextNormal(text = stringResource(R.string.convenient_and_fast), color = TextColor, fontSize = 14.sp)
                 }
 
                 Image(

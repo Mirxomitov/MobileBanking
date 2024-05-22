@@ -34,7 +34,7 @@ import uz.gita.mobilebanking.ui.components.custom_writers.PinCodeCircle
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.circleDefaultColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.utils.hidePartOfNumber
 
 class PinCreateScreen : Screen {
@@ -90,14 +90,14 @@ private fun CreatePinContent(
                 text = stringResource(id = R.string.your_phone_number),
                 fontSize = 14.sp,
                 letterSpacing = 0.8.sp,
-                color = textColor,
+                color = TextColor,
             )
 
             TextNormalBlack(
                 modifier = Modifier.padding(top = 2.dp),
                 text = uiState.phoneNumber.hidePartOfNumber(),
                 fontSize = 14.sp,
-                color = textColor,
+                color = TextColor,
                 letterSpacing = 0.8.sp
             )
 

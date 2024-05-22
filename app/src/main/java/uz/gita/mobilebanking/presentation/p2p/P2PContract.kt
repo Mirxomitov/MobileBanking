@@ -9,11 +9,15 @@ interface P2PContract {
         fun onEventDispatcher(intent: Intent)
     }
 
-    data class UIState(
-        val cards: List<CardData> = emptyList(),
-        val receiverPan: String = "",
-        val ownerName: String = "",
-    )
+    sealed interface UIState {
+        data class Content(
+            val cards: List<CardData> = emptyList(),
+            val receiverPan: String = "",
+            val ownerName: String = "",
+            ) : UIState
+        data object Loading : UIState
+        data class Error(val message :String,) : UIState
+    }
 
     sealed interface SideEffect
     sealed interface Intent {

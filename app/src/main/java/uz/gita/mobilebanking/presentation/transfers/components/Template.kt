@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun Template(
@@ -60,7 +60,7 @@ fun Template(
             text = firstName,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            color = textColor,
+            color = TextColor,
             fontSize = 12.sp,
             letterSpacing = 0.8.sp,
             textAlign = TextAlign.Center,

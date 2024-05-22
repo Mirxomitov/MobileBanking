@@ -27,6 +27,11 @@ class TransferModel @Inject constructor(
                             reduce { TransferContract.UIState(ownerName = ownerName, pan = intent.pan) }
                         }
                     }
+                    it.onFailure {
+                        intent {
+                            reduce { TransferContract.UIState(ownerName = "", pan = intent.pan) }
+                        }
+                    }
                 }.launchIn(viewModelScope)
             }
 
@@ -34,5 +39,10 @@ class TransferModel @Inject constructor(
         }
     }
 
-    override val container = container<TransferContract.UIState, TransferContract.SideEffect>(TransferContract.UIState())
+    override val container =
+        container<TransferContract.UIState, TransferContract.SideEffect>(TransferContract.UIState())
+
+    override fun initCardNumber(cardNumber: String) {
+        intent { reduce { TransferContract.UIState(cardNumber = cardNumber) } }
+    }
 }

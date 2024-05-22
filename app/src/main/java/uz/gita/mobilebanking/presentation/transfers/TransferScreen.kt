@@ -2,6 +2,7 @@ package uz.gita.mobilebanking.presentation.transfers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
+import uz.gita.mobilebanking.presentation.transfers.components.CardNotFound
 import uz.gita.mobilebanking.presentation.transfers.components.DefaultState
 import uz.gita.mobilebanking.presentation.transfers.components.SearchBar
 import uz.gita.mobilebanking.presentation.transfers.components.TopBarTransfer
@@ -31,10 +33,11 @@ import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.previewStateOf
 
-class TransfersScreen : Screen {
+data class TransfersScreen(val cardNumber: String = "") : Screen {
     @Composable
     override fun Content() {
         val viewModel: TransferContract.Model = getViewModel<TransferModel>()
+        viewModel.initCardNumber(cardNumber)
 
         TransactionsScreenContent(
             viewModel.collectAsState(),
@@ -48,31 +51,36 @@ private fun TransactionsScreenContent(
     uiState: State<TransferContract.UIState>,
     onEventDispatchers: (TransferContract.Intent) -> Unit,
 ) {
-    var searchText by remember { mutableStateOf("") }
+    var searchText by remember { mutableStateOf(uiState.value.cardNumber) }
     var isSearchingStateActive by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var isSearchBarFocused by remember { mutableStateOf(false) }
 
-    Scaffold(topBar = {
-        TopBarTransfer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White),
-            visible = isSearchingStateActive,
-            onClick = {
-                isSearchingStateActive = false
-                searchText = ""
-                focusManager.clearFocus(true)
-            })
-    }) {
+    Scaffold(
+        topBar = {
+            TopBarTransfer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                visible = isSearchingStateActive,
+                onClick = {
+                    isSearchingStateActive = false
+                    searchText = ""
+                    focusManager.clearFocus(true)
+                }
+            )
+        }
+    ) {
         Column(
             modifier = Modifier
                 .background(color = CardColor)
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(it),
         ) {
-            SearchBar(modifier = Modifier.padding(horizontal = 12.dp),
+            SearchBar(
+                modifier = Modifier.padding(horizontal = 12.dp),
                 onClickContacts = {},
                 onClickScan = {},
                 onValueChange = {
@@ -90,7 +98,10 @@ private fun TransactionsScreenContent(
                 onFocusChanged = {
                     isSearchBarFocused = it.isFocused
                     if (isSearchBarFocused) isSearchingStateActive = true
-                })
+                }
+            )
+
+            logger("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
 
             if (isSearchingStateActive) {
                 if (uiState.value.ownerName.isNotEmpty() && uiState.value.pan.length == 16) {
@@ -108,7 +119,11 @@ private fun TransactionsScreenContent(
                             )
                         }
                     )
+                } else if (uiState.value.ownerName.isEmpty() && uiState.value.pan.length == 16) {
+                    CardNotFound(modifier = Modifier.padding(12.dp))
                 }
+            } else if (uiState.value.pan.length == 16) {
+                CardNotFound(modifier = Modifier.padding(12.dp))
             } else {
                 DefaultState(
                     onClickLastPayedCard = {
@@ -124,6 +139,7 @@ private fun TransactionsScreenContent(
         }
     }
 }
+
 
 @Preview(showBackground = true, device = "id:pixel_7_pro")
 @Composable

@@ -31,6 +31,10 @@ fun logger(message: String, tag: String = "TTT") {
     Timber.tag(tag).d(message)
 }
 
+fun String.logger(msg: String = "", tag: String = "TTT") {
+    Timber.tag(tag).d("%s%s", msg, this)
+}
+
 fun <T> List<T>.new(): MutableList<T> {
     return mutableListOf<T>().also { it.addAll(this) }
 }
@@ -129,22 +133,39 @@ fun Modifier.angledGradientBackground(colors: List<Color>, degrees: Float) = thi
 )
 
 fun String.checkExpirationDateValidation(): Boolean {
-    if (this.substring(0, 2).toInt() > 12) return false
+    try {
+        if (this.substring(0, 2).toInt() > 12) return false
 
-    val currentDate = Date()
-    val dateFormat = SimpleDateFormat("MMyy", Locale.getDefault())
-    val formattedDate = dateFormat.format(currentDate)
+        val currentDate = Date()
+        val dateFormat = SimpleDateFormat("MMyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(currentDate)
 
-    val monthsNow = formattedDate.substring(0, 2).toInt() + formattedDate.substring(2, 4).toInt() * 12
-    val monthsUser = this.substring(0, 2).toInt() + this.substring(2, 4).toInt() * 12 // this is like a MM/YY
-
-    return monthsUser >= monthsNow
+        val monthsNow = formattedDate.substring(0, 2).toInt() + formattedDate.substring(2, 4).toInt() * 12
+        val monthsUser = this.substring(0, 2).toInt() + this.substring(2, 4).toInt() * 12 // this is like a MM/YY
+        return monthsUser >= monthsNow
+    } catch (e: Exception) {
+        return false
+    }
 }
 
 fun String.containsOnlyNumbers(): Boolean {
     val regex = Regex("^\\d+\$")
     return this.matches(regex)
 }
+
+fun String.toPhoneNumber(): String {
+    if (
+        this.length != 13
+        || !this.startsWith("+")
+        || !this.substring(1, 13).containsOnlyNumbers()
+    ) return this
+
+    val sb = StringBuilder(this)
+    listOf(4, 7, 11, 14).forEach { sb.insert(it, " ") }
+
+    return sb.toString()
+}
+
 
 fun String.toValue(): String {
     if (this.length <= 3) return this

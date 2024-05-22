@@ -66,10 +66,10 @@ import uz.gita.mobilebanking.presentation.transfers.components.ItemSelfTransfer
 import uz.gita.mobilebanking.presentation.transfers.components.Template
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
-import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
+import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.TextColorLight
 import uz.gita.mobilebanking.utils.logger
 

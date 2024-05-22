@@ -20,12 +20,15 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.my_cards.components.ItemCard
 import uz.gita.mobilebanking.ui.components.TopBarWithBack
 import uz.gita.mobilebanking.ui.components.buttons.BoxedButton
+import uz.gita.mobilebanking.ui.dialogs.AddCardDialog
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.previewStateOf
 
@@ -35,6 +38,25 @@ data class MyCardsScreen(val listOfCards: List<CardData>) : Screen {
     override fun Content() {
         val viewModel: MyCardsContract.Model = getViewModel<MyCardsModel>()
         viewModel.onEventDispatcher(MyCardsContract.Intent.InitCards(listOfCards))
+
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
+
+        viewModel.collectSideEffect {
+            when (it) {
+                MyCardsContract.SideEffect.ShowAddCardDialog -> {
+                    bottomSheetNavigator.show(
+                        AddCardDialog(
+                            onUzbClick = {
+                                viewModel.onEventDispatcher(MyCardsContract.Intent.AddCard)
+                            },
+                            onHide = {
+                                bottomSheetNavigator.hide()
+                            }
+                        )
+                    )
+                }
+            }
+        }
 
         MyCardsContent(
             uiState = viewModel.collectAsState(),

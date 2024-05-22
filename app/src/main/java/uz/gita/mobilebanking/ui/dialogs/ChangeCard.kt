@@ -34,7 +34,7 @@ import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 data class ChangeCard(
     val cards: List<CardData>,
     val onClickCard: (CardData) -> Unit,
-    val onClickAddCard: () -> Unit
+    val onClickAddCard: () -> Unit,
 ) : Screen {
     @Composable
     override fun Content() {
@@ -48,6 +48,7 @@ fun ChangeCardContent(
     onClickCard: (CardData) -> Unit,
     onClickAddCard: () -> Unit,
 ) {
+    if (cards.isEmpty()) return
     Column(
         modifier = Modifier
             .fillMaxWidth()

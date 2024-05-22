@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.TextColorLight
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun P2PMoneyInputWithTitle(
@@ -72,7 +72,7 @@ fun P2PMoneyInputWithTitle(
                     .onFocusChanged { isValueInputFocused = it.isFocused },
                 keyboardActions = KeyboardActions(onDone = { focusRequester.freeFocus() }),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                textStyle = TextStyle(color = textColor, fontSize = 24.sp),
+                textStyle = TextStyle(color = TextColor, fontSize = 24.sp),
                 singleLine = true,
             )
         }

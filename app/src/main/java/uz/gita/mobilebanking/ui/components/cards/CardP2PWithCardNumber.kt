@@ -25,7 +25,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun CardP2PWithCardNumber(
@@ -72,7 +72,7 @@ fun CardP2PWithCardNumber(
             TextBoldBlack(
                 modifier = Modifier.padding(bottom = 4.dp),
                 text = formatCardNumber(cardNumber),
-                color = textColor
+                color = TextColor
             )
         }
 

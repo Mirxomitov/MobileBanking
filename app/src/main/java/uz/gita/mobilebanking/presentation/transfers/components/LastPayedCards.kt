@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
 fun LastPayedCards(
@@ -61,7 +61,7 @@ fun LastPayedCards(
             text = "$firstName $lastName",
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            color = textColor,
+            color = TextColor,
             letterSpacing = 0.8.sp,
             textAlign = TextAlign.Center,
             fontSize = 12.sp

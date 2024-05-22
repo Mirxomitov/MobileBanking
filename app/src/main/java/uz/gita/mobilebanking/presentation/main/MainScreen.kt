@@ -64,9 +64,6 @@ private fun MainContent(
 ) {
     val context = LocalContext.current
     //  val bottomSheetNavigator = LocalBottomSheetNavigator.current
-
-    Text(text = "")
-
     var isVisibleMoney by remember { mutableStateOf(true) }
 
     Scaffold(modifier = Modifier.fillMaxSize(),
@@ -76,7 +73,7 @@ private fun MainContent(
                     .fillMaxWidth()
                     .height(56.dp)
                     .padding(horizontal = 12.dp),
-                userName = "Tohir",
+                userName = uiState.value.firstName,
                 onClickItem = {
                     onEventDispatcher(MainContract.Intent.OpenProfileScreen)
                 },
@@ -101,7 +98,7 @@ private fun MainContent(
                     modifier = Modifier
                         .padding(12.dp)
                         .fillMaxWidth(),
-                    balance = if (isVisibleMoney) "1 192 891" else "• •••",
+                    balance = if (isVisibleMoney) uiState.value.totalBalance else "• •••",
                     onClickEye = {
                         isVisibleMoney = !isVisibleMoney
                     },

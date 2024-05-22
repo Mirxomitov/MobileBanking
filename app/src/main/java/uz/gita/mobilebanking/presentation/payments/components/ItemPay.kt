@@ -46,11 +46,11 @@ fun ItemPay(
             modifier = Modifier.padding(end = 4.dp),
         )
 
-        Icon(
-            modifier = Modifier.size(36.dp),
-            painter = painterResource(id = iconID),
-            contentDescription = null,
-        )
+//        Icon(
+//            modifier = Modifier.size(36.dp),
+//            painter = painterResource(id = iconID),
+//            contentDescription = null,
+//        )
     }
 }
 

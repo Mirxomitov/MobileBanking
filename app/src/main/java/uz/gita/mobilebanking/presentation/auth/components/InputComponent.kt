@@ -39,7 +39,7 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.errorColor
-import uz.gita.mobilebanking.ui.theme.textColor
+import uz.gita.mobilebanking.ui.theme.TextColor
 
 
 @Composable
@@ -84,7 +84,7 @@ fun PhoneInputComponent(
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             visualTransformation = PhoneMaskTransformation,
-            cursorBrush = SolidColor(getColorX(colorName = textColor)),
+            cursorBrush = SolidColor(getColorX(colorName = TextColor)),
             decorationBox = { innerTextField ->
 
                 Box(
@@ -116,7 +116,7 @@ fun PhoneInputComponent(
                                 .size(24.dp)
                                 .align(Alignment.CenterVertically),
                             contentDescription = null,
-                            tint = textColor
+                            tint = TextColor
                         )
                         leadingIcon?.invoke()
                         Box(

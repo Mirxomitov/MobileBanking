@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -29,6 +30,7 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.model.ui.FullInfoData
 import uz.gita.mobilebanking.presentation.profile.components.ItemInfo
 import uz.gita.mobilebanking.presentation.profile.components.LogOutButton
 import uz.gita.mobilebanking.presentation.profile.components.MyInformation
@@ -37,10 +39,11 @@ import uz.gita.mobilebanking.presentation.profile.components.UsefulInformation
 import uz.gita.mobilebanking.presentation.profile.components.UserInfo
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.dialogs.PersonalInformation
+import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.profileBgLight
+import uz.gita.mobilebanking.utils.previewStateOf
 
 class ProfileScreen : Screen {
     @Composable
@@ -49,7 +52,7 @@ class ProfileScreen : Screen {
 
         MobileBankingTheme {
             ProfileContent(
-                viewModel.collectAsState().value,
+                viewModel.collectAsState(),
                 viewModel::onEventDispatchers
             )
         }
@@ -58,7 +61,7 @@ class ProfileScreen : Screen {
 
 @Composable
 private fun ProfileContent(
-    uiState: ProfileContract.UIState,
+    uiState: State<ProfileContract.UIState>,
     onEventDispatcher: (ProfileContract.Intent) -> Unit
 ) {
 
@@ -100,17 +103,19 @@ private fun ProfileContent(
                 .padding(8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            UserInfo()
+            if (uiState.value.fullInfoData != null)
+                UserInfo(userData = uiState.value.fullInfoData!!)
 
-            MyInformation(modifier = Modifier
-                .padding(top = 12.dp)
-                .clickable {
-                    bottomSheetNavigator.show(
-                        PersonalInformation(
-                            onClickHide = { bottomSheetNavigator.hide() }
+            MyInformation(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clickable {
+                        bottomSheetNavigator.show(
+                            PersonalInformation(
+                                onClickHide = { bottomSheetNavigator.hide() }
+                            )
                         )
-                    )
-                }
+                    }
             )
 
             Support(modifier = Modifier.padding(top = 12.dp))
@@ -171,5 +176,16 @@ private fun ProfileContent(
 @Preview
 @Composable
 fun ProfileContentPreview() {
-    ProfileContent(ProfileContract.UIState, {})
+    ProfileContent(previewStateOf(
+        value = ProfileContract.UIState(
+            FullInfoData(
+                0L,
+                "Tohir",
+                0,
+                "Mirxomitov",
+                "+998903553620"
+            )
+        )
+    ), {})
 }
+
