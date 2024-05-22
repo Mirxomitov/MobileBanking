@@ -65,7 +65,7 @@ import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.utils.angledGradientBackground
 import uz.gita.mobilebanking.utils.checkExpirationDateValidation
 import uz.gita.mobilebanking.utils.containsOnlyNumbers
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.previewStateOf
 import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
 import uz.gita.mobilebanking.utils.visual_transformations.ExpirationDateTransformation
@@ -280,7 +280,7 @@ private fun AddCardContent(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            toLog("${cardNumber.length == 16} && ${expirationDate.length == 4} && ${!isExpirationErrorVisible}")
+            logger("${cardNumber.length == 16} && ${expirationDate.length == 4} && ${!isExpirationErrorVisible}")
 
             AddCardButton(
                 modifier = Modifier,

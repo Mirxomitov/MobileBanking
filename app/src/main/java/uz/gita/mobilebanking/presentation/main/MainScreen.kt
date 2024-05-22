@@ -63,7 +63,8 @@ object MainScreen : Tab {
         val viewModel: MainContract.Model = getViewModel<MainModel>()
 
         MainContent(
-            uiState = viewModel.collectAsState(), onEventDispatcher = viewModel::onEventDispatcher
+            uiState = viewModel.collectAsState(),
+            onEventDispatcher = viewModel::onEventDispatcher
         )
     }
 }

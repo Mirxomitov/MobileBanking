@@ -36,7 +36,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import uz.gita.mobilebanking.utils.visual_transformations.CardNumberTransformation
 
 @Composable
@@ -74,7 +74,7 @@ fun SearchBar(
                 onValueChange = {
                     text = it
                     onValueChange(text)
-                    toLog("$it -> $text")
+                    logger("$it -> $text")
                 },
                 modifier = Modifier
                     .fillMaxWidth()

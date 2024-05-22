@@ -73,7 +73,7 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.TextColorLight
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 
 object PaymentsScreen : Tab {
     override val options: TabOptions
@@ -166,7 +166,7 @@ fun PaymentContent() {
                     .clickable(interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = {
-                            toLog("request focus")
+                            logger("request focus")
                             focusRequester.requestFocus()
                         }
                     )

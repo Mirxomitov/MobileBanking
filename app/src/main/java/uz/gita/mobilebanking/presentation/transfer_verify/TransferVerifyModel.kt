@@ -10,7 +10,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.TransferVerifyUseCase
 import uz.gita.mobilebanking.domain.use_case.TransferResendUseCase
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,7 +42,7 @@ class TransferVerifyModel @Inject constructor(
                             }
                         }
                     }
-                    it.onFailure { toLog("transferResendUseCase.onFailure") }
+                    it.onFailure { logger("transferResendUseCase.onFailure") }
                 }.launchIn(viewModelScope)
             }
 
@@ -50,7 +50,7 @@ class TransferVerifyModel @Inject constructor(
                 transferVerifyUseCase(intent.token, intent.verificationCode)
                     .onEach {
                         it.onSuccess { transferVerifyDirection.toMainScreen() }
-                        it.onFailure { toLog("transferVerifyUseCase.onFailure") }
+                        it.onFailure { logger("transferVerifyUseCase.onFailure") }
                     }.launchIn(viewModelScope)
             }
         }

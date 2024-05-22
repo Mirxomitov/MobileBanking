@@ -38,7 +38,7 @@ import uz.gita.mobilebanking.ui.theme.circleDefaultColor
 import uz.gita.mobilebanking.ui.theme.pinScreenBgLight
 import uz.gita.mobilebanking.ui.theme.TextColor
 import uz.gita.mobilebanking.utils.hidePartOfNumber
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import java.io.Serializable
 
 
@@ -135,7 +135,7 @@ private fun PinCheckContent(
             horizontalArrangement = Arrangement.Center,
         ) {
             repeat(PASSWORD_LENGTH) {
-                toLog("draw circles")
+                logger("draw circles")
                 PinCodeCircle(color = listOfCircleColors[it], radius = 10, modifier = Modifier.padding(horizontal = 12.dp))
             }
         }

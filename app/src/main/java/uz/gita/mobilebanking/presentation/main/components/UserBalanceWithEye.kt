@@ -23,7 +23,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.GrayIcon
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 
 @Composable
 fun UserBalanceWithEye(
@@ -50,7 +50,7 @@ fun UserBalanceWithEye(
             TextBold(text = stringResource(id = R.string.som), fontSize = 22.sp)
             Spacer(modifier = Modifier.weight(1f))
 
-            toLog("EyeComponent.isVisible =$isVisible")
+            logger("EyeComponent.isVisible =$isVisible")
             Icon(
                 painter = painterResource(
                     id = if (isVisible) R.drawable.ic_eye

@@ -11,7 +11,7 @@ import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.data.model.response.auth.SignUpResponse
 import uz.gita.mobilebanking.domain.RegistrationRepository
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +31,7 @@ class AuthModel @Inject constructor(
                             direction.toVerifyScreen(it.token, true)
                         }
                         it.onFailure {
-                            toLog("AuthModel -> sign in failure ${it.message}")
+                            logger("AuthModel -> sign in failure ${it.message}")
                             signUp(
                                 phone = intent.phoneNumber,
                                 onSuccess = {
@@ -66,11 +66,11 @@ class AuthModel @Inject constructor(
         repository.signUp(phone)
             .onEach {
                 it.onSuccess { signUpResponse ->
-                    toLog("signUp succcess")
+                    logger("signUp succcess")
                     onSuccess(signUpResponse)
                 }
                 it.onFailure {
-                    toLog("AuthModel -> sign UP failure ${it.message}")
+                    logger("AuthModel -> sign UP failure ${it.message}")
                 }
             }.launchIn(viewModelScope)
     }

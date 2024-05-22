@@ -10,7 +10,7 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.TransferGetHistoryUseCase
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +29,7 @@ class HistoryModel @Inject constructor(
                             intent {
                                 reduce { HistoryContract.UIState.Content(transferHistoryResponse = flowOf(pagingData)) }
                             }
-                            toLog("HistoryViewModel.onEventDispatcher.GetHistory.collect${pagingData}")
+                            logger("HistoryViewModel.onEventDispatcher.GetHistory.collect${pagingData}")
                         }
                 }
             }

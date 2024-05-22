@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
@@ -15,6 +14,7 @@ import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetBasicInfoUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetTotalBalanceUseCase
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +24,11 @@ class MainModel @Inject constructor(
     private val getTotalBalanceUseCase: HomeGetTotalBalanceUseCase,
     private val getBasicInfoUseCase: HomeGetBasicInfoUseCase
 ) : MainContract.Model, ViewModel() {
+    init {
+        logger("Main Screen Model Initialization")
+        fetchAllData()
+    }
+
     override fun onEventDispatcher(intent: MainContract.Intent) = intent {
         when (intent) {
             MainContract.Intent.OpenProfileScreen -> direction.toProfileScreen()
@@ -36,26 +41,30 @@ class MainModel @Inject constructor(
 
     override val container = container<MainContract.UIState, MainContract.SideEffect>(MainContract.UIState.Loading) {}
 
-    init { fetchAllData() }
-
     private fun fetchAllData() {
         combine(
-            cardsGetUseCase().map { it.getOrNull() },
-            getTotalBalanceUseCase().map { it.getOrNull() },
-            getBasicInfoUseCase().map { it.getOrNull() }
+            cardsGetUseCase(),
+            getTotalBalanceUseCase(),
+            getBasicInfoUseCase()
         ) { (cards, balance, info) ->
             Triple(cards, balance, info)
         }.onEach { (cards, balance, info) ->
-            if (cards != null && balance != null && info != null) {
+            if (cards.isSuccess && balance.isSuccess && info.isSuccess) {
                 intent {
                     reduce {
+                        @Suppress("UNCHECKED_CAST")
                         MainContract.UIState.Content(
-                            cards = cards as List<CardData>,
-                            totalBalance = balance as String,
-                            firstName = (info as BasicInfoData).firstName
+                            cards = cards.getOrNull() as List<CardData>,
+                            totalBalance = balance.getOrNull() as String,
+                            firstName = (info.getOrNull() as BasicInfoData).firstName
                         )
                     }
                 }
+            } else {
+                // errors
+                cards.getOrElse {}
+                balance.getOrElse {}
+                info.getOrElse {}
             }
         }.launchIn(viewModelScope)
     }

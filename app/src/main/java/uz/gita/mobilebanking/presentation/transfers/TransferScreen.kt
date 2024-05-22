@@ -38,7 +38,7 @@ import uz.gita.mobilebanking.ui.components.cards.CardP2PWithCardNumber
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.utils.previewStateOf
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 
 object TransfersScreen : Tab {
     override val options: TabOptions
@@ -122,16 +122,17 @@ private fun TransactionsScreenContent(
                 }
             )
 
-            toLog("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
+            logger("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
 
             if (isSearchingStateActive) {
                 if (uiState.value.ownerName.isNotEmpty() && uiState.value.pan.length == 16) {
+                    logger("")
                     CardP2PWithCardNumber(
                         modifier = Modifier.padding(top = 12.dp),
                         cardNumber = uiState.value.pan,
                         ownerName = uiState.value.ownerName,
                         onClickItem = {
-                            toLog("pan = ${uiState.value.pan}")
+                            logger("pan = ${uiState.value.pan}")
                             onEventDispatchers(
                                 TransferContract.Intent.ToP2PScreen(
                                     pan = uiState.value.pan,

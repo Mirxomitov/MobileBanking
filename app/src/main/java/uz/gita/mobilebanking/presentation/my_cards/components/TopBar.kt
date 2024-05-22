@@ -47,6 +47,6 @@ fun TopBar(
                 )
         )
 
-        TextBold(text = stringResource(id = R.string.my_cards2), fontSize = 18.sp, color = Color.Black)
+        TextBold(text = stringResource(id = R.string.my_cards2), fontSize = 22.sp, color = Color.Black)
     }
 }

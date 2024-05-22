@@ -10,7 +10,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.RegistrationRepository
 import uz.gita.mobilebanking.domain.use_case.HomeGetFullInfoUseCase
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,11 +37,11 @@ class ProfileModel @Inject constructor(
                 registrationRepository.signOut()
                     .onEach {
                         it.onSuccess {
-                            toLog("ProfileContract.Intent.LogOut.success ${it.message}")
+                            logger("ProfileContract.Intent.LogOut.success ${it.message}")
                             direction.toAuthScreen()
                         }
                         it.onFailure {
-                            toLog("ProfileContract.Intent.LogOut.failure ${it.message}")
+                            logger("ProfileContract.Intent.LogOut.failure ${it.message}")
                             direction.toAuthScreen()
                         }
                     }

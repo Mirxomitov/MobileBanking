@@ -28,7 +28,7 @@ import kotlin.math.cos
 import kotlin.math.hypot
 import kotlin.math.sin
 
-fun toLog(message: String, tag: String = "TTT") {
+fun logger(message: String, tag: String = "TTT") {
     Timber.tag(tag).d(message)
 }
 

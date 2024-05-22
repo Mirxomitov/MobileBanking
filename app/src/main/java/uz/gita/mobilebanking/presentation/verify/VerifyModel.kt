@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.RegistrationRepository
-import uz.gita.mobilebanking.utils.toLog
+import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +31,7 @@ class VerifyModel @Inject constructor(
             }
 
             is VerifyContract.Intent.Back -> {
-                toLog("back pressed")
+                logger("back pressed")
                 intent { verifyDirection.back() }
             }
 
@@ -43,30 +43,30 @@ class VerifyModel @Inject constructor(
                 when (intent.isSignIn) {
                     // verify sign in
                     true -> {
-                        toLog("Verify Sign In ${intent.verificationCode}")
+                        logger("Verify Sign In ${intent.verificationCode}")
                         repository.signInVerify(mToken, intent.verificationCode)
                             .onEach {
                                 it.onSuccess {
                                     intent { verifyDirection.toPinCreateScreen() }
-                                    toLog("signInVerify success")
+                                    logger("signInVerify success")
                                 }
                                 it.onFailure {
-                                    toLog("signInVerify failure ${it.message}")
+                                    logger("signInVerify failure ${it.message}")
                                 }
                             }.launchIn(viewModelScope)
                     }
 
                     false -> {
                         // verify sign up
-                        toLog("Verify Sign Up ${intent.verificationCode}")
+                        logger("Verify Sign Up ${intent.verificationCode}")
                         repository.signUpVerify(mToken, intent.verificationCode)
                             .onEach {
                                 it.onSuccess {
                                     intent { verifyDirection.toPinCreateScreen() }
-                                    toLog("signUpVerify success")
+                                    logger("signUpVerify success")
                                 }
                                 it.onFailure {
-                                    toLog("signUpVerify failure ${it.message}")
+                                    logger("signUpVerify failure ${it.message}")
                                 }
                             }.launchIn(viewModelScope)
                     }
@@ -77,30 +77,30 @@ class VerifyModel @Inject constructor(
             is VerifyContract.Intent.ResendSms -> {
                 when (intent.isSignIn) {
                     true -> {
-                        toLog("VerifyContract.Intent.ResendSms.SignIn")
+                        logger("VerifyContract.Intent.ResendSms.SignIn")
                         repository.signInResend(mToken)
                             .onEach {
                                 it.onSuccess {
-                                    toLog("sign in resend onSuccess")
+                                    logger("sign in resend onSuccess")
                                     mToken = it.token
                                 }
                                 it.onFailure {
-                                    toLog("sign in resend onFailure ${it.message}")
+                                    logger("sign in resend onFailure ${it.message}")
                                 }
                             }
                             .launchIn(viewModelScope)
                     }
 
                     false -> {
-                        toLog("VerifyContract.Intent.ResendSms.SignUp")
+                        logger("VerifyContract.Intent.ResendSms.SignUp")
                         repository.signUpResend(mToken)
                             .onEach {
                                 it.onSuccess {
                                     mToken = it.token
-                                    toLog("sign up resend onSuccess")
+                                    logger("sign up resend onSuccess")
                                 }
                                 it.onFailure {
-                                    toLog("sign up resend onFailure ${it.message}")
+                                    logger("sign up resend onFailure ${it.message}")
                                 }
                             }.launchIn(viewModelScope)
                     }
