@@ -30,7 +30,7 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.FullInfoData
+import uz.gita.mobilebanking.data.model.FullInfoData
 import uz.gita.mobilebanking.presentation.profile.components.ItemInfo
 import uz.gita.mobilebanking.presentation.profile.components.LogOutButton
 import uz.gita.mobilebanking.presentation.profile.components.MyInformation

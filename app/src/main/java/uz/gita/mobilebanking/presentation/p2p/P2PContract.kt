@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.presentation.p2p
 
 import org.orbitmvi.orbit.ContainerHost
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 
 interface P2PContract {
 
@@ -23,7 +23,8 @@ interface P2PContract {
     sealed interface Intent {
         data object Back : Intent
         data object AddCard : Intent
-        data class Pay(
+        data class Transfer(
+            val receiverName : String,
             val senderId: String,
             val receiverPan: String,
             val amount: Int,

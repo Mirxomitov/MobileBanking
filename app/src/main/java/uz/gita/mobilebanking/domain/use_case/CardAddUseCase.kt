@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.domain.use_case
 
 import kotlinx.coroutines.flow.Flow
-import uz.gita.mobilebanking.domain.CardRepository
+import uz.gita.mobilebanking.domain.repositories.CardRepository
 import javax.inject.Inject
 
 class CardAddUseCase @Inject constructor(

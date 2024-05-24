@@ -34,8 +34,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.TextColorLight
 import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.ui.theme.TextColorLight
+import uz.gita.mobilebanking.utils.MoneyFormatTransformation
 
 @Composable
 fun P2PMoneyInputWithTitle(
@@ -44,8 +45,7 @@ fun P2PMoneyInputWithTitle(
     focusRequester: FocusRequester,
     onValueChange: (String) -> Unit
 ) {
-
-    var value by remember { mutableStateOf("0") }
+    var value by remember { mutableStateOf("") }
     var isValueInputFocused by remember { mutableStateOf(true) }
 
     Row(
@@ -74,6 +74,7 @@ fun P2PMoneyInputWithTitle(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 textStyle = TextStyle(color = TextColor, fontSize = 24.sp),
                 singleLine = true,
+                 visualTransformation = MoneyFormatTransformation
             )
         }
 

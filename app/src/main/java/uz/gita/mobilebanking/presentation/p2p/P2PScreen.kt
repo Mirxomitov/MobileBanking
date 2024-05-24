@@ -27,7 +27,6 @@ import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
 import uz.gita.mobilebanking.presentation.p2p.components.P2PMoneyInputWithTitle
 import uz.gita.mobilebanking.ui.components.TopBarWithBack
 import uz.gita.mobilebanking.ui.components.buttons.NextButton
@@ -78,9 +77,11 @@ private fun P2PContent(
                 if (state.cards.isEmpty()) return
 
                 var activeCard by remember { mutableStateOf(state.cards[0]) }
-                val isInputIncorrect by remember { mutableStateOf(false) }
-                val focusRequester = remember { FocusRequester() }
+                var isMoneyEnough by remember { mutableStateOf(true) }
+                var isInRange by remember { mutableStateOf(true) }
                 var isTransferButtonEnabled by remember { mutableStateOf(true) }
+
+                val focusRequester = remember { FocusRequester() }
                 var transferAmount by remember { mutableIntStateOf(0) }
                 val bottomSheetNavigator = LocalBottomSheetNavigator.current
 
@@ -136,17 +137,30 @@ private fun P2PContent(
                     focusRequester = focusRequester,
                     onValueChange = {
                         try {
-                            // TODO write input logic
-                            isTransferButtonEnabled = (it.toInt() in 1_000..34_000_000)
+                            isMoneyEnough = it.toInt() < activeCard.amount
+                            isInRange = it.toInt() in 1_000..34_000_000
+
+                            isTransferButtonEnabled = isMoneyEnough && isInRange
                             transferAmount = it.toInt()
+
                         } catch (e: Exception) {
+
                         }
                     }
                 )
+
+
                 TextNormal(
                     modifier = Modifier.padding(8.dp),
-                    text = stringResource(if (isInputIncorrect) R.string.commission_0 else R.string.insufficient_funds)
+                    text = stringResource(
+                        when {
+                            !isMoneyEnough -> R.string.overflow_34mln
+                            !isInRange -> R.string.insufficient_funds
+                            else -> R.string.commission_0
+                        }
+                    )
                 )
+
 
                 Spacer(modifier = Modifier.weight(1f))
 
@@ -155,10 +169,11 @@ private fun P2PContent(
                     isEnabled = isTransferButtonEnabled,
                     onClick = {
                         onEventDispatcher(
-                            P2PContract.Intent.Pay(
+                            P2PContract.Intent.Transfer(
                                 senderId = activeCard.id.toString(),
                                 receiverPan = state.receiverPan,
-                                amount = transferAmount
+                                amount = transferAmount,
+                                receiverName = state.ownerName
                             )
                         )
                     }

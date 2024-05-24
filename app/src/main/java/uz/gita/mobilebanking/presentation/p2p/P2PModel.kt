@@ -22,10 +22,16 @@ class P2PModel @Inject constructor(
 
     override fun onEventDispatcher(intent: P2PContract.Intent) {
         when (intent) {
-            is P2PContract.Intent.Pay -> {
+            is P2PContract.Intent.Transfer -> {
                 transferUseCase(intent.senderId, intent.receiverPan, intent.amount).onEach {
                     it.onSuccess { token ->
-                        p2PDirection.toTransferVerifyScreen(token)
+                        p2PDirection.toTransferVerifyScreen(
+                            token,
+                            intent.amount.toString(),
+                            intent.receiverName,
+                            intent.receiverPan
+                        )
+
                     }
                     it.onFailure { logger("on failure transfer ${it.message}") }
                 }.launchIn(viewModelScope)

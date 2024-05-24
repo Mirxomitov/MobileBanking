@@ -1,3 +1,4 @@
+
 package uz.gita.mobilebanking.presentation.history.components
 
 import androidx.compose.foundation.Image
@@ -18,7 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.TransferHistoryChildData
+import uz.gita.mobilebanking.data.model.HistoryChildData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.TextColor
@@ -27,7 +28,7 @@ import uz.gita.mobilebanking.utils.toValue
 @Composable
 fun HistoryListItem(
     modifier: Modifier = Modifier,
-    transferHistoryChild: TransferHistoryChildData
+    transferHistoryChild: HistoryChildData
 ) {
     Row(modifier = modifier.fillMaxWidth()) {
         Image(

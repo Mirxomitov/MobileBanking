@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.RegistrationRepository
+import uz.gita.mobilebanking.domain.repositories.RegistrationRepository
 import javax.inject.Inject
 
 @HiltViewModel

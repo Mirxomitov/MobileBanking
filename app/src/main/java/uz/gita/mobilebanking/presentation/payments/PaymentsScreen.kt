@@ -34,6 +34,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,16 +57,16 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.Constants
 import uz.gita.mobilebanking.presentation.main.components.PaynetAvia
 import uz.gita.mobilebanking.presentation.payments.components.ItemPaySmall
 import uz.gita.mobilebanking.presentation.payments.components.TrainTicket
 import uz.gita.mobilebanking.presentation.transfers.components.AddTemplate
 import uz.gita.mobilebanking.presentation.transfers.components.ItemSelfTransfer
-import uz.gita.mobilebanking.presentation.transfers.components.Template
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
@@ -73,7 +74,9 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.TextColorLight
+import uz.gita.mobilebanking.utils.Constants
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.previewStateOf
 
 object PaymentsScreen : Tab {
     override val options: TabOptions
@@ -93,12 +96,17 @@ object PaymentsScreen : Tab {
 
     @Composable
     override fun Content() {
-        PaymentContent()
+
+        val viewModel: PaymentsContract.Model = getViewModel<PaymentsModel>()
+        PaymentContent(viewModel.collectAsState(), viewModel::onEventDispatcher)
     }
 }
 
 @Composable
-fun PaymentContent() {
+fun PaymentContent(
+    uiState: State<PaymentsContract.UIState>,
+    onEventDispatcher: (PaymentsContract.Intent) -> Unit,
+) {
     var searchText by remember { mutableStateOf("") }
     var visible by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
@@ -112,7 +120,8 @@ fun PaymentContent() {
             .imePadding(),
         topBar = {
                 Row(
-                    modifier = Modifier.wrapContentHeight()
+                    modifier = Modifier.wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                 TextBold(
                     modifier = Modifier.padding(12.dp),
@@ -183,6 +192,7 @@ fun PaymentContent() {
                     BasicTextField(
                         modifier = Modifier
                             .padding(start = 4.dp)
+                            .fillMaxWidth()
                             .focusRequester(focusRequester)
                             .onFocusChanged {
                                 if (it.isFocused) visible = true
@@ -230,8 +240,8 @@ fun PaymentContent() {
             }
 
             when (visible) {
-                true -> Searching()
-                false -> Default()
+                true -> Searching(onEventDispatcher)
+                false -> Default(onEventDispatcher)
             }
 
             Spacer(
@@ -244,18 +254,21 @@ fun PaymentContent() {
 }
 
 @Composable
-private fun Searching() {
+private fun Searching(
+    onEventDispatcher: (PaymentsContract.Intent) -> Unit
+) {
     TextBoldBlack(
         text = "Ommaboplari",
         fontSize = 18.sp,
         color = Color.Black,
-        modifier = Modifier.padding(top = 12.dp)
+        modifier = Modifier.padding(top = 12.dp, start = 12.dp)
     )
 
     for (i in 0..12) {
         ItemPaySmall(
             Modifier
                 .padding(top = 12.dp)
+                .padding(horizontal = 12.dp)
                 .fillMaxWidth(),
             R.drawable.ic_search,
             "$i Elektroenergiya",
@@ -265,7 +278,9 @@ private fun Searching() {
 }
 
 @Composable
-private fun Default() {
+private fun Default(
+    onEventDispatcher: (PaymentsContract.Intent) -> Unit
+) {
     TextBoldBlack(
         text = stringResource(R.string.templates),
         fontSize = 18.sp,
@@ -278,15 +293,18 @@ private fun Default() {
     ) {
 
         item {
-            AddTemplate(Modifier.padding(end = 24.dp), onClick = {})
+            AddTemplate(Modifier.padding(end = 24.dp), onClick = {
+                // TODO add template
+                //onEventDispatcher(PaymentsContract.Intent)
+            })
         }
-        items(10) {
-            Template(
-                modifier = Modifier.padding(end = 24.dp),
-                firstName = "Saidrasul",
-                imageID = R.drawable.logo_tbc
-            )
-        }
+//        items(10) {
+//            Template(
+//                modifier = Modifier.padding(end = 24.dp),
+//                firstName = "Saidrasul",
+//                imageID = R.drawable.logo_tbc
+//            )
+//        }
     }
 
     Row(
@@ -546,5 +564,8 @@ private fun Default() {
 @Preview
 @Composable
 fun PaymentContentPreview() {
-    PaymentContent()
+    PaymentContent(
+        previewStateOf(value = PaymentsContract.UIState.Content(listOf())),
+        {}
+    )
 }

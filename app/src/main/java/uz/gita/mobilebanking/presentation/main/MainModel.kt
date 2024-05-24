@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.data.model.ui.BasicInfoData
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.BasicInfoData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetBasicInfoUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetTotalBalanceUseCase

@@ -18,7 +18,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,7 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
@@ -40,7 +43,7 @@ import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.utils.angledGradientBackground
+import uz.gita.mobilebanking.utils.getGradient
 import uz.gita.mobilebanking.utils.toValue
 
 @Composable
@@ -321,10 +324,10 @@ private fun ItemCard(
     cardData: CardData,
     onClick: (CardData) -> Unit
 ) {
-    val bankImageID = R.drawable.logo_tbc
-    val typeImageID = R.drawable.uzcard_logo
+//    val bankImageID = R.drawable.logo_tbc
+    val typeImageID = R.drawable.ic_paymentsystem_humo
     val money = cardData.amount
-    val type = "Uzcard"
+    val selectedColor = getGradient(cardData.themeType)
 
     Column(
         modifier = modifier
@@ -333,9 +336,13 @@ private fun ItemCard(
                 shape = RoundedCornerShape(16.dp),
                 ambientColor = ShadowColorCard,
             )
-            .angledGradientBackground(
-                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
+            .background(
+                brush = selectedColor,
+                shape = RoundedCornerShape(16.dp)
             )
+//            .angledGradientBackground(
+//                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
+//            )
             .padding(8.dp)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -347,21 +354,21 @@ private fun ItemCard(
             Modifier.fillMaxWidth()
         ) {
 
-            Image(
-                painter = painterResource(id = bankImageID),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-
-                modifier = Modifier
-                    .size(24.dp)
-                    .clip(CircleShape)
-                    .align(Alignment.CenterStart)
-            )
+//            Image(
+//                painter = painterResource(id = bankImageID),
+//                contentDescription = null,
+//                contentScale = ContentScale.Crop,
+//
+//                modifier = Modifier
+//                    .size(24.dp)
+//                    .clip(CircleShape)
+//                    .align(Alignment.CenterStart)
+//            )
 
             Icon(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
-                    .size(18.dp),
+                    .size(36.dp),
                 tint = Color.White,
                 painter = painterResource(id = typeImageID),
                 contentDescription = "card type",
@@ -384,7 +391,7 @@ private fun ItemCard(
             modifier = Modifier, contentAlignment = Alignment.Center
         ) {
             TextBold(
-                text = type,
+                text = "Humo",
                 fontSize = 14.sp,
                 color = Color.White,
             )

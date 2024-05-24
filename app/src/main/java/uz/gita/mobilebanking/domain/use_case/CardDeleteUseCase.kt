@@ -1,6 +1,6 @@
 package uz.gita.mobilebanking.domain.use_case
 
-import uz.gita.mobilebanking.domain.CardRepository
+import uz.gita.mobilebanking.domain.repositories.CardRepository
 import javax.inject.Inject
 
 class CardDeleteUseCase @Inject constructor(

@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
@@ -52,16 +53,17 @@ fun ItemPaySmall(
         )
 
         Column(
-            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.Center
+            modifier = Modifier.weight(1f).padding(end = 4.dp), verticalArrangement = Arrangement.Center
         ) {
             TextBoldBlack(
-                text = mainTitle, fontSize = 18.sp, color = Color.Black
+                text = mainTitle, fontSize = 18.sp, color = Color.Black, overflow = TextOverflow.Ellipsis
             )
             TextNormal(
                 modifier = Modifier.padding(top = 4.dp),
                 text = secondTitle,
                 fontSize = 14.sp,
-                color = TextColorLight
+                color = TextColorLight,
+                overflow = TextOverflow.Ellipsis
             )
         }
 

@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
 import cafe.adriel.voyager.core.screen.Screen
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.MarkerData
+import uz.gita.mobilebanking.data.model.MarkerData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormalBlack
 

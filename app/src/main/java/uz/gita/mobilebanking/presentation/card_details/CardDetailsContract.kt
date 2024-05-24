@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.presentation.card_details
 
 import org.orbitmvi.orbit.ContainerHost
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 
 interface CardDetailsContract {
     interface ViewModel : ContainerHost<UIState, SideEffect> {

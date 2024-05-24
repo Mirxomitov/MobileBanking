@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
@@ -40,11 +41,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
+import uz.gita.mobilebanking.ui.components.buttons.CustomButton
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
-import uz.gita.mobilebanking.presentation.card_details.CustomAppBar
+import uz.gita.mobilebanking.data.model.CardData
+import uz.gita.mobilebanking.presentation.card_details.components.CustomAppBar
 import uz.gita.mobilebanking.ui.components.custom_text.CustomImageView
 import uz.gita.mobilebanking.ui.components.custom_text.CustomTextView
+import uz.gita.mobilebanking.ui.theme.OnPrimaryContainer
+import uz.gita.mobilebanking.ui.theme.PrimaryColor
+import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 import uz.gita.mobilebanking.ui.theme.colorInputBg
 import uz.gita.mobilebanking.ui.theme.selectedItemColor
 import uz.gita.mobilebanking.ui.theme.unSelectedItemColor
@@ -52,7 +58,7 @@ import uz.gita.mobilebanking.utils.getCardType
 import uz.gita.mobilebanking.utils.getGradient
 import uz.gita.mobilebanking.utils.toValue
 
-class CardThemeScreen(
+data class CardThemeScreen(
     private val data: CardData
 ) : Screen {
     @Composable
@@ -300,40 +306,40 @@ fun CardThemeContent(
                 colors = CardDefaults.cardColors(Color.White),
                 elevation = CardDefaults.cardElevation(10.dp),
             ) {
-//                CustomButton(
-//                    modifier = Modifier
-//                        .padding(horizontal = 16.dp)
-//                        .padding(bottom = 16.dp, top = 24.dp),
-//                    text = stringResource(id = R.string.continue_btn),
-//                    fontSize = 20,
-//                    fontWeight = 700,
-//                    textColor = Color.White,
-//                    shape = RoundedCornerShape(16.dp),
-//                    enabled = name.length >= 4,
-//                    colors = ButtonDefaults.buttonColors(
-//                        disabledContainerColor = btnNextDisable,
-//                        disabledContentColor = textNextDisable,
-//                        contentColor = textNextEnable,
-//                        containerColor = btnNextEnable
-//                    ),
-//                    click = {
-//                        onEventDispatcher(
-//                            CardThemeContract.Intent.UpdateCard(
-//                                CardData(
-//                                    id = data.id,
-//                                    name = name,
-//                                    amount = data.amount,
-//                                    owner = data.owner,
-//                                    pan = data.pan,
-//                                    expiredMonth = data.expiredMonth,
-//                                    expiredYear = data.expiredYear,
-//                                    themeType = selectedItem,
-//                                    isVisible = data.isVisible
-//                                )
-//                            )
-//                        )
-//                    }
-//                )
+                CustomButton(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(bottom = 16.dp, top = 24.dp),
+                    text = stringResource(id = R.string.continue_btn),
+                    fontSize = 20,
+                    fontWeight = 700,
+                    textColor = Color.White,
+                    shape = RoundedCornerShape(16.dp),
+                    enabled = name.length >= 4,
+                    colors = ButtonDefaults.buttonColors(
+                        disabledContainerColor = OnPrimaryContainer,
+                        disabledContentColor = TextColor,
+                        contentColor = TextColorLight,
+                        containerColor = PrimaryColor
+                    ),
+                    click = {
+                        onEventDispatcher(
+                            CardThemeContract.Intent.UpdateCard(
+                                CardData(
+                                    id = data.id,
+                                    name = name,
+                                    amount = data.amount,
+                                    owner = data.owner,
+                                    pan = data.pan,
+                                    expiredMonth = data.expiredMonth,
+                                    expiredYear = data.expiredYear,
+                                    themeType = selectedItem,
+                                    isVisible = data.isVisible
+                                )
+                            )
+                        )
+                    }
+                )
             }
         }
     }

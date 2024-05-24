@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,16 +35,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
+import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
-import uz.gita.mobilebanking.ui.theme.errorColor
+import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
 import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.ui.theme.errorColor
 
 
 @Composable
 fun PhoneInputComponent(
-    text: String = "",
     modifier: Modifier = Modifier,
+    text: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
     label: String = "Title",
@@ -56,7 +56,7 @@ fun PhoneInputComponent(
 ) {
     Column(modifier = modifier) {
 
-        Text(
+        TextNormal(
             label,
             fontFamily = FontFamily(Font(R.font.pnfont_semibold)),
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -136,7 +136,7 @@ fun PhoneInputComponent(
             }
         )
         if (isError) {
-            Text(
+            TextNormal(
                 error ?: stringResource(id = R.string.connection_error),
 //                style = Typography.headlineLarge
             )
@@ -159,7 +159,7 @@ private fun PhoneInputComponentPreview() {
             label = stringResource(id = R.string.your_phone_number),
             text = phoneSt,
             leadingIcon = {
-                Text(
+                TextNormal(
                     stringResource(id = R.string.phone_prefix),
                     modifier = Modifier
                         .padding(start = 16.dp),

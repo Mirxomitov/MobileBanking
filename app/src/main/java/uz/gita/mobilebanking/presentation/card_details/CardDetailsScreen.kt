@@ -32,7 +32,8 @@ import cafe.adriel.voyager.hilt.getViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
+import uz.gita.mobilebanking.presentation.card_details.components.CustomAppBar
 import uz.gita.mobilebanking.ui.components.custom_text.CustomImageView
 import uz.gita.mobilebanking.ui.components.custom_text.CustomTextView
 import uz.gita.mobilebanking.ui.theme.bgWithCards

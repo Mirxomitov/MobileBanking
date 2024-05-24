@@ -267,4 +267,15 @@
     <string name="card_name">Karta nomi</string>
     <string name="limit_symbols">4 / 15 belgilar</string>
 
+    // Muhammad
+    <string name="accept_transfer">O\'tkazmani qabul qilish</string>
+    <string name="transfer_send">O\'tkazma yuborildi</string>
+    <string name="uzs_sum">so\'m</string>
+    <string name="add_to_template">Shablonga\nqo\'shish</string>
+    <string name="transfer_information">O\'tkazma\ntafsiolatlari</string>
+    <string name="ready">Tayyor</string>
+    <string name="commission">Komissiya</string>
+    <string name="overflow_34mln">34 000 000 so\'mdan oshmasligi kerak</string>
+
+
 </resources>

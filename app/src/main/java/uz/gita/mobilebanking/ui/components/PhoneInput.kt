@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.presentation.auth.components.PhoneMaskTransformation
 import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.GrayColor
@@ -85,7 +86,7 @@ fun PhoneInput(
                     fontFamily = FontFamily(Font(R.font.pnfont_semibold))
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                //visualTransformation = PhoneMaskTransformation
+//                visualTransformation = PhoneMaskTransformation
             )
 
             Icon(

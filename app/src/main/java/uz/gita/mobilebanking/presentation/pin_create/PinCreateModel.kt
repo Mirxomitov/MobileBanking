@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.RegistrationRepository
+import uz.gita.mobilebanking.domain.repositories.RegistrationRepository
 import javax.inject.Inject
 
 @HiltViewModel

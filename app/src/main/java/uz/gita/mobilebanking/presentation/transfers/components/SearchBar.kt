@@ -72,9 +72,10 @@ fun SearchBar(
             BasicTextField(
                 value = text,
                 onValueChange = {
-                    text = it
-                    onValueChange(text)
-                    logger("$it -> $text")
+                    if (it.length <= 16) {
+                        text = it
+                        onValueChange(text)
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()

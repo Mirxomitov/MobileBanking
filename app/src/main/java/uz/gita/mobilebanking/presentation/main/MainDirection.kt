@@ -1,6 +1,6 @@
 package uz.gita.mobilebanking.presentation.main
 
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.presentation.addcard.AddCardScreen
 import uz.gita.mobilebanking.presentation.card_details.CardDetailsScreen
 import uz.gita.mobilebanking.presentation.my_cards.MyCardsScreen

@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import uz.gita.mobilebanking.presentation.add_template.AddTemplateDirection
+import uz.gita.mobilebanking.presentation.add_template.AddTemplateDirectionImpl
 import uz.gita.mobilebanking.presentation.addcard.AddCardDirection
 import uz.gita.mobilebanking.presentation.addcard.AddCardDirectionImpl
 import uz.gita.mobilebanking.presentation.auth.AuthDirection
@@ -93,4 +95,7 @@ interface DirectionModule {
 
     @Binds
     fun cardDetailsDirections(impl: CardDetailsDirectionsImpl): CardDetailsDirections
+
+    @Binds
+    fun addTemplateDirection(impl: AddTemplateDirectionImpl): AddTemplateDirection
 }

@@ -42,3 +42,16 @@ val bgWithCards = Color(0xFFF3F4FA)
 val selectedItemColor = Color(0xFF17A53C)
 val colorInputBg = Color(0xFFECEDEE)
 val unSelectedItemColor = Color(0xFF757575)
+
+val Gray40 = Color(0xffebedef)
+val Gray50 = Color(0xffc5cbce)
+val textColorLight90 = Color(0xff1a181f)
+val BackgroundWhite90 = Color(0xfffefffe)
+
+
+val white = Color(0xFFFFFFFF)
+val activeButtonGreenColor = Color(0xFF13A539) // 00a725
+val blackIcon = Color(0xFF1F1F20)
+val textTint = Color(0xff767c83)
+val activeButtonTextColor = Color(0xfffefefe)
+val greenText = Color(0xff00803b)

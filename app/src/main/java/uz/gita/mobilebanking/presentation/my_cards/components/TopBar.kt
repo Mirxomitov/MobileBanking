@@ -18,9 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
-import uz.gita.mobilebanking.ui.theme.GrayIcon
+import uz.gita.mobilebanking.ui.theme.TextColorLight
 
 @Composable
 fun TopBar(
@@ -30,23 +29,28 @@ fun TopBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(56.dp),
+            .height(64.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = null,
-            tint = GrayIcon,
+            tint = Color.Black,
             modifier = Modifier
-                .padding(8.dp)
+                .padding(12.dp)
                 .size(24.dp)
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
                     onClick = onClickBack
-                )
+                ),
         )
 
-        TextBold(text = stringResource(id = R.string.my_cards2), fontSize = 22.sp, color = Color.Black)
+        TextNormal(
+            modifier = Modifier.padding(9.dp),
+            text = stringResource(id = R.string.my_cards2),
+            fontSize = 22.sp,
+            color = TextColorLight
+        )
     }
 }

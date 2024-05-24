@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -29,16 +27,17 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import org.orbitmvi.orbit.compose.collectAsState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.Constants
 import uz.gita.mobilebanking.presentation.transfers.components.CardNotFound
 import uz.gita.mobilebanking.presentation.transfers.components.DefaultState
+import uz.gita.mobilebanking.presentation.transfers.components.LastCards
 import uz.gita.mobilebanking.presentation.transfers.components.SearchBar
 import uz.gita.mobilebanking.presentation.transfers.components.TopBarTransfer
 import uz.gita.mobilebanking.ui.components.cards.CardP2PWithCardNumber
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
-import uz.gita.mobilebanking.utils.previewStateOf
+import uz.gita.mobilebanking.utils.Constants
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.previewStateOf
 
 object TransfersScreen : Tab {
     override val options: TabOptions
@@ -74,9 +73,10 @@ private fun TransactionsScreenContent(
 ) {
     var searchText by remember { mutableStateOf(uiState.value.cardNumber) }
     var isSearchingStateActive by remember { mutableStateOf(false) }
+    var isSearchBarFocused by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
-    var isSearchBarFocused by remember { mutableStateOf(false) }
+    var filteredPayedCards by remember { mutableStateOf(uiState.value.payedCards) }
 
     Scaffold(
         topBar = {
@@ -97,7 +97,6 @@ private fun TransactionsScreenContent(
             modifier = Modifier
                 .background(color = CardColor)
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(it),
         ) {
             SearchBar(
@@ -107,6 +106,7 @@ private fun TransactionsScreenContent(
                 onValueChange = {
                     if (it.length <= 16) {
                         searchText = it
+                        filteredPayedCards = uiState.value.payedCards.filter { it.pan.startsWith(searchText) }
                     }
 
                     if (searchText.length == 16) {
@@ -122,11 +122,8 @@ private fun TransactionsScreenContent(
                 }
             )
 
-            logger("pan = ${uiState.value.pan.length} // ownerName = ${uiState.value.ownerName}")
-
             if (isSearchingStateActive) {
                 if (uiState.value.ownerName.isNotEmpty() && uiState.value.pan.length == 16) {
-                    logger("")
                     CardP2PWithCardNumber(
                         modifier = Modifier.padding(top = 12.dp),
                         cardNumber = uiState.value.pan,
@@ -143,19 +140,21 @@ private fun TransactionsScreenContent(
                     )
                 } else if (uiState.value.ownerName.isEmpty() && uiState.value.pan.length == 16) {
                     CardNotFound(modifier = Modifier.padding(12.dp))
+                } else {
+                    logger(uiState.value.payedCards.toString())
+                    LastCards(
+                        modifier = Modifier,
+                        payedCards = filteredPayedCards,
+                        onClickCard = { card ->
+                            onEventDispatchers(TransferContract.Intent.ToP2PScreen(card.pan, card.ownerName))
+                        }
+                    )
                 }
-            } else if (uiState.value.pan.length == 16) {
-                CardNotFound(modifier = Modifier.padding(12.dp))
             } else {
                 DefaultState(
-                    onClickLastPayedCard = {
-                        onEventDispatchers(
-                            TransferContract.Intent.ToP2PScreen(
-                                "TODO last payed items",
-                                "TODO last payed items"
-                            )
-                        )
-                    }
+                    onEventDispatcher = onEventDispatchers,
+                    lastPayedCards = uiState.value.payedCards,
+                    cardTemplates = uiState.value.templateCards,
                 )
             }
 

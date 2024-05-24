@@ -48,11 +48,18 @@ import uz.gita.mobilebanking.utils.hidePartOfNumber
 import uz.gita.mobilebanking.utils.previewStateOf
 
 
-data class TransferVerifyScreen(val token: String) : Screen {
+data class TransferVerifyScreen(
+    val token: String,
+    val amount : String,
+    val receiverName : String,
+    val receiverPan : String,
+) : Screen {
     @Composable
     override fun Content() {
         val viewModel: TransferVerifyContract.Model = getViewModel<TransferVerifyModel>()
         viewModel.onEventDispatcher(TransferVerifyContract.Intent.SaveToken(token))
+
+        viewModel.saveData(token, amount, receiverName, receiverPan)
 
         VerifyContent(
             viewModel.collectAsState(),

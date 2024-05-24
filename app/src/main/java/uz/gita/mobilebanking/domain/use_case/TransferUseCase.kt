@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.domain.use_case
 
 import kotlinx.coroutines.flow.Flow
-import uz.gita.mobilebanking.domain.TransferRepository
+import uz.gita.mobilebanking.domain.repositories.TransferRepository
 import javax.inject.Inject
 
 

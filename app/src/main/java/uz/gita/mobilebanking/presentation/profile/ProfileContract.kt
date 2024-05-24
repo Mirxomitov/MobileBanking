@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.presentation.profile
 
 import org.orbitmvi.orbit.ContainerHost
-import uz.gita.mobilebanking.data.model.ui.FullInfoData
+import uz.gita.mobilebanking.data.model.FullInfoData
 
 interface ProfileContract {
 

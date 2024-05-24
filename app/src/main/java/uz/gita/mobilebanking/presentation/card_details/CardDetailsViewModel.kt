@@ -9,12 +9,14 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.CardDeleteUseCase
+import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class CardDetailsViewModel @Inject constructor(
     private val directions: CardDetailsDirections,
-    private val deleteCard: CardDeleteUseCase
+    private val deleteCard: CardDeleteUseCase,
+    private val cardsGetUseCase: CardsGetUseCase
 ) : ViewModel(), CardDetailsContract.ViewModel {
     override val container =
         container<CardDetailsContract.UIState, CardDetailsContract.SideEffect>(CardDetailsContract.UIState())

@@ -20,12 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.FullInfoData
+import uz.gita.mobilebanking.data.model.FullInfoData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
 import uz.gita.mobilebanking.ui.theme.TextColor
-import uz.gita.mobilebanking.utils.containsOnlyNumbers
 import uz.gita.mobilebanking.utils.toPhoneNumber
 
 @Composable

@@ -11,7 +11,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.MarkerData
+import uz.gita.mobilebanking.data.model.MarkerData
 import uz.gita.mobilebanking.ui.dialogs.LocationDialog
 
 class MapScreen : Screen {

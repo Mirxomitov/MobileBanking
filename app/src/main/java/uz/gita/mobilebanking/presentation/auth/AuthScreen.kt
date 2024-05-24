@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
-import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.Flag
@@ -80,8 +79,7 @@ class AuthScreen : Screen {
 
         MobileBankingTheme {
             AuthScreenContent(
-                viewModel::onEventDispatcher,
-                viewModel.collectAsState().value
+                viewModel::onEventDispatcher
             )
         }
     }
@@ -90,7 +88,6 @@ class AuthScreen : Screen {
 @Composable
 private fun AuthScreenContent(
     onEventDispatcher: (AuthContract.Intent) -> Unit,
-    uiState: AuthContract.UIState
 ) {
     Column(
         Modifier
@@ -159,32 +156,6 @@ private fun AuthScreenContent(
                 onEventDispatcher(AuthContract.Intent.SignIn(phone))
             },
         )
-
-        val annotatedString = buildAnnotatedString {
-            append(stringResource(id = R.string.oferta1))
-            pushStringAnnotation(
-                tag = "TTT",
-                annotation = "https://assets-global.website-files.com/63a7038e6eb0c1f38cd4d11f/659e7e324fed06afd1dbacfb_%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%BA%D0%B0%202024.pdf"
-            )
-            withStyle(style = SpanStyle(color = Color.Blue)) {
-                append(stringResource(id = R.string.oferta2))
-            }
-            append(stringResource(id = R.string.oferta3))
-        }
-
-        /*ClickableText(
-            modifier = Modifier.fillMaxWidth(),
-            text = annotatedString,
-            onClick = {
-                annotatedString.getStringAnnotations(
-                    start = it,
-                    end = it,
-                ).firstOrNull()?.let {
-                    if (it.tag == "TTT")
-                        onEventDispatcher.invoke(AuthContract.Intent.OnClickOffer)
-                }
-            },
-        )*/
     }
 }
 
@@ -193,6 +164,5 @@ private fun AuthScreenContent(
 fun AuthScreenPreview() {
     AuthScreenContent(
         {},
-        AuthContract.UIState("", R.drawable.ic_flag_uz)
     )
 }

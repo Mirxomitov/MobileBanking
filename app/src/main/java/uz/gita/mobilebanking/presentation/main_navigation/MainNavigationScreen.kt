@@ -10,8 +10,8 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
@@ -19,15 +19,15 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import uz.gita.mobilebanking.data.Constants.BOTTOM_NAVIGATION_HEIGHT
 import uz.gita.mobilebanking.presentation.history.HistoryScreen
 import uz.gita.mobilebanking.presentation.main.MainScreen
 import uz.gita.mobilebanking.presentation.payments.PaymentsScreen
 import uz.gita.mobilebanking.presentation.transfers.TransfersScreen
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
+import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.ui.theme.MainBgLight
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
-import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.utils.Constants.BOTTOM_NAVIGATION_HEIGHT
 
 class MainNavigationScreen : Screen {
     @Composable
@@ -42,7 +42,8 @@ class MainNavigationScreen : Screen {
                     Row(
                         modifier = Modifier
                             .height(BOTTOM_NAVIGATION_HEIGHT.dp)
-                            .background(MainBgLight)
+                            .background(MainBgLight),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         TabNavigationItem(MainScreen)
                         TabNavigationItem(TransfersScreen)
@@ -64,7 +65,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
         onClick = { tabNavigator.current = tab },
         icon = {
             Icon(
-                tint = if (tabNavigator.current == tab) PrimaryColor else Color.Black,
+                tint = if (tabNavigator.current == tab) PrimaryColor else GrayIcon,
                 painter = tab.options.icon!!,
                 contentDescription = tab.options.title
             )
@@ -73,7 +74,7 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
             TextNormal(
                 text = tab.options.title,
                 fontSize = 10.sp,
-                color = TextColor
+                color = GrayIcon
             )
         },
     )

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
-import uz.gita.mobilebanking.domain.RegistrationRepository
+import uz.gita.mobilebanking.domain.repositories.RegistrationRepository
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 

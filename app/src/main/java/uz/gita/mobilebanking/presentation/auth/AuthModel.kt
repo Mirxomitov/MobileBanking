@@ -9,8 +9,7 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.response.auth.SignUpResponse
-import uz.gita.mobilebanking.domain.RegistrationRepository
+import uz.gita.mobilebanking.domain.repositories.RegistrationRepository
 import uz.gita.mobilebanking.utils.logger
 import javax.inject.Inject
 
@@ -62,7 +61,7 @@ class AuthModel @Inject constructor(
         AuthContract.UIState("Uzbek", R.drawable.ic_flag_uz)
     )
 
-    private fun signUp(phone: String, onSuccess: (SignUpResponse) -> Unit) {
+    private fun signUp(phone: String, onSuccess: (uz.gita.mobilebanking.data.source.remote.api.response.auth.SignUpResponse) -> Unit) {
         repository.signUp(phone)
             .onEach {
                 it.onSuccess { signUpResponse ->

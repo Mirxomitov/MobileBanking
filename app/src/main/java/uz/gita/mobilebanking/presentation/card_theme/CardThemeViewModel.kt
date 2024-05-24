@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.CardsUpdateUseCase
+import uz.gita.mobilebanking.utils.MyDataLoader
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,7 @@ class CardThemeViewModel @Inject constructor(
                 updateCard(intent.data.id, intent.data.name, intent.data.themeType, intent.data.isVisible)
                     .onEach { result ->
                         result.onSuccess {
-                            // TODO MyDataLoader.loadCardsData()
+                            MyDataLoader.loadCardsData()
                             intent { directions.backCardDetails(intent.data) }
                         }
                         result.onFailure { }

@@ -1,7 +1,7 @@
 package uz.gita.mobilebanking.presentation.my_cards
 
 import org.orbitmvi.orbit.ContainerHost
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 
 interface MyCardsContract {
     interface Model : ContainerHost<UIState, SideEffect> {
@@ -19,5 +19,6 @@ interface MyCardsContract {
         data object Back : Intent
         data object AddCard : Intent
         data class InitCards(val listOfCards : List<CardData>) : Intent
+        data class ToCardDetailsScreen(val cardData: CardData) : Intent
     }
 }

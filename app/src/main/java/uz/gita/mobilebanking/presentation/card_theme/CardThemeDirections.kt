@@ -1,6 +1,6 @@
 package uz.gita.mobilebanking.presentation.card_theme
 
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.presentation.card_details.CardDetailsScreen
 import uz.gita.mobilebanking.utils.navigation.AppNavigator
 import javax.inject.Inject

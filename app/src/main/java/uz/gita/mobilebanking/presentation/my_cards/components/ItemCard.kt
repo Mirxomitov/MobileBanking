@@ -1,17 +1,20 @@
 package uz.gita.mobilebanking.presentation.my_cards.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -22,11 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.utils.angledGradientBackground
+import uz.gita.mobilebanking.utils.getGradient
 import uz.gita.mobilebanking.utils.toCardExpirationDate
 import uz.gita.mobilebanking.utils.toValue
 
@@ -34,11 +37,13 @@ import uz.gita.mobilebanking.utils.toValue
 @Composable
 fun ItemCard(
     modifier: Modifier = Modifier,
-    cardData: CardData
+    cardData: CardData,
+    onClickCard: (CardData) -> Unit
 ) {
-    val typeImageID = R.drawable.uzcard_logo
+    val typeImageID = R.drawable.ic_paymentsystem_humo
     val money = cardData.amount.toString()
-    val type = "Uzcard"
+    val type = "Humo"
+    val selectedColor = getGradient(cardData.themeType)
 
     Column(
         modifier = modifier
@@ -47,18 +52,27 @@ fun ItemCard(
                 shape = RoundedCornerShape(16.dp),
                 ambientColor = ShadowColorCard,
             )
-            .angledGradientBackground(
-                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
+            .background(
+                brush = selectedColor,
+                shape = RoundedCornerShape(12.dp),
             )
-            .padding(8.dp),
+//            .angledGradientBackground(
+//                colors = listOf(Color(0xFF004103), Color(0xFF4D744E)), degrees = 65f
+//            )
+            .padding(8.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = { onClickCard(cardData) }
+            ),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Icon(
             modifier = Modifier
                 .align(Alignment.End)
-                .padding(4.dp)
-                .size(26.dp),
+                .padding(end = 4.dp)
+                .size(56.dp),
             tint = Color.White,
             painter = painterResource(id = typeImageID),
             contentDescription = "card type"

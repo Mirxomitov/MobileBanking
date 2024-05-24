@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -26,21 +27,22 @@ fun HistoryTopBar(onClickSearch: () -> Unit) {
         Modifier
             .fillMaxWidth()
             .height(56.dp)
-            .padding(8.dp)
-        ,
+            .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextBold(text = stringResource(id = R.string.history), color = Color.Black, fontSize = 24.sp)
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Icon(
-            painter = painterResource(id = R.drawable.search_clear), contentDescription = null,
-            Modifier.clickable(
+        /*Icon(
+            painter = painterResource(id = R.drawable.ic_search), contentDescription = null,
+            Modifier
+                .size(24.dp)
+                .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
                 onClick = onClickSearch
-            )
-        )
+            ),
+        )*/
     }
 }

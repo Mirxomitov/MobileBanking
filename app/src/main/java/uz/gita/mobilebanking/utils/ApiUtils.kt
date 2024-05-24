@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
-import uz.gita.mobilebanking.data.model.error.ErrorResponse
+import uz.gita.mobilebanking.data.source.remote.api.error.ErrorResponse
 import kotlin.experimental.ExperimentalTypeInference
 
 private val gson = Gson()

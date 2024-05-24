@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.mobilebanking.R
+import uz.gita.mobilebanking.data.model.TemplateCardData
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.AuthComponentBg
 import uz.gita.mobilebanking.ui.theme.TextColor
@@ -30,8 +31,8 @@ import uz.gita.mobilebanking.ui.theme.TextColor
 @Composable
 fun Template(
     modifier: Modifier = Modifier,
-    @DrawableRes imageID: Int,
-    firstName: String,
+    @DrawableRes imageID: Int = R.drawable.logo_tbc,
+    data: TemplateCardData,
 ) {
     Column(
         modifier = modifier
@@ -57,7 +58,7 @@ fun Template(
         )
 
         TextNormal(
-            text = firstName,
+            text = data.ownerName,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = TextColor,
@@ -73,5 +74,5 @@ fun Template(
 @Preview
 @Composable
 fun Preview() {
-    Template(imageID = R.drawable.logo_tbc, firstName = "Tohir")
+    Template(imageID = R.drawable.logo_tbc, data = TemplateCardData("0008000800080001", "Tohir Mirxomitov"))
 }

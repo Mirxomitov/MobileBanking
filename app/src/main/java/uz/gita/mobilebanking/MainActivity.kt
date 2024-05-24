@@ -14,9 +14,15 @@ import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uz.gita.mobilebanking.domain.repositories.CardRepository
+import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.presentation.splash.SplashScreen
 import uz.gita.mobilebanking.ui.theme.MobileBankingTheme
+import uz.gita.mobilebanking.utils.MyDataLoader
 import uz.gita.mobilebanking.utils.navigation.AppNavigationHandler
+import uz.gita.mobilebanking.utils.network_status.ConnectivityLiveData
+import uz.gita.mobilebanking.utils.network_status.NetworkStatus
+import uz.gita.mobilebanking.utils.toLog
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,9 +31,15 @@ class MainActivity : FragmentActivity() {
     @Inject
     lateinit var handler: AppNavigationHandler
 
+    @Inject
+    lateinit var cardRepository: CardRepository
+
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        MyDataLoader.init(CardsGetUseCase(cardRepository))
 
         setContent {
             MobileBankingTheme {
@@ -49,5 +61,23 @@ class MainActivity : FragmentActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+//        "has network ${ConnectivityLiveData(this).hasActiveObservers()}".myLog()
+        val connectivityLiveData = ConnectivityLiveData(this)
+
+        connectivityLiveData.observe(this) { networkState ->
+            if (networkState.isConnected) {
+                NetworkStatus.hasNetwork.tryEmit(true)
+                "networkState connected".toLog()
+
+            } else {
+                NetworkStatus.hasNetwork.tryEmit(false)
+                "networkState Disconnected".toLog()
+            }
+        }
+
+        super.onResume()
     }
 }

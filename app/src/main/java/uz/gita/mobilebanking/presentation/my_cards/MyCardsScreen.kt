@@ -23,7 +23,7 @@ import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
 import uz.gita.mobilebanking.R
-import uz.gita.mobilebanking.data.model.ui.CardData
+import uz.gita.mobilebanking.data.model.CardData
 import uz.gita.mobilebanking.presentation.my_cards.components.ItemCard
 import uz.gita.mobilebanking.presentation.my_cards.components.TopBar
 import uz.gita.mobilebanking.ui.components.buttons.BoxedButton
@@ -54,6 +54,8 @@ data class MyCardsScreen(val listOfCards: List<CardData>) : Screen {
                         )
                     )
                 }
+
+                else -> {}
             }
         }
 
@@ -96,7 +98,10 @@ fun MyCardsContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp),
-                        cardData = it
+                        cardData = it,
+                        onClickCard = { cardData ->
+                            onEventDispatcher(MyCardsContract.Intent.ToCardDetailsScreen(cardData))
+                        }
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))

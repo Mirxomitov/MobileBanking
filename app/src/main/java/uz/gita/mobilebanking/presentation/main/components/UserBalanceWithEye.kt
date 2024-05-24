@@ -24,6 +24,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextBoldBlack
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.GrayIcon
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toValue
 
 @Composable
 fun UserBalanceWithEye(
@@ -45,7 +46,7 @@ fun UserBalanceWithEye(
                 .padding(top = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TextBoldBlack(text = balance, fontSize = 22.sp, modifier = Modifier.padding(end = 2.dp))
+            TextBoldBlack(text = balance.toValue(), fontSize = 22.sp, modifier = Modifier.padding(end = 2.dp))
 
             TextBold(text = stringResource(id = R.string.som), fontSize = 22.sp)
             Spacer(modifier = Modifier.weight(1f))

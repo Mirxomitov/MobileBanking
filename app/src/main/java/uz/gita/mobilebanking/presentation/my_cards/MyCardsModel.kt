@@ -17,6 +17,7 @@ class MyCardsModel @Inject constructor(
             MyCardsContract.Intent.Back -> intent { myCardsDirection.back() }
             MyCardsContract.Intent.AddCard -> intent { postSideEffect(MyCardsContract.SideEffect.ShowAddCardDialog) }
             is MyCardsContract.Intent.InitCards -> intent { reduce { MyCardsContract.UIState(intent.listOfCards) } }
+            is MyCardsContract.Intent.ToCardDetailsScreen -> intent { myCardsDirection.toDetailsScreen(intent.cardData) }
         }
     }
 

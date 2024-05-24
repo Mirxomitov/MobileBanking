@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 interface P2PDirection {
-    suspend fun toTransferVerifyScreen(token: String)
+    suspend fun toTransferVerifyScreen(token: String, amount: String, receiverName: String, receiverPan: String)
     suspend fun toAddCardScreen()
 
     suspend fun back()
@@ -17,8 +17,13 @@ interface P2PDirection {
 class P2PDirectionImpl @Inject constructor(
     private val appNavigator: AppNavigator
 ) : P2PDirection {
-    override suspend fun toTransferVerifyScreen(token: String) {
-        appNavigator.addScreen(TransferVerifyScreen(token))
+    override suspend fun toTransferVerifyScreen(
+        token: String,
+        amount: String,
+        receiverName: String,
+        receiverPan: String
+    ) {
+        appNavigator.addScreen(TransferVerifyScreen(token, amount, receiverName, receiverPan))
     }
 
     override suspend fun toAddCardScreen() {

@@ -3,8 +3,8 @@ package uz.gita.mobilebanking.data.source.remote
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import uz.gita.mobilebanking.data.model.request.card.UpdateTokenRequest
-import uz.gita.mobilebanking.data.source.local.SharedPreferenceHelper
+import uz.gita.mobilebanking.data.source.remote.api.request.card.UpdateTokenRequest
+import uz.gita.mobilebanking.data.source.local.pref.SharedPreferenceHelper
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
 import javax.inject.Provider
 
