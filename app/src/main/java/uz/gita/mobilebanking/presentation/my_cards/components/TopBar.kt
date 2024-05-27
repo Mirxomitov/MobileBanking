@@ -35,7 +35,7 @@ fun TopBar(
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = null,
-            tint = Color.Black,
+            tint = TextColorLight,
             modifier = Modifier
                 .padding(12.dp)
                 .size(24.dp)

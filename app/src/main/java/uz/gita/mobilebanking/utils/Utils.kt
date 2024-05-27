@@ -1,18 +1,32 @@
 package uz.gita.mobilebanking.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.biometric.BiometricPrompt
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import timber.log.Timber
@@ -188,22 +202,110 @@ fun CardData.toCardExpirationDate() = "${this.expiredMonth.toString().toFullMont
 @Composable
 fun <T> previewStateOf(value: T) = remember { mutableStateOf(value) }
 
-fun getGradient(type: Int) : Brush = when(type) {
-    0 -> { Brush.verticalGradient(listOf(Color(0xFF0063B5), Color(0xFF00EBC8))) }
-    1 -> { Brush.verticalGradient(listOf(Color(0xFF06693a), Color(0xFF20d970))) }
-    2 -> { Brush.verticalGradient(listOf(Color(0xFF5b0a8a), Color(0xFFa9518d))) }
-    3 -> { Brush.verticalGradient(listOf(Color(0xFF930709), Color(0xFFff9c63))) }
-    4 -> { Brush.verticalGradient(listOf(Color(0xFF886e33), Color(0xFFffd645))) }
-    5 -> { Brush.verticalGradient(listOf(Color(0xFF282a75), Color(0xFF009ffd))) }
-    6 -> { Brush.verticalGradient(listOf(Color(0xFF191a1f), Color(0xFF55555f))) }
-    7 -> { Brush.verticalGradient(listOf(Color(0xFF6c0f17), Color(0xFFbd1373))) }
-    else -> { Brush.verticalGradient(listOf(Color(0xFFa95403), Color(0xFFecbe38))) }
+fun getGradient(type: Int): Brush = when (type) {
+    0 -> {
+        Brush.verticalGradient(listOf(Color(0xFF0063B5), Color(0xFF00EBC8)))
+    }
+
+    1 -> {
+        Brush.verticalGradient(listOf(Color(0xFF06693a), Color(0xFF20d970)))
+    }
+
+    2 -> {
+        Brush.verticalGradient(listOf(Color(0xFF5b0a8a), Color(0xFFa9518d)))
+    }
+
+    3 -> {
+        Brush.verticalGradient(listOf(Color(0xFF930709), Color(0xFFff9c63)))
+    }
+
+    4 -> {
+        Brush.verticalGradient(listOf(Color(0xFF886e33), Color(0xFFffd645)))
+    }
+
+    5 -> {
+        Brush.verticalGradient(listOf(Color(0xFF282a75), Color(0xFF009ffd)))
+    }
+
+    6 -> {
+        Brush.verticalGradient(listOf(Color(0xFF191a1f), Color(0xFF55555f)))
+    }
+
+    7 -> {
+        Brush.verticalGradient(listOf(Color(0xFF6c0f17), Color(0xFFbd1373)))
+    }
+
+    else -> {
+        Brush.verticalGradient(listOf(Color(0xFFa95403), Color(0xFFecbe38)))
+    }
 }
 
-fun getCardType(cardNumbers: String) : Int {
+fun getCardType(cardNumbers: String): Int {
     return if (cardNumbers.startsWith("9860")) R.drawable.ic_paymentsystem_humo
     else if (cardNumbers.startsWith("8600")) R.drawable.ic_paymentsystem_uzcard
     else if (cardNumbers.startsWith("5440")) R.drawable.ic_paymentsystem_uzcard
     else if (cardNumbers.startsWith("5614")) R.drawable.ic_paymentsystem_uzcard
     else R.drawable.ic_paymentsystem_humo
+}
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
+fun Modifier.shimmerEffect(): Modifier = composed {
+    var size by remember { mutableStateOf(IntSize.Zero) }
+
+    val transition = rememberInfiniteTransition(label = "animation settings")
+    val startOffsetX by transition.animateFloat(
+        initialValue = -2 * size.width.toFloat(),
+        targetValue = 2 * size.width.toFloat(),
+        animationSpec = infiniteRepeatable(tween(durationMillis = 1000)),
+        label = "animate x"
+    )
+
+    background(
+        brush = Brush.linearGradient(
+            colors = listOf(
+                Color(0xFFEBEBEB),  // Light grey
+                Color(0xFFF5F5F5),  // Slightly lighter grey
+                Color(0xFFE0E0E0),  // Medium grey
+                Color(0xFFF5F5F5),  // Slightly lighter grey
+                Color(0xFFEBEBEB),  // Light grey
+            ),
+            start = Offset(startOffsetX, 0f),
+            end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat()),
+        )
+    )
+        .onGloballyPositioned {
+            size = it.size
+        }
+}
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
+fun Modifier.shimmerEffectWithCorner(): Modifier = composed {
+    var size by remember { mutableStateOf(IntSize.Zero) }
+
+    val transition = rememberInfiniteTransition(label = "animation settings")
+    val startOffsetX by transition.animateFloat(
+        initialValue = -2 * size.width.toFloat(),
+        targetValue = 2 * size.width.toFloat(),
+        animationSpec = infiniteRepeatable(tween(durationMillis = 1000)),
+        label = "animate x"
+    )
+
+    this@composed.clip(RoundedCornerShape(56.dp))
+
+    background(
+        brush = Brush.linearGradient(
+            colors = listOf(
+                Color(0xFFEBEBEB),  // Light grey
+                Color(0xFFF5F5F5),  // Slightly lighter grey
+                Color(0xFFE0E0E0),  // Medium grey
+                Color(0xFFF5F5F5),  // Slightly lighter grey
+                Color(0xFFEBEBEB),  // Light grey
+            ),
+            start = Offset(startOffsetX, 0f),
+            end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat()),
+        )
+    )
+        .onGloballyPositioned {
+            size = it.size
+        }
 }

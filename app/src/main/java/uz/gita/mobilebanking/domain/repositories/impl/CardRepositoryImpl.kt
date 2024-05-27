@@ -3,12 +3,15 @@ package uz.gita.mobilebanking.domain.repositories.impl
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import uz.gita.mobilebanking.data.model.CardData
+import uz.gita.mobilebanking.data.source.local.dao.CardsDao
+import uz.gita.mobilebanking.data.source.local.toCardData
 import uz.gita.mobilebanking.data.source.remote.api.CardApi
 import uz.gita.mobilebanking.data.source.remote.api.request.card.CardAddRequest
 import uz.gita.mobilebanking.data.source.remote.api.request.card.UpdateCardRequest
 import uz.gita.mobilebanking.data.source.remote.toCardData
 import uz.gita.mobilebanking.domain.repositories.CardRepository
 import uz.gita.mobilebanking.utils.emitWith
+import uz.gita.mobilebanking.utils.network_status.NetworkStatus
 import uz.gita.mobilebanking.utils.safetyFlow
 import uz.gita.mobilebanking.utils.toResultData
 import javax.inject.Inject
@@ -16,6 +19,7 @@ import javax.inject.Inject
 class CardRepositoryImpl @Inject constructor(
     private val cardApi: CardApi,
     private val gson: Gson,
+    private val cardsDao: CardsDao
 ) : CardRepository {
     override fun addCard(cardNumber: String, expirationDate: String): Flow<Result<Unit>> = safetyFlow {
         cardApi.addCard(
@@ -31,7 +35,15 @@ class CardRepositoryImpl @Inject constructor(
     }
 
     override fun getCards(): Flow<Result<List<CardData>>> = safetyFlow {
-        cardApi.getCards().toResultData().map { it.map { it.toCardData() } }.emitWith()
+        when {
+            NetworkStatus.hasNetwork.value -> {
+                cardApi.getCards().toResultData().map { it.map { it.toCardData() } }.emitWith()
+            }
+
+            else -> {
+                emit(Result.success(cardsDao.getAllCards().map { it.toCardData() }))
+            }
+        }
     }
 
     override fun deleteCard(id: String): Flow<Result<Unit>> = safetyFlow {

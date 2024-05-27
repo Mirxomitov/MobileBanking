@@ -10,5 +10,4 @@ class CardsGetUseCase @Inject constructor(
 ) {
     operator fun invoke(): Flow<Result<List<CardData>>> =
         cardRepository.getCards()
-
 }

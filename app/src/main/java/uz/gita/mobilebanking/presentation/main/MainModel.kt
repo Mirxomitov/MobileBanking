@@ -15,6 +15,7 @@ import uz.gita.mobilebanking.domain.use_case.CardsGetUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetBasicInfoUseCase
 import uz.gita.mobilebanking.domain.use_case.HomeGetTotalBalanceUseCase
 import uz.gita.mobilebanking.utils.logger
+import uz.gita.mobilebanking.utils.toLog
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,7 +53,6 @@ class MainModel @Inject constructor(
             if (cards.isSuccess && balance.isSuccess && info.isSuccess) {
                 intent {
                     reduce {
-                        @Suppress("UNCHECKED_CAST")
                         MainContract.UIState.Content(
                             cards = cards.getOrNull() as List<CardData>,
                             totalBalance = balance.getOrNull() as String,
@@ -62,9 +62,15 @@ class MainModel @Inject constructor(
                 }
             } else {
                 // errors
-                cards.getOrElse {}
-                balance.getOrElse {}
-                info.getOrElse {}
+                cards.getOrElse {
+                    it.message?.toLog("Error Message: GetCardContract")
+                }
+                balance.getOrElse {
+                    it.message?.toLog("Error Message: GetBalance")
+                }
+                info.getOrElse {
+                    it.message?.toLog("Error Message: GetUserInfo")
+                }
             }
         }.launchIn(viewModelScope)
     }

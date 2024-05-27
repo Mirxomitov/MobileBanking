@@ -9,5 +9,4 @@ class CardAddUseCase @Inject constructor(
 ) {
     operator fun invoke(cardNumber: String, expirationDate: String): Flow<Result<Unit>> =
         cardRepository.addCard(cardNumber, expirationDate)
-
 }

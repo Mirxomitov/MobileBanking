@@ -15,6 +15,7 @@ class SharedPreferenceHelper @Inject constructor(
         const val REFRESH_TOKEN = "REFRESH_TOKEN"
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val IS_MONEY_VISIBLE = "IS_MONEY_VISIBLE"
+        const val TOTAL_BALANCE = "TOTAL_BALANCE"
     }
 
     fun phoneNumber(phoneNumber: String) = sharedPreference.edit().putString(PHONE_NUMBER, phoneNumber).apply()
@@ -41,4 +42,7 @@ class SharedPreferenceHelper @Inject constructor(
     //
     fun isMoneyVisible(isVisible: Boolean) = sharedPreference.edit().putBoolean(IS_MONEY_VISIBLE, isVisible).apply()
     fun isMoneyVisible(): Boolean = sharedPreference.getBoolean(IS_MONEY_VISIBLE, true)
+    fun totalBalance(): String = sharedPreference.getString(TOTAL_BALANCE, "0").toString()
+    fun totalBalance(balance: String) = sharedPreference.edit().putString(TOTAL_BALANCE, balance).apply()
+
 }

@@ -24,9 +24,9 @@ import uz.gita.mobilebanking.R
 import uz.gita.mobilebanking.ui.components.custom_text.TextBold
 import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
+import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.ShadowColorCard
-import uz.gita.mobilebanking.ui.theme.GrayColor
 import uz.gita.mobilebanking.ui.theme.TextColor
 
 @Composable
@@ -104,9 +104,8 @@ fun CashBack(
                     ) {
                         Box(
                             modifier = Modifier
-                                .weight(10f)
+                                .weight(if (it == 4) 0.2f else 10f)
                                 .fillMaxWidth()
-
                         )
 
                         Box(

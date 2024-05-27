@@ -1,0 +1,40 @@
+override fun intercept(chain: Interceptor.Chain): Response {
+    val token = pref.accessToken()
+    val request = chain.request().newBuilder()
+        .addHeader("Authorization", "Bearer $token")
+        .build()
+
+    return try {
+        val response = chain.proceed(request)
+        if (response.code == 401) {
+            response.close()
+            refreshToken(chain, request)
+        } else {
+            response
+        }
+    } catch (e: Exception) {
+        // Log the error
+        e.printStackTrace()
+        // You can also use a logging framework like Timber for better logging
+        // Timber.e(e, "Error proceeding request: ${request.url}")
+
+        // Return a proper response or throw the exception to be handled upstream
+        throw e
+    }
+}
+
+private fun refreshToken(chain: Interceptor.Chain, request: Request): Response {
+    // Add your refresh token logic here
+    // For example:
+    val newToken = fetchNewToken()
+    val newRequest = request.newBuilder()
+        .header("Authorization", "Bearer $newToken")
+        .build()
+    return chain.proceed(newRequest)
+}
+
+private fun fetchNewToken(): String {
+    // Implement your logic to refresh the token
+    // This might involve making a synchronous network call to your auth server
+    return "newAccessToken"
+}

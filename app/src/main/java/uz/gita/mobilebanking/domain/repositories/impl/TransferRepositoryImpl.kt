@@ -10,7 +10,7 @@ import uz.gita.mobilebanking.data.model.PayedCardData
 import uz.gita.mobilebanking.data.model.TemplateCardData
 import uz.gita.mobilebanking.data.source.local.dao.PayedCardsDao
 import uz.gita.mobilebanking.data.source.local.dao.TemplateCardsDao
-import uz.gita.mobilebanking.data.source.local.toData
+import uz.gita.mobilebanking.data.source.local.toCardData
 import uz.gita.mobilebanking.data.source.local.toEntity
 import uz.gita.mobilebanking.data.source.local.toPayedCardData
 import uz.gita.mobilebanking.data.source.remote.api.TransferApi
@@ -60,7 +60,7 @@ class TransferRepositoryImpl @Inject constructor(
     }
 
     override fun getTemplateCards(): List<TemplateCardData> {
-        return templateCardsDao.all().map { it.toData() }
+        return templateCardsDao.all().map { it.toCardData() }
     }
 
     override fun savePayedCard(data: PayedCardData) {

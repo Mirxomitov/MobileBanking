@@ -8,10 +8,10 @@ import uz.gita.mobilebanking.data.source.remote.api.response.home.TotalBalanceRe
 
 interface HomeApi {
     @GET("mobile-bank/v1/home/total-balance")
-    suspend fun getTotalBalance(): Response<uz.gita.mobilebanking.data.source.remote.api.response.home.TotalBalanceResponse>
+    suspend fun getTotalBalance(): Response<TotalBalanceResponse>
     @GET("mobile-bank/v1/home/user-info")
-    suspend fun getBasicInfo(): Response<uz.gita.mobilebanking.data.source.remote.api.response.home.BasicInfoResponse>
+    suspend fun getBasicInfo(): Response<BasicInfoResponse>
     @GET("mobile-bank/v1/home/user-info/details")
-    suspend fun getFullInfo(): Response<uz.gita.mobilebanking.data.source.remote.api.response.home.FullInfoResponse>
+    suspend fun getFullInfo(): Response<FullInfoResponse>
 
 }

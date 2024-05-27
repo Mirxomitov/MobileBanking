@@ -5,11 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,6 +36,7 @@ import uz.gita.mobilebanking.ui.components.custom_text.TextNormal
 import uz.gita.mobilebanking.ui.theme.CardColor
 import uz.gita.mobilebanking.ui.theme.PrimaryColor
 import uz.gita.mobilebanking.ui.theme.TextColor
+import uz.gita.mobilebanking.utils.shimmerEffectWithCorner
 
 @Composable
 fun FillTransactPay(
@@ -212,20 +215,157 @@ private fun Item(
 }
 
 
+@Composable
+fun FillTransactPayShimmer(
+    modifier: Modifier,
+    onClickWhatIsIt: () -> Unit,
+    onClickItem: () -> Unit,
+) {
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 1.dp
+        ),
+        modifier = modifier.clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = null,
+            onClick = onClickItem
+        ),
+        colors = CardDefaults.cardColors(containerColor = CardColor),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 12.dp, start = 4.dp, end = 4.dp)
+        ) {
+            // karta bu nima
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp)
+            ) {
+                TextBoldBlack(
+                    text = stringResource(id = R.string.pay_net_card),
+                    modifier = Modifier,
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+
+                TextBoldBlack(
+                    text = stringResource(id = R.string.what_is_it),
+                    modifier = Modifier
+                        .clickable(
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            },
+                            indication = null,
+                            onClick = onClickWhatIsIt
+                        ),
+                    color = PrimaryColor,
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp
+                )
+            }
+            // karta rasmi
+            Row(
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_paynet),
+                    contentDescription = "pay net card",
+                    modifier = Modifier
+                        .width(72.dp)
+                        .padding(end = 12.dp)
+                )
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                            .padding(2.dp)
+                            .shimmerEffectWithCorner()
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(2.dp)
+                            .weight(1f)
+                            .shimmerEffectWithCorner()
+                    )
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                ItemShimmer(
+                    Modifier
+                        .height(96.dp)
+                        .weight(1f)
+                        .padding(4.dp))
+                ItemShimmer(
+                    Modifier
+                        .height(96.dp)
+                        .weight(1f)
+                        .padding(4.dp))
+                ItemShimmer(
+                    Modifier
+                        .height(96.dp)
+                        .weight(1f)
+                        .padding(4.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun ItemShimmer(
+    modifier: Modifier
+) {
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp
+        ),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        modifier = modifier
+            .padding(horizontal = 8.dp)
+            .fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(2f)
+                .padding(4.dp)
+                .shimmerEffectWithCorner()
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(4.dp)
+                .shimmerEffectWithCorner()
+        )
+    }
+}
+
 @Preview
 @Composable
 private fun FillTransactPreview() {
-    FillTransactPay(
+    FillTransactPayShimmer(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp)
             .padding(top = 12.dp),
-        balance = "0",
-        cardNumber = "3600",
         onClickWhatIsIt = { },
         onClickItem = { },
-        onClickFill = { },
-        onClickTransact = { },
-        onClickPay = { }
     )
 }

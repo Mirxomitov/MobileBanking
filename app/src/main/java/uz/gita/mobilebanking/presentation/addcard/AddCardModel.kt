@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.viewmodel.container
 import uz.gita.mobilebanking.domain.use_case.CardAddUseCase
+import uz.gita.mobilebanking.utils.toLog
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +24,9 @@ class AddCardModel @Inject constructor(
                 cardAddUseCase(intent.cardNumber, intent.expirationDate).onEach {
                     it.onSuccess {
                         addCardDirection.back()
+                    }
+                    it.onFailure {
+                        it.message?.toLog("Error Message: AddCardContract")
                     }
                 }.launchIn(viewModelScope)
             }
